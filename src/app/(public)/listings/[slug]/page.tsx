@@ -1,7 +1,7 @@
 import { getOneListingPublic } from "@/lib/models/listings/queries";
 import { type ListingResponse } from "@/types/api/listings";
 
-export default async function ListingPage({
+export default async function PublicListingPage({
   params,
 }: {
   params: { slug: string };

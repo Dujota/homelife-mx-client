@@ -3,7 +3,7 @@ import ListingListItem from "@/components/listings/listings-list-item";
 import { getAllListingsPublic } from "@/lib/models/listings/queries";
 import { type ListingsResponse } from "@/types/api/listings";
 
-export default async function ListingsPage() {
+export default async function PublicListingsPage() {
   const res: ListingsResponse = await getAllListingsPublic();
   const listings = res.data;
 
