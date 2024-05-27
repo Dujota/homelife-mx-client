@@ -9,7 +9,7 @@ export default async function ListingPage({
   const session = await auth();
 
   if (!session?.user) {
-    return redirect(`/login?callbackUrl=/listings/${params.slug}`);
+    return redirect(`/login?callbackUrl=/brokers/listings/${params.slug}`);
   }
 
   return (

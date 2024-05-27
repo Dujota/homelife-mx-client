@@ -6,7 +6,7 @@ export default async function ListingsPage() {
   const session = await auth();
 
   if (!session?.user) {
-    return redirect("/login?callbackUrl=/listings");
+    return redirect("/login?callbackUrl=/brokers/listings");
   }
 
   // const properties = await getAllProperties(session.user.accessToken);

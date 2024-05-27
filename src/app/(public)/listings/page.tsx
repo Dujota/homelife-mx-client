@@ -1,4 +1,4 @@
-import { getAllProperties } from "@/lib/models/properties/queries";
+import { getAllListingsPublic } from "@/lib/models/listings/queries";
 import { auth } from "@/server/auth";
 import { redirect } from "next/navigation";
 
@@ -9,7 +9,9 @@ export default async function ListingsPage() {
     return redirect("/login?callbackUrl=/listings");
   }
 
-  // const properties = await getAllProperties(session.user.accessToken);
+  const listings = await getAllListingsPublic();
+
+  console.log(listings);
 
   return (
     <div>

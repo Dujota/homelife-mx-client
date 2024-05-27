@@ -14,3 +14,11 @@ export function apiTokenExpired(axiosError: AxiosError) {
 
   return false;
 }
+
+export function resourceNotFound(axiosError: AxiosError) {
+  if (axiosError.response?.status === 404) {
+    return true;
+  }
+
+  return false;
+}
