@@ -1,22 +1,18 @@
+import ListingsList from "@/components/listings/listings-list";
+import ListingListItem from "@/components/listings/listings-list-item";
 import { getAllListingsPublic } from "@/lib/models/listings/queries";
-import { auth } from "@/server/auth";
-import { redirect } from "next/navigation";
+import { type ListingsResponse } from "@/types/api/listings";
 
 export default async function ListingsPage() {
-  const session = await auth();
-
-  if (!session?.user) {
-    return redirect("/login?callbackUrl=/listings");
-  }
-
-  const listings = await getAllListingsPublic();
-
-  console.log(listings);
+  const res: ListingsResponse = await getAllListingsPublic();
+  const listings = res.data;
 
   return (
     <div>
-      Listing Page
-      <h1>ALL THE PROPERTIES</h1>
+      <h1>Listings</h1>
+      <ListingsList listings={listings}>
+        {(listing) => <ListingListItem listing={listing} />}
+      </ListingsList>
     </div>
   );
 }
