@@ -1,12 +1,8 @@
-// import Header from "@/components/common/layout/header";
-// import PageHeader from "@/components/common/layout/page-header";
-// import PageWrapper from "@/components/common/layout/page-wrapper";
-// import CreateProperty from "@/components/forms/create-property";
-
+import CreateListingForm from "@/components/forms/create-listings";
 import { auth } from "@/server/auth";
 import { redirect } from "next/navigation";
 
-export default async function ListingsPage() {
+export default async function CreateListingsPage() {
   const session = await auth();
 
   if (!session?.user) {
@@ -14,8 +10,9 @@ export default async function ListingsPage() {
   }
 
   return (
-    <main>
-      <h1>CREATE PROPERTY FORM</h1>
-    </main>
+    <div>
+      <h1>Broker Create Listing</h1>
+      <CreateListingForm />
+    </div>
   );
 }

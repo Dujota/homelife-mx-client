@@ -13,7 +13,7 @@ export default async function ListingsPage() {
 
   return (
     <div>
-      Properties Page
+      <h1>Properties Page</h1>
       <h1>ALL THE PROPERTIES</h1>
     </div>
   );

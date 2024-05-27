@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Breadcrumbs from "@/components/common/layout/breadcrumbs";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Breadcrumbs
+          homeElement="Home"
+          separator={<span className="text-coral">&gt;</span>}
+          containerClasses="flex m-0 p-0"
+          listClasses="hover:underline mx-2 font-bold list-none"
+          activeClasses="text-steelblue"
+          capitalizeLinks={true}
+          linkClass="text-xs hover:underline no-underline text-coral"
+        />
+        <SessionProvider>{children}</SessionProvider>
+      </body>
     </html>
   );
 }
