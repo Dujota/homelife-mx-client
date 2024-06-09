@@ -10,7 +10,7 @@ const mockPropertyTypes = [
   { name: "Townhouse", id: 4 },
 ];
 
-export default async function ListingsPage() {
+export default async function BrokerAddPropertyPage() {
   const session = await auth();
 
   if (!session?.user) {
