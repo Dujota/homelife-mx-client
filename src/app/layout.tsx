@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Breadcrumbs from "@/components/common/layout/breadcrumbs";
 import { SessionProvider } from "next-auth/react";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+        />
+      </head>
       <body className={inter.className}>
         <Breadcrumbs
           homeElement="Home"
@@ -29,6 +36,7 @@ export default function RootLayout({
           linkClass="text-xs hover:underline no-underline text-coral"
         />
         <SessionProvider>{children}</SessionProvider>
+        <Toaster />
       </body>
     </html>
   );

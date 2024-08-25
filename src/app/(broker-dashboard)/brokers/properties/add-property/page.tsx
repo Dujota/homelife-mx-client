@@ -1,4 +1,5 @@
 import CreatePropertyForm from "@/components/forms/create-property";
+import PropertyFormTabs from "@/components/forms/properties/property-form-tabs";
 import { getAllProperties } from "@/lib/models/properties/queries";
 import { auth } from "@/server/auth";
 import { redirect } from "next/navigation";
@@ -22,7 +23,7 @@ export default async function BrokerAddPropertyPage() {
   return (
     <div>
       <h1>Create Broker Properties Page</h1>
-      <CreatePropertyForm propertyTypes={mockPropertyTypes} />
+      <PropertyFormTabs propertyTypes={mockPropertyTypes} />
     </div>
   );
 }

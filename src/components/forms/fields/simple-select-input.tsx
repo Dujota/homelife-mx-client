@@ -3,16 +3,17 @@ import FieldErrorMessage from "./field-error-message";
 
 type Option = {
   label: string;
-  value: number;
+  value: number | boolean | string;
 };
 
 type SelectInputProps = {
   name: string;
   label: string;
   options: Option[];
+  isMulti?: boolean;
 };
 
-const SelectInput = ({ name, label, options }: SelectInputProps) => {
+const SelectInput = ({ name, label, options, isMulti }: SelectInputProps) => {
   const { control } = useFormContext();
 
   return (
@@ -23,7 +24,7 @@ const SelectInput = ({ name, label, options }: SelectInputProps) => {
         control={control}
         render={({ field, fieldState: { error } }) => (
           <>
-            <select {...field}>
+            <select {...field} multiple={isMulti}>
               <option key={`default-select-name`} value="">
                 Select an option
               </option>
