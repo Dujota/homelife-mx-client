@@ -1,14 +1,13 @@
 import { nextApi, handleError, handleSuccess } from "@/lib/services";
-import { PropertyInput } from "@/lib/zod/property-schema";
+import { SingleFamilyDwellingFormData } from "@/lib/zod/forms/single-family-dwelling-schema";
+import { createPropertyResponse } from "@/types/property";
 
-import { type PropertyResponse } from "@/types/api";
-
-export const createProperty = async (
-  data: { property: PropertyInput },
+export const createSingleFamilyDwelling = async (
+  data: { property: SingleFamilyDwellingFormData },
   token?: string,
-): Promise<PropertyResponse | any> => {
+): Promise<createPropertyResponse | any> => {
   try {
-    const response = await nextApi.post("/properties", data, {
+    const response = await nextApi.post("/admins/properties", data, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return handleSuccess(response);

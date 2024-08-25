@@ -20,8 +20,8 @@ export async function POST(req: Request) {
     };
 
     const body = await req.json();
-
     const response = await apiV1.post("admin/properties", body, config);
+
     return NextResponse.json(response.data);
   } catch (error: any) {
     if (apiTokenExpired(error)) {

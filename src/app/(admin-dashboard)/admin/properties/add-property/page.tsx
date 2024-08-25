@@ -2,6 +2,7 @@
 // import PageHeader from "@/components/common/layout/page-header";
 // import PageWrapper from "@/components/common/layout/page-wrapper";
 import CreatePropertyForm from "@/components/forms/create-property";
+import PropertyFormTabs from "@/components/forms/properties/property-form-tabs";
 
 import { auth } from "@/server/auth";
 import { redirect } from "next/navigation";
@@ -17,13 +18,14 @@ export default async function AdminAddPropertyPage() {
   const session = await auth();
 
   if (!session?.user) {
-    return redirect("/login?callbackUrl=/listings/add-listing");
+    return redirect("/login?callbackUrl=/admin/properties/add-property");
   }
 
   return (
     <main>
       <h1>CREATE PROPERTY FORM ADMIN</h1>
-      <CreatePropertyForm propertyTypes={mockPropertyTypes} />
+      {/* <CreatePropertyForm propertyTypes={mockPropertyTypes} /> */}
+      <PropertyFormTabs propertyTypes={mockPropertyTypes} />
     </main>
   );
 }
