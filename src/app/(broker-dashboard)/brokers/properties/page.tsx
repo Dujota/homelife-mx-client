@@ -1,4 +1,4 @@
-import { getAllProperties } from "@/lib/models/properties/queries";
+// import { getAllProperties } from "@/lib/models/properties/queries";
 import { auth } from "@/server/auth";
 import { redirect } from "next/navigation";
 

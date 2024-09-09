@@ -3,7 +3,7 @@ import FieldErrorMessage from "./field-error-message";
 
 type Option = {
   label: string;
-  value: number | boolean | string;
+  value: any;
 };
 
 type SelectInputProps = {
