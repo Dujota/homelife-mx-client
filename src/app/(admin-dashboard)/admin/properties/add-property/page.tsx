@@ -24,7 +24,6 @@ export default async function AdminAddPropertyPage() {
   return (
     <main>
       <h1>CREATE PROPERTY FORM ADMIN</h1>
-      {/* <CreatePropertyForm propertyTypes={mockPropertyTypes} /> */}
       <PropertyFormTabs propertyTypes={mockPropertyTypes} />
     </main>
   );
