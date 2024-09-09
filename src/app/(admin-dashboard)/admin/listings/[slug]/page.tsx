@@ -1,4 +1,4 @@
-import { getOneListingAdmin } from "@/lib/models/listings/queries";
+import { getOneListingAdminAPIV1 } from "@/lib/models/listings/queries";
 import { auth } from "@/server/auth";
 import { type ListingResponse } from "@/types/api/listings";
 import { redirect } from "next/navigation";
@@ -11,10 +11,10 @@ export default async function AdminListingShowPage({
   const session = await auth();
 
   if (!session?.user) {
-    return redirect(`/login?callbackUrl=/admins/listings/${params.slug}`);
+    return redirect(`/login?callbackUrl=/admin/listings/${params.slug}`);
   }
 
-  const res: ListingResponse = await getOneListingAdmin(
+  const res: ListingResponse = await getOneListingAdminAPIV1(
     params.slug,
     session.user.accessToken,
   );

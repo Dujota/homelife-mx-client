@@ -1,10 +1,10 @@
 import ListingsList from "@/components/listings/listings-list";
 import ListingListItem from "@/components/listings/listings-list-item";
-import { getAllListingsPublic } from "@/lib/models/listings/queries";
+import { getAllListingsPublicAPIV1 } from "@/lib/models/listings/queries";
 import { type ListingsResponse } from "@/types/api/listings";
 
 export default async function PublicListingsPage() {
-  const res: ListingsResponse = await getAllListingsPublic();
+  const res: ListingsResponse = await getAllListingsPublicAPIV1();
   const listings = res.data;
 
   return (

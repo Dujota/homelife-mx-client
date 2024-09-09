@@ -1,4 +1,4 @@
-import { getOneListingBroker } from "@/lib/models/listings/queries";
+import { getOneListingBrokerAPIV1 } from "@/lib/models/listings/queries";
 import { auth } from "@/server/auth";
 import { type ListingResponse } from "@/types/api/listings";
 import { redirect } from "next/navigation";
@@ -14,7 +14,7 @@ export default async function BrokerListingShowPage({
     return redirect(`/login?callbackUrl=/brokers/listings/${params.slug}`);
   }
 
-  const res: ListingResponse = await getOneListingBroker(
+  const res: ListingResponse = await getOneListingBrokerAPIV1(
     params.slug,
     session.user.accessToken,
   );
