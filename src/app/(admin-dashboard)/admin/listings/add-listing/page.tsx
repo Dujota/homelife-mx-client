@@ -1,8 +1,3 @@
-// import Header from "@/components/common/layout/header";
-// import PageHeader from "@/components/common/layout/page-header";
-// import PageWrapper from "@/components/common/layout/page-wrapper";
-// import CreateProperty from "@/components/forms/create-property";
-
 import CreateListingForm from "@/components/forms/create-listings";
 import { auth } from "@/server/auth";
 import { redirect } from "next/navigation";

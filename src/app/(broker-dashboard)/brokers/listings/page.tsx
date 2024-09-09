@@ -2,7 +2,7 @@ import { auth } from "@/server/auth";
 import { redirect } from "next/navigation";
 import ListingsList from "@/components/listings/listings-list";
 import ListingListItem from "@/components/listings/listings-list-item";
-import { getAllListingsBroker } from "@/lib/models/listings/queries";
+import { getAllListingsBrokerAPIV1 } from "@/lib/models/listings/queries";
 import { type ListingsResponse } from "@/types/api/listings";
 
 export default async function BrokersListingsPage() {
@@ -12,7 +12,7 @@ export default async function BrokersListingsPage() {
     return redirect("/login?callbackUrl=/brokers/listings");
   }
 
-  const res: ListingsResponse = await getAllListingsBroker(
+  const res: ListingsResponse = await getAllListingsBrokerAPIV1(
     session.user.accessToken,
   );
   const listings = res.data;

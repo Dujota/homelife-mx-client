@@ -2,7 +2,7 @@ import { auth } from "@/server/auth";
 import { redirect } from "next/navigation";
 import ListingsList from "@/components/listings/listings-list";
 import ListingListItem from "@/components/listings/listings-list-item";
-import { getAllListingsAdmin } from "@/lib/models/listings/queries";
+import { getAllListingsAdminAPIV1 } from "@/lib/models/listings/queries";
 import { type ListingsResponse } from "@/types/api/listings";
 
 export default async function AdminListingsPage() {
@@ -12,7 +12,7 @@ export default async function AdminListingsPage() {
     return redirect("/login?callbackUrl=/admin/listings");
   }
 
-  const res: ListingsResponse = await getAllListingsAdmin(
+  const res: ListingsResponse = await getAllListingsAdminAPIV1(
     session.user.accessToken,
   );
   const listings = res.data;

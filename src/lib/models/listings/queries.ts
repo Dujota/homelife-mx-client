@@ -1,4 +1,4 @@
-import { nextApi, handleError, handleSuccess } from "@/lib/services";
+import { nextApi, handleError, handleSuccess, apiV1 } from "@/lib/services";
 import { ListingResponse, ListingsResponse } from "@/types/api/listings";
 
 // Public
@@ -18,6 +18,28 @@ export const getOneListingPublic = async (
 ): Promise<ListingResponse | any> => {
   try {
     const response = await nextApi.get(`/listings/${slug}`);
+    return handleSuccess(response);
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const getAllListingsPublicAPIV1 = async (): Promise<
+  ListingsResponse | any
+> => {
+  try {
+    const response = await apiV1.get("/listings");
+    return handleSuccess(response);
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const getOneListingPublicAPIV1 = async (
+  slug: string,
+): Promise<ListingResponse | any> => {
+  try {
+    const response = await apiV1.get(`/listings/${slug}`);
     return handleSuccess(response);
   } catch (error) {
     return handleError(error);
@@ -54,6 +76,36 @@ export const getOneListingBroker = async (
   }
 };
 
+// API V1
+export const getAllListingsBrokerAPIV1 = async (
+  token: string,
+): Promise<ListingsResponse | any> => {
+  try {
+    const response = await apiV1.get("/brokers/listings", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return handleSuccess(response);
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const getOneListingBrokerAPIV1 = async (
+  slug: string,
+  token: string,
+): Promise<ListingResponse | any> => {
+  try {
+    const response = await apiV1.get(`/brokers/listings/${slug}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return handleSuccess(response);
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
 // Admin
 
 export const getAllListingsAdmin = async (
@@ -76,6 +128,36 @@ export const getOneListingAdmin = async (
 ): Promise<ListingResponse | any> => {
   try {
     const response = await nextApi.get(`/admins/listings/${slug}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return handleSuccess(response);
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+// API V1
+export const getAllListingsAdminAPIV1 = async (
+  token: string,
+): Promise<ListingsResponse | any> => {
+  try {
+    const response = await apiV1.get("/admin/listings", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return handleSuccess(response);
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+export const getOneListingAdminAPIV1 = async (
+  slug: string,
+  token: string,
+): Promise<ListingResponse | any> => {
+  try {
+    const response = await apiV1.get(`/admin/listings/${slug}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 

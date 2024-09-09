@@ -1,7 +1,3 @@
-// import Header from "@/components/common/layout/header";
-// import PageHeader from "@/components/common/layout/page-header";
-// import PageWrapper from "@/components/common/layout/page-wrapper";
-import CreatePropertyForm from "@/components/forms/create-property";
 import PropertyFormTabs from "@/components/forms/properties/property-form-tabs";
 
 import { auth } from "@/server/auth";

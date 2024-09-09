@@ -1,4 +1,4 @@
-import { getOneListingPublic } from "@/lib/models/listings/queries";
+import { getOneListingPublicAPIV1 } from "@/lib/models/listings/queries";
 import { type ListingResponse } from "@/types/api/listings";
 
 export default async function PublicListingPage({
@@ -6,7 +6,7 @@ export default async function PublicListingPage({
 }: {
   params: { slug: string };
 }) {
-  const res: ListingResponse = await getOneListingPublic(params.slug);
+  const res: ListingResponse = await getOneListingPublicAPIV1(params.slug);
   const listing = res.data;
 
   return (
