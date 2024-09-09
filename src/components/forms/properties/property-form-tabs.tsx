@@ -23,18 +23,18 @@ const PropertyFormTabs = ({ propertyTypes }: PropertyTypes) => {
 
   return (
     <div>
-      <div className="tabs">
+      <div className="tabs my-20 flex justify-center flex-wrap">
         {PROPERTY_TABS.map((tab, index) => (
           <button
             key={tab.name}
-            className={`tab ${index === selectedTab ? "active" : ""}`}
+            className={`mx-2 tab ${index === selectedTab ? "active" : ""}`}
             onClick={() => setSelectedTab(index)}
           >
             {tab.name}
           </button>
         ))}
       </div>
-      <div className="tab-content">
+      <div className="tab-content md:mx-[20%]">
         <SelectedFormComponent propertyTypes={propertyTypes} />
       </div>
     </div>
