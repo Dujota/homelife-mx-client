@@ -1,7 +1,6 @@
 import GridListingCard from "./cards/grid-listing-card";
 
 const FavsWatchList = ({ listings }: { listings: any[] }) => {
-  console.log(listings[1].attributes.property);
   return (
     <section className="flex-1 overflow-hidden flex flex-col items-start justify-start gap-spacing-container-lg max-w-full text-left text-[1.25rem] text-content-base-main font-text-md-regular">
       {listings.length &&
