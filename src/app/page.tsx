@@ -6,7 +6,7 @@ import HomepageHeroBanner from "@/components/sections/hero/homepage-hero";
 import UpcomingProjectsBanner from "@/components/sections/upcoming/upcoming-projects-banner";
 
 // MOCKS
-export const aboutUsData = {
+const aboutUsData = {
   title: "About Casa Feliz",
   description:
     "Whether you're a first-time homebuyer, a seasoned investor, or looking to sell your property, our team of experienced and passionate agents is here to provide exceptional service and expertise.",

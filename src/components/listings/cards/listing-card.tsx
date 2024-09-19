@@ -2,6 +2,7 @@ import Image from "next/image";
 
 export type ListingCard = {
   className?: string;
+  imageContainerClassName?: string;
   currency?: string;
   imageUrl?: string;
   listing: {
@@ -11,15 +12,17 @@ export type ListingCard = {
 
 const ListingCard = ({
   className = "",
+  imageContainerClassName = "",
   currency = "",
   imageUrl,
+  listing: { price },
 }: ListingCard) => {
   return (
     <div
       className={`self-stretch flex-1 flex flex-col items-start justify-start gap-[1.25rem] min-w-[20rem] shrink-0 text-left text-[1.25rem] text-content-base-main font-text-md-regular ${className}`}
     >
       <div
-        className={`self-stretch flex-1 rounded-lg overflow-hidden flex flex-row items-start justify-end py-[1rem] px-[1.062rem] bg-cover bg-no-repeat bg-[top]`}
+        className={`self-stretch flex-1 rounded-lg overflow-hidden flex flex-row items-start justify-end py-[1rem] px-[1.062rem] bg-cover bg-no-repeat bg-[top] ${imageContainerClassName}`}
         style={{ backgroundImage: `url(${imageUrl})` }}
       >
         <div className="h-[2.5rem] w-[2.5rem] [backdrop-filter:blur(10px)] rounded-3xl bg-gray flex flex-row items-start justify-start p-[0.5rem] box-border">
@@ -39,7 +42,7 @@ const ListingCard = ({
             $
           </h3>
           <div className="self-stretch flex-1 relative tracking-[-0.02em] leading-[1.5rem] font-medium flex items-center">
-            1,234,567
+            {price}
           </div>
           <h3 className="m-0 self-stretch w-[2.688rem] relative text-inherit tracking-[-0.02em] leading-[1.5rem] font-medium font-[inherit] flex items-center">
             {currency}

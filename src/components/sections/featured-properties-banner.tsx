@@ -1,5 +1,5 @@
 import CardSlider from "../common/banners/card-slider";
-import ListingCard from "../listings/listing-card";
+import ListingCard from "../listings/cards/listing-card";
 
 const mockData = "123456".split("").map((m) => {
   if (parseInt(m) % 2) {

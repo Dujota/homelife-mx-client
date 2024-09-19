@@ -25,7 +25,7 @@ export default function HomepageSearch() {
           placeholder="Search by City, Address, Zip"
           type="text"
           value={term}
-          onChange={setTerm}
+          onChange={(e) => setTerm(e.target.value)}
         />
       </div>
       <Image
