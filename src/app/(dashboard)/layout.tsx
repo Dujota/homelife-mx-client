@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Breadcrumbs from "@/components/common/layout/breadcrumbs";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "react-hot-toast";
@@ -20,7 +20,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic&display=optional"
+      />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+      />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+      />
+
+      <main>{children}</main>
+
+      {/*
+       <html lang="en">
       <body className={inter.className}>
         <Nav />
         <Breadcrumbs
@@ -36,6 +53,9 @@ export default function RootLayout({
         <Toaster />
         <Footer />
       </body>
-    </html>
+
+      </html>
+      */}
+    </>
   );
 }
