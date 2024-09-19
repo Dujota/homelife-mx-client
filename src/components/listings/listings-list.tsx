@@ -9,9 +9,10 @@ type ListingListProps = {
 export default function ListingsList({ listings, children }: ListingListProps) {
   return (
     <ul>
-      {listings?.map((listing: Listing) => (
-        <li key={listing.id}>{children(listing)}</li>
-      ))}
+      {listings.length &&
+        listings?.map((listing: Listing) => (
+          <li key={listing.id}>{children(listing)}</li>
+        ))}
     </ul>
   );
 }

@@ -17,12 +17,13 @@ export default async function ListingsPage() {
     <div>
       Properties Page
       <h1>ALL THE PROPERTIES</h1>
-      {properties.map((property: any) => (
-        <div key={property.id}>
-          <h2>{property.attributes.price}</h2>
-          <p>{property.attributes.description}</p>
-        </div>
-      ))}
+      {properties.length &&
+        properties.map((property: any) => (
+          <div key={property.id}>
+            <h2>{property.attributes.price}</h2>
+            <p>{property.attributes.description}</p>
+          </div>
+        ))}
     </div>
   );
 }
