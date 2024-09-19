@@ -1,6 +1,7 @@
 import BackToLink from "@/components/common/buttons/back-to-link";
 import ContactAgent from "@/components/listings/public/contact-agent";
 import DescriptionCard from "@/components/listings/public/description-card";
+import PropertyDetailCard from "@/components/listings/public/property-detail-card";
 import PropertyDetailMetrics from "@/components/listings/public/property-detail-metrics";
 import { getOneListingPublicAPIV1 } from "@/lib/models/listings/queries";
 import { type ListingResponse } from "@/types/api/listings";
@@ -54,6 +55,89 @@ const mockDescriptionProps = {
   showLessText: "Show Less",
 };
 
+const mockDetailProps = {
+  title: "Details",
+  items: [
+    {
+      icon: "/images/icons/properties/bed.svg",
+      label: "Beds",
+      value: "2 Beds",
+    },
+    {
+      icon: "/images/icons/properties/bath.svg",
+      label: "Baths",
+      value: "2 Baths",
+    },
+    {
+      icon: "/images/icons/properties/ruler-area.svg",
+      label: "Size",
+      value: "100m² living Space",
+    },
+    {
+      icon: "/images/icons/properties/prop-type.svg",
+      label: "Type",
+      value: "Apartment",
+    },
+    {
+      icon: "/images/icons/properties/calendar.svg",
+      label: "Year",
+      value: "Built in 2014",
+    },
+    {
+      icon: "/images/icons/properties/apraisal.svg",
+      label: "Appraisal",
+      value: "Appraisal Available",
+    },
+    {
+      icon: "/images/icons/properties/ruler-area.svg",
+      label: "Lot Size",
+      value: "100m² lot size",
+    },
+  ],
+};
+
+const mockAmenitiesProps = {
+  title: "Amenities",
+  items: [
+    {
+      icon: "/images/icons/properties/image.svg",
+      label: "View",
+      value: "Bay view",
+    },
+    {
+      icon: "/images/icons/properties/sunset.svg",
+      label: "Waterfront",
+      value: "Waterfront",
+    },
+    { icon: "/images/icons/properties/wifi.svg", label: "Wifi", value: "Wifi" },
+    {
+      icon: "/images/icons/properties/car.svg",
+      label: "Parking",
+      value: "2 Car Garage",
+    },
+    {
+      icon: "/images/icons/properties/sunset.svg",
+      label: "View",
+      value: "Beach view",
+    },
+    {
+      icon: "/images/icons/properties/kitchen.svg",
+      label: "Kitchen",
+      value: "Kitchen",
+    },
+    {
+      icon: "/images/icons/properties/office.svg",
+      label: "Workspace",
+      value: "Office / Den",
+    },
+    {
+      icon: "/images/icons/properties/alarm.svg",
+      label: "Safety",
+      value: "24hr Security",
+    },
+  ],
+};
+
 export default async function PublicListingPage({
   params,
 }: {
@@ -86,6 +170,15 @@ export default async function PublicListingPage({
                 content={mockDescriptionProps.content}
                 showMoreText={mockDescriptionProps.showMoreText}
                 showLessText={mockDescriptionProps.showLessText}
+              />
+
+              <PropertyDetailCard
+                title={mockDetailProps.title}
+                items={mockDetailProps.items}
+              />
+              <PropertyDetailCard
+                title={mockAmenitiesProps.title}
+                items={mockAmenitiesProps.items}
               />
             </div>
           </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import TruncateButton from "@/components/common/buttons/truncate-button";
-import React, { useState } from "react";
+import useExpandable from "@/lib/hooks/use-expandable";
 
 interface DescriptionCardProps {
   title: string;
@@ -16,11 +16,9 @@ const DescriptionCard: React.FC<DescriptionCardProps> = ({
   showMoreText,
   showLessText,
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const { toggleSection, isSectionExpanded } = useExpandable();
 
-  const toggleExpanded = () => {
-    setIsExpanded(!isExpanded);
-  };
+  const isExpanded = isSectionExpanded("description");
 
   return (
     <div className="self-stretch flex flex-col items-start justify-start gap-[1rem]">
@@ -38,7 +36,7 @@ const DescriptionCard: React.FC<DescriptionCardProps> = ({
           <p className="m-0">{content}</p>
         </div>
         <TruncateButton
-          toggleExpanded={toggleExpanded}
+          toggleExpanded={() => toggleSection("description")}
           isExpanded={isExpanded}
           showMoreText={showMoreText}
           showLessText={showLessText}
