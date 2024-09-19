@@ -1,4 +1,5 @@
 import { Key } from "react";
+import NewsLetter from "@/components/common/banners/news-letter";
 import CategoryCard from "./category-card";
 
 const mock_cats = [
@@ -45,6 +46,10 @@ export default function CategoriesList({ className = "" }: CategoriesListType) {
                 />
               ),
             )}
+            <NewsLetter
+              heading="Join Newsletter to stay updated"
+              buttonText="Subscribe"
+            />
           </div>
         </div>
       </div>
