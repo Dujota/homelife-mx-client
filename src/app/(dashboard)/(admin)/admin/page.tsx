@@ -10,7 +10,7 @@ export default function AdminDashboard() {
         <Link href="/admin/properties/add-property">
           <button className="mx-2">Add Property</button>
         </Link>
-        <Link href="/admin/listings/add-listings">
+        <Link href="/admin/listings/add-listing">
           <button className="mx-2">Add Listings</button>
         </Link>
         <Link href="/admin/properties">
