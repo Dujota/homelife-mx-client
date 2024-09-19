@@ -25,8 +25,6 @@ export default function UpcomingProjectsBanner() {
     >
       {mockData.map((m, i) => (
         <UpcomingProjectsCard
-          // currency={i % 2 ? "CAD" : "MXN"}
-          // listing={{ price: "1,234,567" }}
           label={m.label}
           date={m.date}
           key={i}
