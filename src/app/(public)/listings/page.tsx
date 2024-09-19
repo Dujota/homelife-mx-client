@@ -1,8 +1,6 @@
 import ListFilterDropdowns from "@/components/forms/fields/all-recently-selects";
 import HomepageSearch from "@/components/forms/search/homepage-search";
 import FavsWatchList from "@/components/listings/favs-list";
-import ListingsList from "@/components/listings/listings-list";
-import ListingListItem from "@/components/listings/listings-list-item";
 import { getAllListingsPublicAPIV1 } from "@/lib/models/listings/queries";
 import { type ListingsResponse } from "@/types/api/listings";
 

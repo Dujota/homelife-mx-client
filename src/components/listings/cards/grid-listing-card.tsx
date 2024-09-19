@@ -34,7 +34,7 @@ const GridListingCard: NextPage<GridListingCardType> = ({
       href={`/listings/${slug}`}
       className="block w-full no-underline text-black"
     >
-      <div className="self-stretch flex flex-col items-start justify-start gap-[1.25rem] min-w-[20rem] h-[21.5rem]">
+      <div className="self-stretch flex flex-col items-start justify-start gap-[1.25rem] min-w-[20rem] h-[21.75rem]">
         <div
           className="self-stretch h-[15rem] rounded-lg overflow-hidden shrink-0 flex flex-row items-start justify-end py-[1rem] px-[1.062rem] box-border bg-cover bg-no-repeat bg-[top]"
           style={{ backgroundImage: `url(${imageUrl})` }}

@@ -39,7 +39,7 @@ const ListingCardMetrics: NextPage<ListingCardMetricsType> = ({
       <div className="self-stretch flex flex-col items-start justify-start gap-[1rem] text-[0.875rem] text-content-base-base">
         <div className="self-stretch relative leading-[1rem]">{address}</div>
 
-        <div className="flex flex-row items-start justify-start flex-wrap content-start py-[0rem] pl-[0rem] pr-[1.5rem] gap-x-[1.5rem] gap-y-[1.418rem]">
+        <div className="flex flex-row items-end justify-start flex-wrap content-start py-[0rem] pl-[0rem] pr-[1.5rem] gap-x-[1.5rem] gap-y-[1.418rem]">
           {/* Bedrooms */}
           <div className="flex flex-row items-center justify-start gap-[0.5rem]">
             <Image
