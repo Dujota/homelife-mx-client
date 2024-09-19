@@ -10,7 +10,11 @@ const mockData = "123456".split("").map((m) => {
     };
   }
 
-  return { img: "/temp/UPCOMING2.png", date: " 22 January 2024" };
+  return {
+    img: "/temp/UPCOMING2.png",
+    date: " 22 January 2024",
+    label: " Vaughan, Ontario, Canada",
+  };
 });
 
 export default function UpcomingProjectsBanner() {
