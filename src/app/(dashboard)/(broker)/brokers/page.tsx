@@ -9,7 +9,7 @@ export default function BrokersDashboard() {
         <Link href="/brokers/properties/add-property">
           <button className="mx-2">Add Property</button>
         </Link>
-        <Link href="/brokers/listings/add-listings">
+        <Link href="/brokers/listings/add-listing">
           <button className="mx-2">Add Listings</button>
         </Link>
         <Link href="/brokers/properties">
