@@ -27,6 +27,11 @@ body {
   border-width: 0;
 }
 
+a{
+  text-decoration: none;
+  color: #4b5563;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
