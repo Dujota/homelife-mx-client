@@ -22,7 +22,10 @@ export type CategoriesListType = {
 
 export default function CategoriesList({ className = "" }: CategoriesListType) {
   return (
-    <section id="categories" className="self-stretch flex flex-row items-start justify-start pt-[0rem] pb-[1rem] pl-[0rem] pr-[1rem] box-border max-w-full">
+    <section
+      id="categories"
+      className="self-stretch flex flex-row items-start justify-start pt-[0rem] pb-[1rem] pl-[0rem] pr-[1rem] box-border max-w-full"
+    >
       <div className="flex-1 flex flex-col items-start justify-start gap-[13.25rem] max-w-[105%] shrink-0">
         <div
           className={`self-stretch flex flex-col items-start justify-start py-spacing-section-section-vertical-padding pl-spacing-section-section-horizontal-padding pr-[0rem] box-border gap-spacing-section-section-vertical-padding max-w-full text-left text-[2rem] text-content-base-main font-text-md-regular ${className}`}
