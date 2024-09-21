@@ -8,28 +8,28 @@ import { type ListingResponse } from "@/types/api/listings";
 
 const propertyDetailMetricsMock = [
   {
-    icon: "/images/icons/properties/bed.svg",
-    alt: "location icon",
+    icon: "/images/icons/properties/location.svg",
+    alt: "location",
     text: "Vaughan, Ontario, Canada, L5A4Y5",
   },
   {
     icon: "/images/icons/properties/bed.svg",
-    alt: "bed icon",
+    alt: "bed",
     text: "2 Beds",
   },
   {
     icon: "/images/icons/properties/bath.svg",
-    alt: "bath icon",
+    alt: "bath",
     text: "2 Baths",
   },
   {
     icon: "/images/icons/properties/ruler-area.svg",
-    alt: "size icon",
+    alt: "size",
     text: "1000 sqm²",
   },
   {
     icon: "/images/icons/properties/prop-type.svg",
-    alt: "property type icon",
+    alt: "property type",
     text: "Apartment",
   },
 ];
@@ -154,9 +154,14 @@ export default async function PublicListingPage({
             {/* Metrics */}
             <div className="flex-1 flex flex-col items-start justify-start gap-[2.5rem] max-w-full">
               <BackToLink slug="/listings" label="Listings" />
+              <div className="self-stretch flex flex-col items-start justify-start gap-[1.5rem] text-[2rem] text-black">
+                <div className="self-stretch relative tracking-[-0.03em] leading-[2.5rem] font-medium whitespace-nowrap">
+                  $139,900
+                </div>
 
-              <div className="self-stretch flex flex-col items-start justify-start gap-[2rem] max-w-full text-[1.25rem] text-content-base-main">
-                <PropertyDetailMetrics details={propertyDetailMetricsMock} />
+                <div className="self-stretch flex flex-col items-start justify-start gap-[2rem] max-w-full text-[1.25rem] text-content-base-main">
+                  <PropertyDetailMetrics details={propertyDetailMetricsMock} />
+                </div>
               </div>
 
               <ContactAgent

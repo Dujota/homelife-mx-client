@@ -22,7 +22,7 @@ const DescriptionCard: React.FC<DescriptionCardProps> = ({
 
   return (
     <div className="self-stretch flex flex-col items-start justify-start gap-[1rem]">
-      <div className="self-stretch relative tracking-[-0.01em] leading-[1.5rem] font-medium">
+      <div className="self-stretch relative tracking-[-0.01em] leading-[1.5rem] font-medium text-2xl text-black">
         {title}
       </div>
       <div className="self-stretch flex flex-col items-start justify-start gap-[0.25rem] text-[1rem] text-black">
