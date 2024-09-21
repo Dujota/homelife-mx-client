@@ -1,5 +1,5 @@
 import { Key } from "react";
-import NewsLetter from "@/components/common/banners/news-letter";
+import NewsLetter from "@/components/common/banners/news-letter-card";
 import CategoryCard from "./category-card";
 
 const mock_cats = [
@@ -22,7 +22,7 @@ export type CategoriesListType = {
 
 export default function CategoriesList({ className = "" }: CategoriesListType) {
   return (
-    <section className="self-stretch flex flex-row items-start justify-start pt-[0rem] pb-[1rem] pl-[0rem] pr-[1rem] box-border max-w-full">
+    <section id="categories" className="self-stretch flex flex-row items-start justify-start pt-[0rem] pb-[1rem] pl-[0rem] pr-[1rem] box-border max-w-full">
       <div className="flex-1 flex flex-col items-start justify-start gap-[13.25rem] max-w-[105%] shrink-0">
         <div
           className={`self-stretch flex flex-col items-start justify-start py-spacing-section-section-vertical-padding pl-spacing-section-section-horizontal-padding pr-[0rem] box-border gap-spacing-section-section-vertical-padding max-w-full text-left text-[2rem] text-content-base-main font-text-md-regular ${className}`}
@@ -32,7 +32,7 @@ export default function CategoriesList({ className = "" }: CategoriesListType) {
               Categories
             </h1>
           </div>
-          <div className="h-[25rem] tablet:flex-wrap overflow-x-auto shrink-0 flex flex-row items-start justify-start gap-spacing-container-md max-w-full text-[1.25rem] text-colors-background-bg-primary">
+          <div className="h-[25rem] md:flex-wrap md:h-full md:w-full md:justify-evenly overflow-x-auto shrink-0 flex flex-row items-start justify-start gap-spacing-container-md max-w-full text-[1.25rem] text-colors-background-bg-primary">
             {mock_cats.map(
               (
                 m: { img: string; label: string | undefined },
@@ -40,7 +40,7 @@ export default function CategoriesList({ className = "" }: CategoriesListType) {
               ) => (
                 <CategoryCard
                   key={i}
-                  className=""
+                  className="md:w-[360px] md:h-[400px]"
                   imgUrl={m.img}
                   label={m.label}
                 />

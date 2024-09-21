@@ -21,7 +21,7 @@ const AboutUs: NextPage<AboutUsType> = ({
     <section
       className={`self-stretch flex flex-col items-start justify-start pt-[0rem] px-[0rem] pb-[2rem] box-border gap-[1rem] max-w-full text-left text-[2rem] text-content-base-main font-text-md-regular ${className}`}
     >
-      <div className="self-stretch bg-colors-background-bg-primary overflow-hidden flex flex-col items-start justify-center py-spacing-section-section-vertical-padding px-spacing-section-section-horizontal-padding gap-spacing-section-section-horizontal-padding md:flex-row">
+      <div className="self-stretch bg-colors-background-bg-primary overflow-hidden flex flex-col items-start justify-center py-spacing-section-section-vertical-padding px-spacing-section-section-horizontal-padding gap-spacing-section-section-horizontal-padding lg:flex-row">
         <div className="self-stretch flex flex-col items-start justify-start gap-spacing-container-lg">
           <div className="self-stretch flex flex-col items-start justify-start gap-spacing-container-xs">
             <h1 className="m-0 self-stretch relative text-inherit tracking-[-0.03em] leading-[2.5rem] font-medium font-[inherit]">
@@ -35,7 +35,7 @@ const AboutUs: NextPage<AboutUsType> = ({
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className="flex-1 flex flex-col items-start justify-start gap-spacing-container-xxs1 min-w-[9rem] xs:min-w-[13.5rem] md:min-w-[14.5rem] 2xl:min-w-[19rem]"
+                className="flex-1 flex flex-col items-start justify-start gap-spacing-container-xxs1 min-w-[9rem] xs:min-w-[13.5rem] sm:min-w-[14.5rem] md:min-w-[20rem] lg:min-w-[15rem] 2xl:min-w-[19rem]"
               >
                 <div className="self-stretch relative tracking-[-0.03em] leading-[2.5rem] font-medium">
                   {stat.number}
