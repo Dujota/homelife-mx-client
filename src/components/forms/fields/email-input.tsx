@@ -14,7 +14,7 @@ const EmailInput = ({
   label,
   className,
   placeholder,
-  wrapperClassName
+  wrapperClassName,
 }: EmailInputProps) => {
   const { control } = useFormContext();
 
