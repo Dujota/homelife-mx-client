@@ -89,6 +89,40 @@ const config: Config = {
       // mq87: {
       //   raw: 'screen and (max-width: 87px)',
       // },
+
+      xs: "501px",
+      // => @media (min-width: 501px) { ... }
+
+      sm: "640px",
+      // => @media (min-width: 640px) { ... }
+
+      md: "768px",
+      // => @media (min-width: 768px) { ... }
+
+      lg: "1024px",
+      // => @media (min-width: 1024px) { ... }
+
+      xl: "1280px",
+      // => @media (min-width: 1280px) { ... }
+
+      "2xl": "1536px",
+      // => @media (min-width: 1536px) { ... }
+
+      // sm: {
+      //   raw: "screen and (max-width: 500px)",
+      // },
+      // tablet: {
+      //   raw: "screen and (min-width: 501px) and (max-width: 767px)",
+      // },
+      // lg: {
+      //   raw: "screen and (min-width: 768px) and (max-width: 1023px)",
+      // },
+      // xl: {
+      //   raw: "screen and (min-width: 1024px) and (max-width: 1280px)",
+      // },
+      // 2xl: {
+      //   raw: ,
+      // },
     },
   },
   corePlugins: {

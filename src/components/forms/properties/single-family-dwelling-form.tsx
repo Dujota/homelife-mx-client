@@ -59,8 +59,14 @@ const SingleFamilyDwellingForm = ({
         session?.user?.accessToken,
       );
 
-      debugger;
-      // router.push(`/listings/${res.data.id}`);
+      const result = window.confirm("Do you want to add another property?");
+      if (result) {
+        // TODO: clear form with react hook form
+        window.location.reload();
+      } else {
+        router.push(`/admin/properties/${res.data.id}`);
+      }
+
       toast.success("Property created successfully!");
     } catch (error) {
       toast.error("Failed to create property");

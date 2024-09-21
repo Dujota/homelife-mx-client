@@ -1,14 +1,26 @@
 import * as z from "zod";
 
 export const preConstructionSchema = z.object({
-  name_of_develop: z.string().min(1, "Name of development is required"),
-  project_description: z.string().min(1, "Project description is required"),
-  developer_contact_info: z
+  development_name: z.string().min(1, "Name of development is required"),
+  description: z.string().min(1, "Project description is required"),
+  address_attributes: z.object({
+    // house_number: z.string().min(1, "House number is required"),
+    house_number: z.string().optional(),
+    // street: z.string().min(1, "Street is required"),
+    street: z.string().optional(),
+    neighborhood: z.string().optional(),
+    // neighborhood: z.string().min(1, "Neighborhood is required"),
+    // municipality: z.string().min(1, "Municipality is required"),
+    municipality: z.string().optional(),
+    city: z.string().min(1, "City is required"),
+    state: z.string().min(1, "State is required"),
+    // postal_code: z.string().min(1, "Postal code is required"),
+    postal_code: z.string().optional(),
+  }),
+  developer_contact: z
     .string()
     .min(1, "Developer contact information is required"),
-  cadastral_folio_number: z
-    .string()
-    .min(1, "Cadastral folio number is required"),
+  cadastral_number: z.string().min(1, "Cadastral folio number is required"),
   proof_of_ownership: z.boolean().optional(),
   property_taxes: z.preprocess(
     (val = "") => (val === "" ? 0 : parseFloat(val as string)),

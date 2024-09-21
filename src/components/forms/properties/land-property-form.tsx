@@ -1,49 +1,61 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
+// Hook Form
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   landPropertySchema,
   type LandPropertyFormData,
 } from "@/lib/zod/forms/land-property-schema";
+
+// Components
 import NumberInput from "../fields/number-input";
 import TextArea from "../fields/text-area-input";
 import TextInput from "../fields/text-input";
 import SelectInput from "../fields/simple-select-input";
 import FormSubmitButton from "../../common/buttons/form-submit-button";
 
+// Mutations
+import { createLand } from "@/lib/models/properties/mutations";
+
 type LandPropertyFormProps = {
-  propertyTypes: { name: string; id: number }[];
+  propertyTypes?: { name: string; id: number }[];
 };
 
 const LandPropertyForm = ({ propertyTypes }: LandPropertyFormProps) => {
+  const router = useRouter();
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/login?callbackUrl=/admin/properties/add-property");
+    },
+  });
+
   const methods = useForm<LandPropertyFormData>({
     resolver: zodResolver(landPropertySchema),
   });
 
-  const propertyTypeOptions = propertyTypes.map(
-    (type: { name: string; id: number }) => ({
-      label: type.name,
-      value: type.id,
-    }),
-  );
+  // const propertyTypeOptions = propertyTypes.map(
+  //   (type: { name: string; id: number }) => ({
+  //     label: type.name,
+  //     value: type.id,
+  //   }),
+  // );
 
   const onSubmit = async (data: LandPropertyFormData) => {
     try {
-      const res = await fetch("/api/properties", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const res = await createLand(data, session?.user?.accessToken);
 
-      if (!res.ok) {
-        throw new Error("Failed to create property");
+      const result = window.confirm("Do you want to add another property?");
+
+      if (result) {
+        // TODO: clear form with react hook form
+        window.location.reload();
+      } else {
+        router.push(`/admin/properties/${res.data.id}`);
       }
-
-      const result = await res.json();
-      console.log("Property created:", result);
     } catch (error) {
       console.error("Error creating property:", error);
     }
@@ -54,22 +66,31 @@ const LandPropertyForm = ({ propertyTypes }: LandPropertyFormProps) => {
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <NumberInput name="price" label="Price" />
         <TextArea name="description" label="Description" />
-        <TextInput name="address.house_number" label="House Number" />
-        <TextInput name="address.street" label="Street" />
-        <TextInput name="address.neighborhood" label="Neighborhood" />
-        <TextInput name="address.municipality" label="Municipality" />
-        <TextInput name="address.city" label="City" />
-        <TextInput name="address.state" label="State" />
-        <TextInput name="address.postal_code" label="Postal Code" />
-        <SelectInput
+        <TextInput
+          name="address_attributes.house_number"
+          label="House Number"
+        />
+        <TextInput name="address_attributes.street" label="Street" />
+        <TextInput
+          name="address_attributes.neighborhood"
+          label="Neighborhood"
+        />
+        <TextInput
+          name="address_attributes.municipality"
+          label="Municipality"
+        />
+        <TextInput name="address_attributes.city" label="City" />
+        <TextInput name="address_attributes.state" label="State" />
+        <TextInput name="address_attributes.postal_code" label="Postal Code" />
+        {/* <SelectInput
           name="property_type_id"
           label="Property Type"
           options={propertyTypeOptions}
-        />
+        /> */}
         <NumberInput name="size_of_land" label="Size of the Land" />
         <TextInput name="dimensions" label="Dimensions" />
         <SelectInput
-          name="in_land_registry"
+          name="is_in_land_registry"
           label="In Land Registry"
           options={[
             { label: "Yes", value: true },

@@ -1,49 +1,56 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
+// Hook Form
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   preConstructionSchema,
   type PreConstructionFormData,
 } from "@/lib/zod/forms/pre-construction-schema";
+
+// Components
 import NumberInput from "../fields/number-input";
 import TextArea from "../fields/text-area-input";
 import TextInput from "../fields/text-input";
 import SelectInput from "../fields/simple-select-input";
 import FormSubmitButton from "../../common/buttons/form-submit-button";
+import { createPreConstructionProject } from "@/lib/models/properties/mutations";
 
 type PreConstructionFormProps = {
   propertyTypes: { name: string; id: number }[];
 };
 
 const PreConstructionForm = ({ propertyTypes }: PreConstructionFormProps) => {
+  const router = useRouter();
+
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/login?callbackUrl=/admin/properties/add-property");
+    },
+  });
+
   const methods = useForm<PreConstructionFormData>({
     resolver: zodResolver(preConstructionSchema),
   });
 
-  const propertyTypeOptions = propertyTypes.map(
-    (type: { name: string; id: number }) => ({
-      label: type.name,
-      value: type.id,
-    }),
-  );
-
   const onSubmit = async (data: PreConstructionFormData) => {
     try {
-      const res = await fetch("/api/properties", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const res = await createPreConstructionProject(
+        data,
+        session?.user?.accessToken,
+      );
 
-      if (!res.ok) {
-        throw new Error("Failed to create property");
+      const result = window.confirm("Do you want to add another property?");
+
+      if (result) {
+        // TODO: clear form with react hook form
+        window.location.reload();
+      } else {
+        router.push(`/admin/properties/${res.data.id}`);
       }
-
-      const result = await res.json();
-      console.log("Property created:", result);
     } catch (error) {
       console.error("Error creating property:", error);
     }
@@ -52,16 +59,13 @@ const PreConstructionForm = ({ propertyTypes }: PreConstructionFormProps) => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <TextInput name="name_of_develop" label="Name of Development" />
-        <TextArea name="project_description" label="Project Description" />
+        <TextInput name="development_name" label="Name of Development" />
+        <TextArea name="description" label="Project Description" />
         <TextInput
-          name="developer_contact_info"
+          name="developer_contact"
           label="Developer Contact Information"
         />
-        <TextInput
-          name="cadastral_folio_number"
-          label="Cadastral/Folio Number"
-        />
+        <TextInput name="cadastral_number" label="Cadastral/Folio Number" />
         <SelectInput
           name="proof_of_ownership"
           label="Proof of Ownership"
@@ -73,6 +77,22 @@ const PreConstructionForm = ({ propertyTypes }: PreConstructionFormProps) => {
         <NumberInput name="property_taxes" label="Property Taxes" />
         <TextInput name="zoning" label="Zoning" />
         <TextInput name="location" label="Location" />
+        <TextInput
+          name="address_attributes.house_number"
+          label="House Number"
+        />
+        <TextInput name="address_attributes.street" label="Street" />
+        <TextInput
+          name="address_attributes.neighborhood"
+          label="Neighborhood"
+        />
+        <TextInput
+          name="address_attributes.municipality"
+          label="Municipality"
+        />
+        <TextInput name="address_attributes.city" label="City" />
+        <TextInput name="address_attributes.state" label="State" />
+        <TextInput name="address_attributes.postal_code" label="Postal Code" />
         <TextArea name="plans" label="Plans" />
         <SelectInput
           name="rendering_available"

@@ -24,7 +24,19 @@ const SelectInput = ({ name, label, options, isMulti }: SelectInputProps) => {
         control={control}
         render={({ field, fieldState: { error } }) => (
           <>
-            <select {...field} multiple={isMulti}>
+            <select
+              {...field}
+              multiple={isMulti}
+              onChange={(e) => {
+                const value =
+                  e.target.value === "true"
+                    ? true
+                    : e.target.value === "false"
+                      ? false
+                      : e.target.value;
+                field.onChange(value);
+              }}
+            >
               <option key={`default-select-name`} value="">
                 Select an option
               </option>

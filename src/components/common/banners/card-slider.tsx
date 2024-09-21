@@ -50,7 +50,7 @@ const CardSlider = ({
           )}
 
           <div
-            className={`w-[22.375rem] overflow-x-auto shrink-0 flex flex-row items-start justify-start gap-spacing-container-md max-w-full text-[1.25rem] ${slidesWrapperClassName}`}
+            className={`overflow-x-auto shrink-0 flex flex-row items-start justify-start gap-spacing-container-md max-w-full text-[1.25rem] ${slidesWrapperClassName}`}
           >
             {children}
           </div>
