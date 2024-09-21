@@ -34,17 +34,17 @@ const Nav: NextPage<NavType> = ({
 
   return (
     <header
-      className={`self-stretch flex flex-row items-center justify-between pt-spacing-container-md px-spacing-section-section-horizontal-padding pb-[1rem] top-[0] z-[99] sticky gap-[0rem] [row-gap:20px] text-left text-[1.125rem] text-colors-background-bg-primary font-text-md-regular ${className}`}
+      className={`self-stretch flex flex-row items-center justify-between pt-spacing-container-md pb-[1rem] top-[0] z-[99] gap-[0rem] [row-gap:20px] text-left text-[1.125rem] text-colors-background-bg-primary font-text-md-regular ${className}`}
       style={NavStyle}
     >
-      <div className="w-[8.75rem] flex flex-col items-start justify-center">
+      <div className="w-[8.75rem] flex flex-col items-start justify-center ml-[1rem]">
         <Image
           className="w-[6rem] h-[2.75rem] relative object-cover"
           loading="eager"
           alt="Casa Feliz Logo"
           width={96}
           height={44}
-          src="/images/logos/homelife-white-nav.png"
+          src="/images/logos/nav-black.svg"
         />
       </div>
       <div className="flex flex-row items-center justify-start gap-spacing-container-md">
@@ -57,7 +57,7 @@ const Nav: NextPage<NavType> = ({
           </Link>
         </button>
         <Image
-          className="h-[2rem] w-[2rem] relative overflow-hidden shrink-0"
+          className="h-[2rem] w-[2rem] relative overflow-hidden shrink-0 px-[1rem]"
           loading="eager"
           alt="Mobile Menu Icon"
           width={32}
