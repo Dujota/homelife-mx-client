@@ -154,21 +154,27 @@ export default async function PublicListingPage({
             {/* Metrics */}
             <div className="flex-1 flex flex-col items-start justify-start gap-[2.5rem] max-w-full">
               <BackToLink slug="/listings" label="Listings" />
-              <div className="self-stretch flex flex-col items-start justify-start gap-[1.5rem] text-[2rem] text-black">
-                <div className="self-stretch relative tracking-[-0.03em] leading-[2.5rem] font-medium whitespace-nowrap">
-                  $139,900
-                </div>
 
-                <div className="self-stretch flex flex-col items-start justify-start gap-[2rem] max-w-full text-[1.25rem] text-content-base-main">
-                  <PropertyDetailMetrics details={propertyDetailMetricsMock} />
+              <div className="flex-1 flex flex-col items-start justify-start gap-[2.5rem] max-w-full self-stretch md:flex-row">
+                <div className="self-stretch flex flex-col items-start justify-start gap-[1.5rem] text-[2rem] text-black">
+                  <div className="self-stretch relative tracking-[-0.03em] leading-[2.5rem] font-medium whitespace-nowrap">
+                    $139,900
+                  </div>
+
+                  <div className="self-stretch flex flex-col items-start justify-start gap-[2rem] max-w-full text-[1.25rem] text-content-base-main">
+                    <PropertyDetailMetrics
+                      details={propertyDetailMetricsMock}
+                    />
+                  </div>
+                </div>
+                <div className="flex-1 flex flex-col items-start justify-start gap-[2.5rem] max-w-full self-stretch md:flex-row">
+                  <ContactAgent
+                    title={mockTourRequestProps.title}
+                    // time={mockTourRequestProps.time}
+                    buttonText={mockTourRequestProps.buttonText}
+                  />
                 </div>
               </div>
-
-              <ContactAgent
-                title={mockTourRequestProps.title}
-                // time={mockTourRequestProps.time}
-                buttonText={mockTourRequestProps.buttonText}
-              />
 
               <DescriptionCard
                 title={mockDescriptionProps.title}
@@ -184,6 +190,12 @@ export default async function PublicListingPage({
               <PropertyDetailCard
                 title={mockAmenitiesProps.title}
                 items={mockAmenitiesProps.items}
+              />
+
+              <ContactAgent
+                title={mockTourRequestProps.title}
+                // time={mockTourRequestProps.time}
+                buttonText={mockTourRequestProps.buttonText}
               />
             </div>
           </div>

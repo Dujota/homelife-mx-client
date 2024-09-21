@@ -33,7 +33,7 @@ const PropertyDetailMetrics = ({ details }: PropertyDetailMetricsProps) => {
         {restOfMetrics.map((detail, index) => (
           <div
             key={index}
-            className="flex flex-row items-center justify-start py-[0rem] pl-[0rem] pr-[1.25rem] gap-[0.687rem] w-[40%]"
+            className="flex flex-row items-center justify-start py-[0rem] pl-[0rem] pr-[1.25rem] gap-[0.687rem] w-[40%] lg:w-auto"
           >
             <Image
               className="h-[1.25rem] w-[1.25rem] relative overflow-hidden shrink-0 min-h-[1.25rem]"

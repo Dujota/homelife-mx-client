@@ -25,7 +25,7 @@ const PropertyDetailCard: React.FC<PropertyDetailCardProps> = ({
         {title}
       </div>
       <div className="flex flex-row items-start justify-start py-[0rem] pl-[0rem] pr-[1.25rem] gap-[1rem] text-content-base-base">
-        <div className="flex flex-col items-start justify-start gap-[1rem] sm:flex-row sm:flex-wrap">
+        <div className="flex flex-col items-start justify-start gap-[1rem] sm:flex-row sm:flex-wrap md:max-w-[800px]">
           {items.map((item, index) => (
             <div className="flex gap-4 w-[280px]" key={index}>
               <Image
