@@ -32,11 +32,11 @@ const GridListingCard: NextPage<GridListingCardType> = ({
   return (
     <Link
       href={`/listings/${slug}`}
-      className="block w-full no-underline text-black"
+      className="block w-full xs:max-w-[500px] sm:max-w-[295px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[380px] no-underline text-black"
     >
-      <div className="self-stretch flex flex-col items-start justify-start gap-[1.25rem] min-w-[20rem] h-[21.75rem]">
+      <div className="self-stretch flex flex-col items-start justify-start gap-[1.25rem] ">
         <div
-          className="self-stretch h-[15rem] rounded-lg overflow-hidden shrink-0 flex flex-row items-start justify-end py-[1rem] px-[1.062rem] box-border bg-cover bg-no-repeat bg-[top]"
+          className="self-stretch h-[15rem] rounded-lg overflow-hidden shrink-0 flex flex-row items-start justify-end py-[1rem] px-[1.062rem] box-border bg-cover bg-no-repeat bg-center"
           style={{ backgroundImage: `url(${imageUrl})` }}
         >
           <div className="h-[2.5rem] w-[2.5rem] [backdrop-filter:blur(10px)] rounded-3xl bg-gray flex flex-row items-start justify-start p-[0.5rem] box-border">
