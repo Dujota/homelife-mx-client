@@ -32,7 +32,7 @@ export default function CategoriesList({ className = "" }: CategoriesListType) {
               Categories
             </h1>
           </div>
-          <div className="w-[23.375rem] h-[25rem] overflow-x-auto shrink-0 flex flex-row items-start justify-start gap-spacing-container-md max-w-full text-[1.25rem] text-colors-background-bg-primary">
+          <div className="h-[25rem] tablet:flex-wrap overflow-x-auto shrink-0 flex flex-row items-start justify-start gap-spacing-container-md max-w-full text-[1.25rem] text-colors-background-bg-primary">
             {mock_cats.map(
               (
                 m: { img: string; label: string | undefined },
