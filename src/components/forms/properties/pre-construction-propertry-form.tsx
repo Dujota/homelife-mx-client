@@ -59,16 +59,13 @@ const PreConstructionForm = ({ propertyTypes }: PreConstructionFormProps) => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <TextInput name="name_of_develop" label="Name of Development" />
-        <TextArea name="project_description" label="Project Description" />
+        <TextInput name="development_name" label="Name of Development" />
+        <TextArea name="description" label="Project Description" />
         <TextInput
-          name="developer_contact_info"
+          name="developer_contact"
           label="Developer Contact Information"
         />
-        <TextInput
-          name="cadastral_folio_number"
-          label="Cadastral/Folio Number"
-        />
+        <TextInput name="cadastral_number" label="Cadastral/Folio Number" />
         <SelectInput
           name="proof_of_ownership"
           label="Proof of Ownership"
@@ -80,6 +77,22 @@ const PreConstructionForm = ({ propertyTypes }: PreConstructionFormProps) => {
         <NumberInput name="property_taxes" label="Property Taxes" />
         <TextInput name="zoning" label="Zoning" />
         <TextInput name="location" label="Location" />
+        <TextInput
+          name="address_attributes.house_number"
+          label="House Number"
+        />
+        <TextInput name="address_attributes.street" label="Street" />
+        <TextInput
+          name="address_attributes.neighborhood"
+          label="Neighborhood"
+        />
+        <TextInput
+          name="address_attributes.municipality"
+          label="Municipality"
+        />
+        <TextInput name="address_attributes.city" label="City" />
+        <TextInput name="address_attributes.state" label="State" />
+        <TextInput name="address_attributes.postal_code" label="Postal Code" />
         <TextArea name="plans" label="Plans" />
         <SelectInput
           name="rendering_available"
