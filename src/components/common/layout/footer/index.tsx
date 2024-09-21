@@ -72,7 +72,7 @@ const Footer: NextPage<FooterType> = ({
             width={100}
             height={80}
             alt="Footer Logo"
-            src="/images/logos/footer-black-logo.png"
+            src="/images/logos/footer-black.svg"
           />
           <div className="self-stretch flex flex-col items-start justify-start gap-spacing-container-xs">
             <div className="self-stretch relative leading-[1.125rem] whitespace-nowrap">
