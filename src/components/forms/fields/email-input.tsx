@@ -5,6 +5,7 @@ type EmailInputProps = {
   name: string;
   label: string;
   placeholder: string;
+  wrapperClassName?: string;
   className?: string;
 };
 
@@ -13,11 +14,12 @@ const EmailInput = ({
   label,
   className,
   placeholder,
+  wrapperClassName
 }: EmailInputProps) => {
   const { control } = useFormContext();
 
   return (
-    <div>
+    <div className={wrapperClassName}>
       {/* <label>{label}</label> */}
       <Controller
         name={name}

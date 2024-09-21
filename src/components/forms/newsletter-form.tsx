@@ -32,10 +32,11 @@ const NewsletterForm: React.FC = () => {
             name="email"
             label="Your Email"
             placeholder="you@example.com"
+            wrapperClassName="w-full"
             className="w-full [border:none] [outline:none] bg-[transparent] h-[1.25rem] flex-1 flex flex-row items-center justify-start font-text-md-regular text-[1rem] text-input-text-placeholder min-w-[11.938rem]"
           />
-        </form>
         <SubscribeButton text="Subscribe" />
+        </form>
       </div>
     </FormProvider>
   );

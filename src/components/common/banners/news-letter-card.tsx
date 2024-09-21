@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-export default function NewsLetter({
+export default function NewsLetterCard({
   heading = "",
   buttonText = "",
 }: {
@@ -27,7 +27,7 @@ export default function NewsLetter({
   return (
     <form
       onSubmit={handleSubmit}
-      className="self-stretch w-[20rem] rounded-lg bg-primary overflow-hidden shrink-0 flex flex-col items-center justify-center py-[6.625rem] px-spacing-container-xs box-border gap-[0.5rem] text-center text-[1.5rem] text-content-inverted-main"
+      className="self-stretch w-[20rem] rounded-lg bg-primary overflow-hidden shrink-0 flex flex-col items-center justify-center py-[6.625rem] px-spacing-container-xs box-border gap-[0.5rem] text-center text-[1.5rem] text-content-inverted-main md:w-[360px]"
     >
       <div className="self-stretch flex-1 flex flex-col items-start justify-start gap-[1.5rem]">
         <div className="self-stretch flex-1 flex flex-col items-center justify-start gap-[0.75rem]">
