@@ -3,6 +3,7 @@ import AboutUs from "@/components/sections/about-us";
 import CategoriesList from "@/components/sections/categories/category-list";
 import FeaturedPropertiesBanner from "@/components/sections/featured-properties-banner";
 import HomepageHeroBanner from "@/components/sections/hero/homepage-hero";
+import NewsletterBanner from "@/components/sections/newsletter-banner";
 import UpcomingProjectsBanner from "@/components/sections/upcoming/upcoming-projects-banner";
 
 // MOCKS
@@ -19,6 +20,12 @@ const aboutUsData = {
   imageSrc: "/images/about-us.png",
 };
 
+export const mockNewsletterData = {
+  title: "Join Newsletter to stay updated",
+  description:
+    "Whether you're a first-time homebuyer, a seasoned investor, or looking to sell your property, our team of experienced and passionate agents is here to provide exceptional service and expertise.",
+};
+
 export default function Home() {
   return (
     <PageWrapper>
@@ -27,6 +34,7 @@ export default function Home() {
       <UpcomingProjectsBanner />
       <CategoriesList />
       <AboutUs {...aboutUsData} />
+      <NewsletterBanner title={mockNewsletterData.title} />
     </PageWrapper>
   );
 }
