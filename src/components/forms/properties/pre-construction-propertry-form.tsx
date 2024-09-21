@@ -1,49 +1,56 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
+// Hook Form
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   preConstructionSchema,
   type PreConstructionFormData,
 } from "@/lib/zod/forms/pre-construction-schema";
+
+// Components
 import NumberInput from "../fields/number-input";
 import TextArea from "../fields/text-area-input";
 import TextInput from "../fields/text-input";
 import SelectInput from "../fields/simple-select-input";
 import FormSubmitButton from "../../common/buttons/form-submit-button";
+import { createPreConstructionProject } from "@/lib/models/properties/mutations";
 
 type PreConstructionFormProps = {
   propertyTypes: { name: string; id: number }[];
 };
 
 const PreConstructionForm = ({ propertyTypes }: PreConstructionFormProps) => {
+  const router = useRouter();
+
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/login?callbackUrl=/admin/properties/add-property");
+    },
+  });
+
   const methods = useForm<PreConstructionFormData>({
     resolver: zodResolver(preConstructionSchema),
   });
 
-  const propertyTypeOptions = propertyTypes.map(
-    (type: { name: string; id: number }) => ({
-      label: type.name,
-      value: type.id,
-    }),
-  );
-
   const onSubmit = async (data: PreConstructionFormData) => {
     try {
-      const res = await fetch("/api/properties", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const res = await createPreConstructionProject(
+        data,
+        session?.user?.accessToken,
+      );
 
-      if (!res.ok) {
-        throw new Error("Failed to create property");
+      const result = window.confirm("Do you want to add another property?");
+
+      if (result) {
+        // TODO: clear form with react hook form
+        window.location.reload();
+      } else {
+        router.push(`/admin/properties/${res.data.id}`);
       }
-
-      const result = await res.json();
-      console.log("Property created:", result);
     } catch (error) {
       console.error("Error creating property:", error);
     }

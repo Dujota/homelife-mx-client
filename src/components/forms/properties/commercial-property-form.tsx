@@ -1,16 +1,24 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
+// Hook Form
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   commercialPropertySchema,
   type CommercialPropertyFormData,
 } from "@/lib/zod/forms/commercial-property-schema";
+
+// Components
 import NumberInput from "../fields/number-input";
 import TextArea from "../fields/text-area-input";
 import TextInput from "../fields/text-input";
-import SelectInput from "../fields/simple-select-input";
 import FormSubmitButton from "../../common/buttons/form-submit-button";
+import SelectInput from "../fields/simple-select-input";
+
+// Mutations
+import { createCommercialProperty } from "@/lib/models/properties/mutations";
 
 type CommercialPropertyFormProps = {
   propertyTypes: { name: string; id: number }[];
@@ -19,6 +27,14 @@ type CommercialPropertyFormProps = {
 const CommercialPropertyForm = ({
   propertyTypes,
 }: CommercialPropertyFormProps) => {
+  const router = useRouter();
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/login?callbackUrl=/admin/properties/add-property");
+    },
+  });
+
   const methods = useForm<CommercialPropertyFormData>({
     resolver: zodResolver(commercialPropertySchema),
   });
@@ -32,20 +48,19 @@ const CommercialPropertyForm = ({
 
   const onSubmit = async (data: CommercialPropertyFormData) => {
     try {
-      const res = await fetch("/api/properties", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const res = await createCommercialProperty(
+        data,
+        session?.user?.accessToken,
+      );
 
-      if (!res.ok) {
-        throw new Error("Failed to create property");
+      const result = window.confirm("Do you want to add another property?");
+
+      if (result) {
+        // TODO: clear form with react hook form
+        window.location.reload();
+      } else {
+        router.push(`/admin/properties/${res.data.id}`);
       }
-
-      const result = await res.json();
-      console.log("Property created:", result);
     } catch (error) {
       console.error("Error creating property:", error);
     }
@@ -56,24 +71,36 @@ const CommercialPropertyForm = ({
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <NumberInput name="price" label="Price" />
         <TextArea name="description" label="Description" />
-        <TextInput name="address.house_number" label="House Number" />
-        <TextInput name="address.street" label="Street" />
-        <TextInput name="address.neighborhood" label="Neighborhood" />
-        <TextInput name="address.municipality" label="Municipality" />
-        <TextInput name="address.city" label="City" />
-        <TextInput name="address.state" label="State" />
-        <TextInput name="address.postal_code" label="Postal Code" />
-        <SelectInput
+        <TextInput
+          name="address_attributes.house_number"
+          label="House Number"
+        />
+        <TextInput name="address_attributes.street" label="Street" />
+        <TextInput
+          name="address_attributes.neighborhood"
+          label="Neighborhood"
+        />
+        <TextInput
+          name="address_attributes.municipality"
+          label="Municipality"
+        />
+        <TextInput name="address_attributes.city" label="City" />
+        <TextInput name="address_attributes.state" label="State" />
+        <TextInput name="address_attributes.postal_code" label="Postal Code" />
+        {/* <SelectInput
           name="property_type_id"
           label="Property Type"
           options={propertyTypeOptions}
+        /> */}
+        <TextInput name="type_of_property" label="Type of Business" />
+        <NumberInput
+          name="square_footage_of_building"
+          label="Commercial Space Size"
         />
-        <TextInput name="type_of_property" label="Type of Property" />
-        <NumberInput name="square_footage" label="Square Footage" />
-        <NumberInput name="lot_size" label="Lot Size" />
+        {/* <NumberInput name="size_of_land" label="Lot Size" /> */}
         <TextInput name="zoning" label="Zoning" />
         <NumberInput name="rental_income" label="Rental Income" />
-        <NumberInput name="year_built" label="Year Built" />
+        {/* <NumberInput name="year_built" label="Year Built" /> */}
         <TextArea
           name="commercial_lease_terms"
           label="Commercial Lease Terms"
