@@ -147,7 +147,7 @@ export default async function PublicListingPage({
   const listing = res.data;
 
   return (
-    <div className=" relative bg-colors-background-bg-primary overflow-hidden flex flex-col items-start justify-start gap-[4.5rem] leading-[normal] tracking-[normal] text-center text-[1.25rem] text-primary font-text-md-regular">
+    <div className=" relative bg-colors-background-bg-primary overflow-hidden flex flex-col items-start justify-start gap-[4.5rem] leading-[normal] tracking-[normal] text-center text-[1.25rem] text-primary font-text-md-regular mt-[6rem]">
       <main className="self-stretch flex flex-col items-start justify-start gap-[2rem] max-w-full">
         <section className="self-stretch flex flex-row items-start justify-start py-[0rem] px-[1rem] box-border max-w-full text-left text-[1rem] text-content-base-base font-text-md-regular">
           <div className="flex-1 flex flex-row items-start justify-start max-w-full">
