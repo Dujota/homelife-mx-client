@@ -60,6 +60,7 @@ const Footer: NextPage<FooterType> = ({
     };
   }, [propTextDecoration3]);
 
+  const year = useMemo(() => new Date().getFullYear(), []);
   return (
     <section
       className={`self-stretch bg-colors-background-bg-primary overflow-hidden flex flex-col items-center justify-start py-spacing-section-section-vertical-padding px-spacing-section-section-horizontal-padding gap-spacing-5xl z-[1] text-left text-[0.875rem] text-content-base-base font-text-md-regular ${className}`}
@@ -179,7 +180,7 @@ const Footer: NextPage<FooterType> = ({
       <div className="self-stretch flex flex-col items-start justify-start">
         <footer className="self-stretch border-colors-border-border-secondary border-t-[1px] border-solid flex flex-col items-start justify-start pt-[0.875rem] pb-[0rem] pl-[0rem] pr-[1.25rem] gap-spacing-container-md text-left text-[1rem] text-content-base-base font-text-md-regular">
           <div className="relative leading-[1.5rem]">
-            © 2077 Homelife. All rights reserved.
+            © {year} Homelife. All rights reserved.
           </div>
           <div className="w-[11.75rem] flex flex-row items-start justify-start gap-[0.687rem] text-colors-text-text-quarterary-500">
             <div className="relative leading-[1.5rem] inline-block min-w-[3rem]">

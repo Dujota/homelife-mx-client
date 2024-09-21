@@ -20,7 +20,7 @@ const aboutUsData = {
   imageSrc: "/images/about-us.png",
 };
 
-export const mockNewsletterData = {
+const mockNewsletterData = {
   title: "Join Newsletter to stay updated",
   description:
     "Whether you're a first-time homebuyer, a seasoned investor, or looking to sell your property, our team of experienced and passionate agents is here to provide exceptional service and expertise.",
