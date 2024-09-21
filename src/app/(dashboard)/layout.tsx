@@ -33,22 +33,22 @@ export default function RootLayout({
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
       />
-
+      <Breadcrumbs
+        homeElement="Home"
+        separator={<span className="text-coral">&gt;</span>}
+        containerClasses="flex m-0 p-0 mt-[6rem]"
+        listClasses="hover:underline mx-2 font-bold list-none"
+        activeClasses="text-steelblue"
+        capitalizeLinks={true}
+        linkClass="text-xs hover:underline no-underline text-coral"
+      />
       <main>{children}</main>
 
       {/*
        <html lang="en">
       <body className={inter.className}>
         <Nav />
-        <Breadcrumbs
-          homeElement="Home"
-          separator={<span className="text-coral">&gt;</span>}
-          containerClasses="flex m-0 p-0"
-          listClasses="hover:underline mx-2 font-bold list-none"
-          activeClasses="text-steelblue"
-          capitalizeLinks={true}
-          linkClass="text-xs hover:underline no-underline text-coral"
-        />
+
         <SessionProvider>{children}</SessionProvider>
         <Toaster />
         <Footer />

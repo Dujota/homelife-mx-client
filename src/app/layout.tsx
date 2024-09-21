@@ -22,8 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Nav />
-        <Breadcrumbs
+        <Nav className="absolute w-full" />
+        {/* <Breadcrumbs
           homeElement="Home"
           separator={<span className="text-coral">&gt;</span>}
           containerClasses="flex m-0 p-0"
@@ -31,7 +31,7 @@ export default function RootLayout({
           activeClasses="text-steelblue"
           capitalizeLinks={true}
           linkClass="text-xs hover:underline no-underline text-coral"
-        />
+        /> */}
         <SessionProvider>{children}</SessionProvider>
         <Toaster />
         <Footer />
