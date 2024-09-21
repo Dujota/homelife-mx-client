@@ -32,7 +32,7 @@ const GridListingCard: NextPage<GridListingCardType> = ({
   return (
     <Link
       href={`/listings/${slug}`}
-      className="block w-full xs:max-w-[500px] sm:max-w-[295px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[380px] no-underline text-black"
+      className="block w-full xs:max-w-[500px] sm:max-w-[290px] md:max-w-[350px] lg:max-w-[300px] xl:max-w-[380px] no-underline text-black"
     >
       <div className="self-stretch flex flex-col items-start justify-start gap-[1.25rem] ">
         <div
