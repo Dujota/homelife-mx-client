@@ -6,6 +6,7 @@ import type { NextPage } from "next";
 
 export type ListFilterDropdownsType = {
   className?: string;
+  title: string;
 };
 
 const optionsListings = [
@@ -22,6 +23,7 @@ const optionsRecentlyAdded = [
 
 const ListFilterDropdowns: NextPage<ListFilterDropdownsType> = ({
   className = "",
+  title = "Favourites",
 }) => {
   const [selectedListing, setSelectedListing] = useState(optionsListings[0]);
   const [selectedRecentlyAdded, setSelectedRecentlyAdded] = useState(
@@ -42,13 +44,13 @@ const ListFilterDropdowns: NextPage<ListFilterDropdownsType> = ({
     <div
       className={`self-stretch flex flex-row items-start justify-start py-[0rem] px-[1rem] box-border max-w-full text-left text-[2rem] text-content-base-main font-text-md-regular ${className}`}
     >
-      <div className="flex-1 flex flex-col items-end justify-start gap-spacing-container-xs max-w-full">
+      <div className="flex-1 flex flex-col items-end justify-start gap-spacing-container-xs max-w-full md:flex-row md:justify-between">
         <h1 className="m-0 self-stretch relative text-inherit tracking-[-0.03em] leading-[2.5rem] font-medium font-[inherit]">
-          Favorites
+          {title}
         </h1>
         <div className="self-stretch flex flex-row items-center justify-start flex-wrap content-center gap-spacing-container-xs text-[1rem]">
           {/* All Listings */}
-          <div className="flex-1 min-w-[7rem]">
+          <div className="flex-1 min-w-[7rem] md:w-[360px]">
             <Select
               options={optionsListings}
               value={selectedListing}

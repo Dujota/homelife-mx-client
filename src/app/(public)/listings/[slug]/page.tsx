@@ -8,28 +8,28 @@ import { type ListingResponse } from "@/types/api/listings";
 
 const propertyDetailMetricsMock = [
   {
-    icon: "/images/icons/properties/bed.svg",
-    alt: "location icon",
+    icon: "/images/icons/properties/location.svg",
+    alt: "location",
     text: "Vaughan, Ontario, Canada, L5A4Y5",
   },
   {
     icon: "/images/icons/properties/bed.svg",
-    alt: "bed icon",
+    alt: "bed",
     text: "2 Beds",
   },
   {
     icon: "/images/icons/properties/bath.svg",
-    alt: "bath icon",
+    alt: "bath",
     text: "2 Baths",
   },
   {
     icon: "/images/icons/properties/ruler-area.svg",
-    alt: "size icon",
+    alt: "size",
     text: "1000 sqm²",
   },
   {
     icon: "/images/icons/properties/prop-type.svg",
-    alt: "property type icon",
+    alt: "property type",
     text: "Apartment",
   },
 ];
@@ -147,23 +147,34 @@ export default async function PublicListingPage({
   const listing = res.data;
 
   return (
-    <div className=" relative bg-colors-background-bg-primary overflow-hidden flex flex-col items-start justify-start gap-[4.5rem] leading-[normal] tracking-[normal] text-center text-[1.25rem] text-primary font-text-md-regular mt-[6rem]">
+    <div className=" relative bg-colors-background-bg-primary overflow-hidden flex flex-col items-start justify-start gap-[4.5rem] leading-[normal] tracking-[normal] text-center text-[1.25rem] text-primary font-text-md-regular mt-[6rem] ">
       <main className="self-stretch flex flex-col items-start justify-start gap-[2rem] max-w-full">
-        <section className="self-stretch flex flex-row items-start justify-start py-[0rem] px-[1rem] box-border max-w-full text-left text-[1rem] text-content-base-base font-text-md-regular">
+        <section className="self-stretch flex flex-row items-start justify-start py-[0rem] px-[1rem] box-border max-w-full text-left text-[1rem] text-content-base-base font-text-md-regular md:max-w-[1100px] mx-auto">
           <div className="flex-1 flex flex-row items-start justify-start max-w-full">
             {/* Metrics */}
             <div className="flex-1 flex flex-col items-start justify-start gap-[2.5rem] max-w-full">
               <BackToLink slug="/listings" label="Listings" />
 
-              <div className="self-stretch flex flex-col items-start justify-start gap-[2rem] max-w-full text-[1.25rem] text-content-base-main">
-                <PropertyDetailMetrics details={propertyDetailMetricsMock} />
-              </div>
+              <div className="flex-1 flex flex-col items-start justify-start gap-[2.5rem] max-w-full self-stretch lg:flex-row">
+                <div className="self-stretch flex flex-col items-start justify-start gap-[1.5rem] text-[2rem] text-black">
+                  <div className="self-stretch relative tracking-[-0.03em] leading-[2.5rem] font-medium whitespace-nowrap">
+                    $139,900
+                  </div>
 
-              <ContactAgent
-                title={mockTourRequestProps.title}
-                // time={mockTourRequestProps.time}
-                buttonText={mockTourRequestProps.buttonText}
-              />
+                  <div className="self-stretch flex flex-col items-start justify-start gap-[2rem] max-w-full text-[1.25rem] text-content-base-main">
+                    <PropertyDetailMetrics
+                      details={propertyDetailMetricsMock}
+                    />
+                  </div>
+                </div>
+                <div className="flex-1 flex flex-col items-start justify-start gap-[2.5rem] self-stretch lg:flex-row">
+                  <ContactAgent
+                    title={mockTourRequestProps.title}
+                    // time={mockTourRequestProps.time}
+                    buttonText={mockTourRequestProps.buttonText}
+                  />
+                </div>
+              </div>
 
               <DescriptionCard
                 title={mockDescriptionProps.title}
@@ -179,6 +190,12 @@ export default async function PublicListingPage({
               <PropertyDetailCard
                 title={mockAmenitiesProps.title}
                 items={mockAmenitiesProps.items}
+              />
+
+              <ContactAgent
+                title={mockTourRequestProps.title}
+                // time={mockTourRequestProps.time}
+                buttonText={mockTourRequestProps.buttonText}
               />
             </div>
           </div>

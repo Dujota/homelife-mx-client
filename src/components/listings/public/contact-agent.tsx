@@ -8,7 +8,7 @@ export default function ContactAgent({
   buttonText: string;
 }) {
   return (
-    <div className="self-stretch rounded-lg bg-colors-background-bg-primary border-input-border-light-main border-[1px] border-solid flex flex-col items-start justify-start py-[0.625rem] px-[0.687rem] gap-spacing-container-sm text-center text-colors-background-bg-primary">
+    <div className="contact-agent lg:min-w-[400px] self-stretch rounded-lg bg-colors-background-bg-primary border-input-border-light-main border-[1px] border-solid flex flex-col items-start justify-start py-[0.625rem] px-[0.687rem] gap-spacing-container-sm text-center text-colors-background-bg-primary lg:justify-center sm:mx-auto sm:w-[80%]">
       <div className="self-stretch rounded-lg bg-primary flex flex-col items-start justify-start py-spacing-container-sm px-spacing-container-md gap-[0.25rem]">
         <div className="self-stretch relative">{title}</div>
         {time && (

@@ -74,6 +74,7 @@ const config: Config = {
       base: "1rem",
       sm: "0.875rem",
       xl: "1.25rem",
+      "2xl": "1.5rem",
       xs: "0.75rem",
       "13xl": "2rem",
       "21xl": "2.5rem",
