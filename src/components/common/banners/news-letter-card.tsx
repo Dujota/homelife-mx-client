@@ -36,7 +36,7 @@ export default function NewsLetterCard({
           </h2>
         </div>
         <div
-          className={`self-stretch h-[2.75rem] shadow-[0px_1px_2px_rgba(16,_24,_40,_0.05)] rounded-rounded-lg bg-colors-background-bg-primary  border-[1px] border-solid box-border overflow-hidden shrink-0 flex flex-row items-center justify-center py-[0.75rem] px-[0.687rem] gap-[0.5rem] text-left text-[1rem] text-input-text-placeholder ${error && "border-2 border-red-500"}`}
+          className={`self-stretch h-[2.75rem] shadow-[0px_1px_2px_rgba(16,_24,_40,_0.05)] rounded-rounded-lg bg-colors-background-bg-primary   border-solid box-border overflow-hidden shrink-0 flex flex-row items-center justify-center py-[0.75rem] px-[0.687rem] gap-[0.5rem] text-left text-[1rem] text-input-text-placeholder ${error ? "border-4 border-red-500" : "border-[1px]"}`}
         >
           <input
             type="email"

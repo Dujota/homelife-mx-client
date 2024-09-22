@@ -7,6 +7,7 @@ type EmailInputProps = {
   placeholder: string;
   wrapperClassName?: string;
   className?: string;
+  disableErrorMessage?: boolean;
 };
 
 const EmailInput = ({
@@ -15,6 +16,7 @@ const EmailInput = ({
   className,
   placeholder,
   wrapperClassName,
+  disableErrorMessage,
 }: EmailInputProps) => {
   const { control } = useFormContext();
 
@@ -32,7 +34,9 @@ const EmailInput = ({
               className={className}
               placeholder={placeholder}
             />
-            {error && <FieldErrorMessage errorMessage={error.message} />}
+            {error && !disableErrorMessage && (
+              <FieldErrorMessage errorMessage={error.message} />
+            )}
           </>
         )}
       />

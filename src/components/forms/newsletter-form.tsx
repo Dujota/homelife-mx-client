@@ -26,9 +26,10 @@ const NewsletterForm: React.FC = () => {
       <div className="self-stretch flex flex-col items-center justify-start gap-[0.75rem] md:self-center md:w-[500px]">
         <form
           onSubmit={methods.handleSubmit(onSubmit)}
-          className="self-stretch shadow-[0px_1px_2px_rgba(16,_24,_40,_0.05)] rounded-rounded-lg bg-colors-background-bg-primary border-input-border-light-main border-[1px] border-solid overflow-hidden flex flex-row items-center justify-center py-[0.625rem] px-[0.687rem] gap-[0.5rem]"
+          className={`self-stretch shadow-[0px_1px_2px_rgba(16,_24,_40,_0.05)] rounded-rounded-lg bg-colors-background-bg-primary border-input-border-light-main border-solid overflow-hidden flex flex-row items-center justify-center py-[0.625rem] px-[0.687rem] gap-[0.5rem] ${methods.formState.errors.email ? "border-4 border-red-500" : "border-[1px]"}`}
         >
           <EmailInput
+            disableErrorMessage
             name="email"
             label="Your Email"
             placeholder="you@example.com"
