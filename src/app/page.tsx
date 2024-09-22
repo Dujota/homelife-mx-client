@@ -32,9 +32,12 @@ export default function Home() {
       <HomepageHeroBanner />
       <FeaturedPropertiesBanner />
       <UpcomingProjectsBanner />
-      <CategoriesList />
-      <AboutUs {...aboutUsData} />
-      <NewsletterBanner title={mockNewsletterData.title} />
+      <CategoriesList containerClassName="md:mx-auto md:max-w-[1600px]" />
+      <AboutUs {...aboutUsData} className="md:mx-auto md:max-w-[1600px]" />
+      <NewsletterBanner
+        title={mockNewsletterData.title}
+        className="2xl:mx-auto 2xl:w-[1600px]"
+      />
     </PageWrapper>
   );
 }
