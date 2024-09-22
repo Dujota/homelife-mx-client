@@ -36,7 +36,7 @@ export default function Home() {
       <AboutUs {...aboutUsData} className="md:mx-auto md:max-w-[1600px]" />
       <NewsletterBanner
         title={mockNewsletterData.title}
-        className="md:mx-auto md:max-w-[1600px]"
+        className="2xl:mx-auto 2xl:w-[1600px]"
       />
     </PageWrapper>
   );
