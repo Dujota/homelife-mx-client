@@ -147,15 +147,15 @@ export default async function PublicListingPage({
   const listing = res.data;
 
   return (
-    <div className=" relative bg-colors-background-bg-primary overflow-hidden flex flex-col items-start justify-start gap-[4.5rem] leading-[normal] tracking-[normal] text-center text-[1.25rem] text-primary font-text-md-regular mt-[6rem]">
+    <div className=" relative bg-colors-background-bg-primary overflow-hidden flex flex-col items-start justify-start gap-[4.5rem] leading-[normal] tracking-[normal] text-center text-[1.25rem] text-primary font-text-md-regular mt-[6rem] ">
       <main className="self-stretch flex flex-col items-start justify-start gap-[2rem] max-w-full">
-        <section className="self-stretch flex flex-row items-start justify-start py-[0rem] px-[1rem] box-border max-w-full text-left text-[1rem] text-content-base-base font-text-md-regular">
+        <section className="self-stretch flex flex-row items-start justify-start py-[0rem] px-[1rem] box-border max-w-full text-left text-[1rem] text-content-base-base font-text-md-regular md:max-w-[1100px] mx-auto">
           <div className="flex-1 flex flex-row items-start justify-start max-w-full">
             {/* Metrics */}
             <div className="flex-1 flex flex-col items-start justify-start gap-[2.5rem] max-w-full">
               <BackToLink slug="/listings" label="Listings" />
 
-              <div className="flex-1 flex flex-col items-start justify-start gap-[2.5rem] max-w-full self-stretch md:flex-row">
+              <div className="flex-1 flex flex-col items-start justify-start gap-[2.5rem] max-w-full self-stretch lg:flex-row">
                 <div className="self-stretch flex flex-col items-start justify-start gap-[1.5rem] text-[2rem] text-black">
                   <div className="self-stretch relative tracking-[-0.03em] leading-[2.5rem] font-medium whitespace-nowrap">
                     $139,900
@@ -167,7 +167,7 @@ export default async function PublicListingPage({
                     />
                   </div>
                 </div>
-                <div className="flex-1 flex flex-col items-start justify-start gap-[2.5rem] max-w-full self-stretch md:flex-row">
+                <div className="flex-1 flex flex-col items-start justify-start gap-[2.5rem] self-stretch lg:flex-row">
                   <ContactAgent
                     title={mockTourRequestProps.title}
                     // time={mockTourRequestProps.time}
