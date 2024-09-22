@@ -13,6 +13,7 @@ export default function FeaturedPropertiesBanner() {
   return (
     <CardSlider
       title="Featured Listings"
+      containerClassName="md:mx-auto md:max-w-[1600px]"
       slidesWrapperClassName="overflow-y-hidden h-[21.5rem]"
     >
       {mockData.map((m, i) => (

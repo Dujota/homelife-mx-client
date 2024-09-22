@@ -18,13 +18,17 @@ const mock_cats = [
 
 export type CategoriesListType = {
   className?: string;
+  containerClassName?: string;
 };
 
-export default function CategoriesList({ className = "" }: CategoriesListType) {
+export default function CategoriesList({
+  className = "",
+  containerClassName,
+}: CategoriesListType) {
   return (
     <section
       id="categories"
-      className="self-stretch flex flex-row items-start justify-start pt-[0rem] pb-[1rem] pl-[0rem] pr-[1rem] box-border max-w-full"
+      className={`self-stretch flex flex-row items-start justify-start pt-[0rem] pb-[1rem] pl-[0rem] pr-[1rem] box-border max-w-full ${containerClassName}`}
     >
       <div className="flex-1 flex flex-col items-start justify-start gap-[13.25rem] max-w-[105%] shrink-0">
         <div
@@ -35,7 +39,7 @@ export default function CategoriesList({ className = "" }: CategoriesListType) {
               Categories
             </h1>
           </div>
-          <div className="h-[25rem] md:flex-wrap md:h-full md:w-full md:justify-evenly overflow-x-auto shrink-0 flex flex-row items-start justify-start gap-spacing-container-md max-w-full text-[1.25rem] text-colors-background-bg-primary">
+          <div className="h-[25rem] md:flex-wrap md:h-full md:w-full md:justify-evenly 2xl:justify-between overflow-x-auto shrink-0 flex flex-row items-start justify-start gap-spacing-container-md max-w-full text-[1.25rem] text-colors-background-bg-primary">
             {mock_cats.map(
               (
                 m: { img: string; label: string | undefined },
