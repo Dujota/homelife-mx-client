@@ -9,7 +9,7 @@ export default async function PublicListingsPage() {
   const listings = res.data;
 
   return (
-    <div className=" relative bg-colors-background-bg-primary overflow-hidden flex flex-col items-start justify-start pt-[0.75rem] px-[0rem] pb-[0rem] box-border gap-[2rem] leading-[normal] tracking-[normal] mt-[6rem]">
+    <div className=" relative bg-colors-background-bg-primary overflow-hidden flex flex-col items-start justify-start pt-[0.75rem] px-[0rem] pb-[0rem] box-border gap-[2rem] leading-[normal] tracking-[normal] mt-[6rem] 3xl:mx-auto 3xl:w-[1650px]">
       <div className="self-stretch flex flex-row items-start justify-start pt-[0rem] px-[0.75rem] pb-[0.75rem] box-border max-w-full">
         <header className="flex-1 flex flex-row items-start justify-start gap-[0.75rem] max-w-full">
           {/* <div className="flex-1 rounded-lg border-gainsboro-200 border-[1px] border-solid flex flex-row items-start justify-start py-[0.25rem] pl-[0.375rem] pr-[0rem] gap-spacing-container-xxs1">
@@ -39,7 +39,7 @@ export default async function PublicListingsPage() {
       </div>
       <ListFilterDropdowns title="Listings" />
 
-      <main className="self-stretch flex flex-row items-start justify-start py-[0rem] px-[1rem] box-border max-w-full 3xl:mx-auto 3xl:w-[1650px]">
+      <main className="self-stretch flex flex-row items-start justify-start py-[0rem] px-[1rem] box-border max-w-full">
         <FavsWatchList listings={listings} />
       </main>
     </div>
