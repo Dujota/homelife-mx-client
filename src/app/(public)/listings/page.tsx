@@ -39,7 +39,7 @@ export default async function PublicListingsPage() {
       </div>
       <ListFilterDropdowns title="Listings" />
 
-      <main className="self-stretch flex flex-row items-start justify-start py-[0rem] px-[1rem] box-border max-w-full">
+      <main className="self-stretch flex flex-row items-start justify-start py-[0rem] px-[1rem] box-border max-w-full 3xl:mx-auto 3xl:w-[1650px]">
         <FavsWatchList listings={listings} />
       </main>
     </div>

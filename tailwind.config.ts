@@ -108,7 +108,7 @@ const config: Config = {
 
       "2xl": "1520px",
       // => @media (min-width: 1520px) { ... }
-
+      "3xl": "1650px",
       // sm: {
       //   raw: "screen and (max-width: 500px)",
       // },
