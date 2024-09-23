@@ -80,6 +80,9 @@ export const singleFamilyDwellingSchema = z.object({
   property_tax_paid: z.boolean().optional(),
   maintenance_fees_paid: z.boolean().optional(),
   amenity_ids: z.array(z.number()).optional(),
+  create_listing: z.enum(["true", "false"], {
+    required_error: "Please choose whether to make the listing public.",
+  }),
 });
 
 export type SingleFamilyDwellingFormData = z.infer<

@@ -49,6 +49,9 @@ export const commercialPropertySchema = z.object({
   //   z.number().min(1900, "Year built is required"),
   // ),
   commercial_lease_terms: z.string().optional(),
+  create_listing: z.enum(["true", "false"], {
+    required_error: "Please choose whether to make the listing public.",
+  }),
 });
 
 export type CommercialPropertyFormData = z.infer<
