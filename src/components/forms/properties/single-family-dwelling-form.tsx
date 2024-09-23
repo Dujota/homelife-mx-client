@@ -68,7 +68,8 @@ const SingleFamilyDwellingForm = ({
   const onSubmit = async (data: SingleFamilyDwellingFormData) => {
     try {
       const payload = {
-        property: data,
+        property: { ...data },
+        create_listing: data.create_listing === "true",
       };
 
       const res = await createSingleFamilyDwelling(
@@ -177,6 +178,15 @@ const SingleFamilyDwellingForm = ({
             { label: "Pool", value: 7 },
             { label: "Gym", value: 8 },
             { label: "Garden", value: 9 },
+          ]}
+        />
+
+        <Checkboxes
+          name="create_listing"
+          label="Make Listing Public"
+          options={[
+            { label: "Yes", value: "true" },
+            { label: "No", value: "false" },
           ]}
         />
         <FormSubmitButton text="Create Single Family Dwelling" />

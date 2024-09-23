@@ -20,6 +20,7 @@ import FormSubmitButton from "../../common/buttons/form-submit-button";
 // Mutations
 import { createLand } from "@/lib/models/properties/mutations";
 import { useMemo } from "react";
+import Checkboxes from "../fields/checkboxes";
 
 type LandPropertyFormProps = {
   propertyTypes?: { name: string; id: number }[];
@@ -135,6 +136,14 @@ const LandPropertyForm = ({
           ]}
         />
         <TextArea name="existing_structures" label="Existing Structures" />
+        <Checkboxes
+          name="create_listing"
+          label="Make Listing Public"
+          options={[
+            { label: "Yes", value: "true" },
+            { label: "No", value: "false" },
+          ]}
+        />
         <FormSubmitButton text="Create Land Property" />
       </form>
     </FormProvider>

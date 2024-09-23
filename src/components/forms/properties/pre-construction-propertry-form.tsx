@@ -18,6 +18,7 @@ import SelectInput from "../fields/simple-select-input";
 import FormSubmitButton from "../../common/buttons/form-submit-button";
 import { createPreConstructionProject } from "@/lib/models/properties/mutations";
 import { useMemo } from "react";
+import Checkboxes from "../fields/checkboxes";
 
 type PreConstructionFormProps = {
   propertyTypes: { name: string; id: number }[];
@@ -129,6 +130,29 @@ const PreConstructionForm = ({
         />
         <TextArea name="deposit_structure" label="Deposit Structure" />
         <TextArea name="incentives" label="Incentives" />
+        <Checkboxes
+          name="amenity_ids"
+          label="Amenities"
+          options={[
+            { label: "Pool", value: 1 },
+            { label: "Gym", value: 2 },
+            { label: "Garden", value: 3 },
+            { label: "Pool", value: 4 },
+            { label: "Gym", value: 5 },
+            { label: "Garden", value: 6 },
+            { label: "Pool", value: 7 },
+            { label: "Gym", value: 8 },
+            { label: "Garden", value: 9 },
+          ]}
+        />
+        <Checkboxes
+          name="create_listing"
+          label="Make Listing Public"
+          options={[
+            { label: "Yes", value: "true" },
+            { label: "No", value: "false" },
+          ]}
+        />
         <FormSubmitButton text="Create Pre-construction Property" />
       </form>
     </FormProvider>

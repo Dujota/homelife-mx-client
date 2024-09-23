@@ -47,6 +47,10 @@ export const preConstructionSchema = z.object({
   ),
   deposit_structure: z.string().min(1, "Deposit structure is required"),
   incentives: z.string().optional(),
+  amenity_ids: z.array(z.number()).optional(),
+  create_listing: z.enum(["true", "false"], {
+    required_error: "Please choose whether to make the listing public.",
+  }),
 });
 
 export type PreConstructionFormData = z.infer<typeof preConstructionSchema>;

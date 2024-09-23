@@ -4,7 +4,7 @@ import FieldErrorMessage from "./field-error-message";
 
 type CheckboxOption = {
   label: string;
-  value: number;
+  value: number | string;
 };
 
 type CheckboxesProps = {

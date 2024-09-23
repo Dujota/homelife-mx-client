@@ -20,6 +20,7 @@ import SelectInput from "../fields/simple-select-input";
 // Mutations
 import { createCommercialProperty } from "@/lib/models/properties/mutations";
 import { useMemo } from "react";
+import Checkboxes from "../fields/checkboxes";
 
 type CommercialPropertyFormProps = {
   propertyTypes: { name: string; id: number }[];
@@ -121,6 +122,14 @@ const CommercialPropertyForm = ({
         <TextArea
           name="commercial_lease_terms"
           label="Commercial Lease Terms"
+        />
+        <Checkboxes
+          name="create_listing"
+          label="Make Listing Public"
+          options={[
+            { label: "Yes", value: "true" },
+            { label: "No", value: "false" },
+          ]}
         />
         <FormSubmitButton text="Create Commercial Property" />
       </form>
