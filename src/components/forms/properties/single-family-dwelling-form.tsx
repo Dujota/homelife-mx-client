@@ -22,6 +22,7 @@ import toast from "react-hot-toast";
 // Mutations
 import { createSingleFamilyDwelling } from "@/lib/models/properties/mutations";
 import Checkboxes from "../fields/checkboxes";
+import ImageUpload from "../fields/image-uploader";
 
 type SingleFamilyDwellingFormProps = {
   propertyTypes: { name: string; id: number }[];
@@ -94,6 +95,7 @@ const SingleFamilyDwellingForm = ({
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <ImageUpload name="images" label="Images" maxNumber={10} />
         <NumberInput name="price" label="Price" />
         <SelectInput
           name="currency"
