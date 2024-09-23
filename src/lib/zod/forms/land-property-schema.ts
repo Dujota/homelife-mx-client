@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { validateCreateListing } from "./helpers";
 
 export const landPropertySchema = z.object({
   price: z.preprocess(
@@ -40,9 +41,7 @@ export const landPropertySchema = z.object({
   topography: z.string().optional(),
   access_to_utilities: z.boolean().optional(),
   existing_structures: z.string().optional(),
-  create_listing: z.enum(["true", "false"], {
-    required_error: "Please choose whether to make the listing public.",
-  }),
+  create_listing: validateCreateListing,
 });
 
 export type LandPropertyFormData = z.infer<typeof landPropertySchema>;

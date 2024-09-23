@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { validateCreateListing } from "./helpers";
 
 export const commercialPropertySchema = z.object({
   price: z.preprocess(
@@ -44,14 +45,8 @@ export const commercialPropertySchema = z.object({
       z.number().min(0, "Rental income has to be greater than 0"),
     )
     .optional(),
-  // year_built: z.preprocess(
-  //   (val = "") => (val === "" ? 0 : parseInt(val as string, 10)),
-  //   z.number().min(1900, "Year built is required"),
-  // ),
   commercial_lease_terms: z.string().optional(),
-  create_listing: z.enum(["true", "false"], {
-    required_error: "Please choose whether to make the listing public.",
-  }),
+  create_listing: validateCreateListing,
 });
 
 export type CommercialPropertyFormData = z.infer<
