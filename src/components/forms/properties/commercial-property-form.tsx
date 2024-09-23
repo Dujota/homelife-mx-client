@@ -19,13 +19,16 @@ import SelectInput from "../fields/simple-select-input";
 
 // Mutations
 import { createCommercialProperty } from "@/lib/models/properties/mutations";
+import { useMemo } from "react";
 
 type CommercialPropertyFormProps = {
   propertyTypes: { name: string; id: number }[];
+  currencyOptions: { name: string; value: string }[];
 };
 
 const CommercialPropertyForm = ({
   propertyTypes,
+  currencyOptions,
 }: CommercialPropertyFormProps) => {
   const router = useRouter();
   const { data: session } = useSession({
@@ -39,11 +42,20 @@ const CommercialPropertyForm = ({
     resolver: zodResolver(commercialPropertySchema),
   });
 
-  const propertyTypeOptions = propertyTypes.map(
-    (type: { name: string; id: number }) => ({
-      label: type.name,
-      value: type.id,
-    }),
+  // const propertyTypeOptions = propertyTypes.map(
+  //   (type: { name: string; id: number }) => ({
+  //     label: type.name,
+  //     value: type.id,
+  //   }),
+  // );
+
+  const currencySelectOptions = useMemo(
+    () =>
+      currencyOptions?.map((currency: { name: string; value: string }) => ({
+        label: currency.name,
+        value: currency.value,
+      })),
+    [currencyOptions],
   );
 
   const onSubmit = async (data: CommercialPropertyFormData) => {
@@ -70,6 +82,11 @@ const CommercialPropertyForm = ({
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <NumberInput name="price" label="Price" />
+        <SelectInput
+          name="currency"
+          label="Currency"
+          options={currencySelectOptions}
+        />
         <TextArea name="description" label="Description" />
         <TextInput
           name="address_attributes.house_number"

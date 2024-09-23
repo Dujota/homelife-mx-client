@@ -10,6 +10,12 @@ const mockPropertyTypes = [
   { name: "Townhouse", id: 4 },
 ];
 
+const mockCurrencyTypes = [
+  { name: "MXN", value: "MXN" },
+  { name: "USD", value: "USD" },
+  { name: "CAD", value: "CAD" },
+];
+
 export default async function AdminAddPropertyPage() {
   const session = await auth();
 
@@ -20,7 +26,10 @@ export default async function AdminAddPropertyPage() {
   return (
     <main>
       <h1>CREATE PROPERTY FORM ADMIN</h1>
-      <PropertyFormTabs propertyTypes={mockPropertyTypes} />
+      <PropertyFormTabs
+        propertyTypes={mockPropertyTypes}
+        currencyOptions={mockCurrencyTypes}
+      />
     </main>
   );
 }

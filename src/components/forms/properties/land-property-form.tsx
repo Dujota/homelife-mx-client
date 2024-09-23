@@ -19,12 +19,17 @@ import FormSubmitButton from "../../common/buttons/form-submit-button";
 
 // Mutations
 import { createLand } from "@/lib/models/properties/mutations";
+import { useMemo } from "react";
 
 type LandPropertyFormProps = {
   propertyTypes?: { name: string; id: number }[];
+  currencyOptions: { name: string; value: string }[];
 };
 
-const LandPropertyForm = ({ propertyTypes }: LandPropertyFormProps) => {
+const LandPropertyForm = ({
+  propertyTypes,
+  currencyOptions,
+}: LandPropertyFormProps) => {
   const router = useRouter();
   const { data: session } = useSession({
     required: true,
@@ -43,6 +48,15 @@ const LandPropertyForm = ({ propertyTypes }: LandPropertyFormProps) => {
   //     value: type.id,
   //   }),
   // );
+
+  const currencySelectOptions = useMemo(
+    () =>
+      currencyOptions?.map((currency: { name: string; value: string }) => ({
+        label: currency.name,
+        value: currency.value,
+      })),
+    [currencyOptions],
+  );
 
   const onSubmit = async (data: LandPropertyFormData) => {
     try {
@@ -65,6 +79,11 @@ const LandPropertyForm = ({ propertyTypes }: LandPropertyFormProps) => {
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <NumberInput name="price" label="Price" />
+        <SelectInput
+          name="currency"
+          label="Currency"
+          options={currencySelectOptions}
+        />
         <TextArea name="description" label="Description" />
         <TextInput
           name="address_attributes.house_number"

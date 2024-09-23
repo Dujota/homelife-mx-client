@@ -17,12 +17,17 @@ import TextInput from "../fields/text-input";
 import SelectInput from "../fields/simple-select-input";
 import FormSubmitButton from "../../common/buttons/form-submit-button";
 import { createPreConstructionProject } from "@/lib/models/properties/mutations";
+import { useMemo } from "react";
 
 type PreConstructionFormProps = {
   propertyTypes: { name: string; id: number }[];
+  currencyOptions: { name: string; value: string }[];
 };
 
-const PreConstructionForm = ({ propertyTypes }: PreConstructionFormProps) => {
+const PreConstructionForm = ({
+  propertyTypes,
+  currencyOptions,
+}: PreConstructionFormProps) => {
   const router = useRouter();
 
   const { data: session } = useSession({
@@ -55,6 +60,15 @@ const PreConstructionForm = ({ propertyTypes }: PreConstructionFormProps) => {
       console.error("Error creating property:", error);
     }
   };
+
+  const currencySelectOptions = useMemo(
+    () =>
+      currencyOptions?.map((currency: { name: string; value: string }) => ({
+        label: currency.name,
+        value: currency.value,
+      })),
+    [currencyOptions],
+  );
 
   return (
     <FormProvider {...methods}>
@@ -108,6 +122,11 @@ const PreConstructionForm = ({ propertyTypes }: PreConstructionFormProps) => {
         />
         <NumberInput name="min_price" label="Minimum Price" />
         <NumberInput name="max_price" label="Maximum Price" />
+        <SelectInput
+          name="currency"
+          label="Currency"
+          options={currencySelectOptions}
+        />
         <TextArea name="deposit_structure" label="Deposit Structure" />
         <TextArea name="incentives" label="Incentives" />
         <FormSubmitButton text="Create Pre-construction Property" />
