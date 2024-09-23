@@ -21,7 +21,7 @@ export default function UpcomingProjectsBanner() {
   return (
     <CardSlider
       title="Upcoming Projects"
-      containerClassName="md:mx-auto md:max-w-[1600px]"
+      containerClassName="3xl:mx-auto 3xl:max-w-[1600px]"
       slidesWrapperClassName="overflow-y-hidden"
     >
       {mockData.map((m, i) => (
