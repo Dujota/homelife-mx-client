@@ -21,6 +21,7 @@ import toast from "react-hot-toast";
 
 // Mutations
 import { createSingleFamilyDwelling } from "@/lib/models/properties/mutations";
+import Checkboxes from "../fields/checkboxes";
 
 type SingleFamilyDwellingFormProps = {
   propertyTypes: { name: string; id: number }[];
@@ -102,6 +103,7 @@ const SingleFamilyDwellingForm = ({
         />
         <NumberInput name="number_of_bedrooms" label="Number of Bedrooms" />
         <NumberInput name="number_of_bathrooms" label="Number of Bathrooms" />
+        <NumberInput name="half_bathrooms" label="Half Bathrooms" />
         <NumberInput
           name="living_space_square_meters"
           label="Living Space (sqm)"
@@ -119,13 +121,40 @@ const SingleFamilyDwellingForm = ({
           isMulti
         /> */}
 
-        <MultiSelectInput
+        {/* <MultiSelectInput
           name="amenity_ids"
           label="Amenities"
           options={[
             { label: "Pool", value: 1 },
             { label: "Gym", value: 2 },
             { label: "Garden", value: 3 },
+          ]}
+        /> */}
+        <TextInput name="currency" label="Currency" />
+        <NumberInput name="number_of_living_rooms" label="Living Rooms" />
+        <NumberInput name="garage_size" label="Garage Size" />
+        <NumberInput
+          name="number_of_airconditioners"
+          label="Number of Air Conditioners"
+        />
+        <NumberInput name="gas_tank_size" label="Gas Tank Size (liters)" />
+        <TextInput
+          name="general_carpentry_and_paint_condition"
+          label="Carpentry/Paint Condition"
+        />
+        <Checkboxes
+          name="amenity_ids"
+          label="Amenities"
+          options={[
+            { label: "Pool", value: 1 },
+            { label: "Gym", value: 2 },
+            { label: "Garden", value: 3 },
+            { label: "Pool", value: 4 },
+            { label: "Gym", value: 5 },
+            { label: "Garden", value: 6 },
+            { label: "Pool", value: 7 },
+            { label: "Gym", value: 8 },
+            { label: "Garden", value: 9 },
           ]}
         />
         <FormSubmitButton text="Create Single Family Dwelling" />
