@@ -1,4 +1,5 @@
 "use client";
+import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
@@ -16,13 +17,11 @@ import TextArea from "../fields/text-area-input";
 import TextInput from "../fields/text-input";
 import SelectInput from "../fields/simple-select-input";
 import FormSubmitButton from "../../common/buttons/form-submit-button";
-import MultiSelectInput from "../fields/multi-select";
 import toast from "react-hot-toast";
 
 // Mutations
 import { createSingleFamilyDwelling } from "@/lib/models/properties/mutations";
 import Checkboxes from "../fields/checkboxes";
-import { useMemo } from "react";
 
 type SingleFamilyDwellingFormProps = {
   propertyTypes: { name: string; id: number }[];
@@ -69,7 +68,7 @@ const SingleFamilyDwellingForm = ({
     try {
       const payload = {
         property: { ...data },
-        create_listing: data.create_listing === "true",
+        create_listing: data.create_listing,
       };
 
       const res = await createSingleFamilyDwelling(
@@ -132,28 +131,6 @@ const SingleFamilyDwellingForm = ({
         />
         <NumberInput name="lot_size" label="Lot Size (sqm)" />
         <NumberInput name="year_built" label="Year Built" />
-        {/* <SelectInput
-          name="amenities"
-          label="Amenities"
-          options={[
-            { label: "Pool", value: "pool" },
-            { label: "Garage", value: "garage" },
-            { label: "Nearby Schools", value: "schools" },
-          ]}
-          isMulti
-        /> */}
-
-        {/* <MultiSelectInput
-          name="amenity_ids"
-          label="Amenities"
-          options={[
-            { label: "Pool", value: 1 },
-            { label: "Gym", value: 2 },
-            { label: "Garden", value: 3 },
-          ]}
-        /> */}
-        {/* <TextInput name="currency" label="Currency" /> */}
-
         <NumberInput name="number_of_living_rooms" label="Living Rooms" />
         <NumberInput name="garage_size" label="Garage Size" />
         <NumberInput

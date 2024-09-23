@@ -17,43 +17,49 @@ const Checkboxes = ({ name, label, options }: CheckboxesProps) => {
   const { control } = useFormContext();
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-      {/* <label>{label}</label> */}
-      <Controller
-        name={name}
-        control={control}
-        render={({ field, fieldState: { error } }) => (
-          <>
-            {options.map((option) => (
-              <div key={option.value} className="flex items-baseline space-x-2">
-                <input
-                  type="checkbox"
-                  value={option.value}
-                  id={option.label}
-                  checked={field.value?.includes(option.value)}
-                  onChange={(e) => {
-                    const newValue = e.target.checked
-                      ? [...(field.value || []), option.value]
-                      : field.value.filter(
-                          (val: number) => val !== option.value,
-                        );
-
-                    field.onChange(newValue);
-                  }}
-                />
-                <label
-                  htmlFor={option.label}
-                  className="font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+    <>
+      {label && <label className="my-4">{label}</label>}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        <Controller
+          name={name}
+          control={control}
+          render={({ field, fieldState: { error } }) => (
+            <>
+              {options.map((option) => (
+                <div
+                  key={option.value}
+                  className="flex items-baseline space-x-2"
                 >
-                  {option.label}
-                </label>
-              </div>
-            ))}
-            {error && <FieldErrorMessage errorMessage={error.message} />}
-          </>
-        )}
-      />
-    </div>
+                  <input
+                    type="checkbox"
+                    value={option.value}
+                    id={option.label}
+                    checked={field.value?.includes(option.value)}
+                    onChange={(e) => {
+                      const newValue = e.target.checked
+                        ? [...(field.value || []), option.value]
+                        : field.value.filter(
+                            (val: number) => val !== option.value,
+                          );
+
+                      field.onChange(newValue);
+                    }}
+                  />
+                  <label
+                    htmlFor={option.label}
+                    className="font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    {option.label}
+                  </label>
+                </div>
+              ))}
+
+              {error && <FieldErrorMessage errorMessage={error.message} />}
+            </>
+          )}
+        />
+      </div>
+    </>
   );
 };
 

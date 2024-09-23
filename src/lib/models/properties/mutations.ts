@@ -19,13 +19,19 @@ export const createSingleFamilyDwelling = async (
   }
 };
 
+// const payload = {
+//   property: { ...data },
+//   create_listing: data.create_listing === "true",
+// };
+
 export const createLand = async (
-  data: LandPropertyFormData,
+  data: LandPropertyFormData | any,
   token?: string,
 ): Promise<createPropertyResponse | any> => {
   try {
     const payload = {
       property: { ...data, property_type_id: 3 },
+      create_listing: data.create_listing,
     };
     const response = await nextApi.post("/admins/properties", payload, {
       headers: { Authorization: `Bearer ${token}` },
@@ -37,12 +43,13 @@ export const createLand = async (
 };
 
 export const createCommercialProperty = async (
-  data: CommercialPropertyFormData,
+  data: CommercialPropertyFormData | any,
   token?: string,
 ): Promise<createPropertyResponse | any> => {
   try {
     const payload = {
       property: { ...data, property_type_id: 4 },
+      create_listing: data.create_listing,
     };
     const response = await nextApi.post("/admins/properties", payload, {
       headers: { Authorization: `Bearer ${token}` },
@@ -54,12 +61,13 @@ export const createCommercialProperty = async (
 };
 
 export const createPreConstructionProject = async (
-  data: PreConstructionFormData,
+  data: PreConstructionFormData | any,
   token?: string,
 ): Promise<createPropertyResponse | any> => {
   try {
     const payload = {
       property: { ...data, property_type_id: 5 },
+      create_listing: data.create_listing,
     };
     const response = await nextApi.post("/admins/properties", payload, {
       headers: { Authorization: `Bearer ${token}` },
