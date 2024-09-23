@@ -44,6 +44,37 @@ export const singleFamilyDwellingSchema = z.object({
     (val = "") => (val === "" ? 0 : parseInt(val as string, 10)),
     z.number().min(1900, "Year built is required"),
   ),
+  currency: z.string().optional(),
+  corner_lot: z.boolean().optional(),
+  number_of_living_rooms: z.preprocess(
+    (val = "") => (val === "" ? 0 : parseInt(val as string, 10)),
+    z.number().optional(),
+  ),
+  garage_size: z.preprocess(
+    (val = "") => (val === "" ? 0 : parseInt(val as string, 10)),
+    z.number().optional(),
+  ),
+  service_room_with_bathroom: z.boolean().optional(),
+  laundry_room: z.boolean().optional(),
+  general_carpentry_and_paint_condition: z.string().optional(),
+  number_of_electric_meters: z.preprocess(
+    (val = "") => (val === "" ? 0 : parseInt(val as string, 10)),
+    z.number().optional(),
+  ),
+  number_of_airconditioners: z.preprocess(
+    (val = "") => (val === "" ? 0 : parseInt(val as string, 10)),
+    z.number().optional(),
+  ),
+  half_bathrooms: z.preprocess(
+    (val = "") => (val === "" ? 0 : parseInt(val as string, 10)),
+    z.number().optional(),
+  ),
+  gas_tank_size: z.preprocess(
+    (val = "") => (val === "" ? 0 : parseFloat(val as string)),
+    z.number().optional(),
+  ),
+  property_tax_paid: z.boolean().optional(),
+  maintenance_fees_paid: z.boolean().optional(),
   amenity_ids: z.array(z.number()).optional(),
 });
 
