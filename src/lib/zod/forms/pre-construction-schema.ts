@@ -41,6 +41,10 @@ export const preConstructionSchema = z.object({
     (val = "") => (val === "" ? 0 : parseFloat(val as string)),
     z.number().min(1, "Maximum price is required"),
   ),
+  currency: z.preprocess(
+    (val = "") => (val === "" ? "" : (val as string)),
+    z.string().min(1, "Currency type is required").nullable(),
+  ),
   deposit_structure: z.string().min(1, "Deposit structure is required"),
   incentives: z.string().optional(),
 });

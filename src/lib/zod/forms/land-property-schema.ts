@@ -5,6 +5,10 @@ export const landPropertySchema = z.object({
     (val = "") => (val === "" ? 0 : parseFloat(val as string)),
     z.number().min(1, "Please enter a price"),
   ),
+  currency: z.preprocess(
+    (val = "") => (val === "" ? "" : (val as string)),
+    z.string().min(1, "Currency type is required").nullable(),
+  ),
   description: z.string().min(1, "Description is required"),
   address_attributes: z.object({
     // house_number: z.string().min(1, "House number is required"),

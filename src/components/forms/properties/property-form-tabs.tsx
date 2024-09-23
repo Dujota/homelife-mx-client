@@ -15,9 +15,13 @@ const PROPERTY_TABS = [
 
 type PropertyTypes = {
   propertyTypes: { name: string; id: number }[];
+  currencyOptions: { name: string; value: string }[];
 };
 
-const PropertyFormTabs = ({ propertyTypes }: PropertyTypes) => {
+const PropertyFormTabs = ({
+  propertyTypes,
+  currencyOptions,
+}: PropertyTypes) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const SelectedFormComponent = PROPERTY_TABS[selectedTab].component;
 
@@ -35,7 +39,10 @@ const PropertyFormTabs = ({ propertyTypes }: PropertyTypes) => {
         ))}
       </div>
       <div className="tab-content md:mx-[20%]">
-        <SelectedFormComponent propertyTypes={propertyTypes} />
+        <SelectedFormComponent
+          propertyTypes={propertyTypes}
+          currencyOptions={currencyOptions}
+        />
       </div>
     </div>
   );

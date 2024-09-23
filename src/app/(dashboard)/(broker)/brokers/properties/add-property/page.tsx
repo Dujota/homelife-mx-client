@@ -9,6 +9,12 @@ const mockPropertyTypes = [
   { name: "Townhouse", id: 4 },
 ];
 
+const mockCurrencyTypes = [
+  { name: "MXN", value: "MXN" },
+  { name: "USD", value: "USD" },
+  { name: "CAD", value: "CAD" },
+];
+
 export default async function BrokerAddPropertyPage() {
   const session = await auth();
 
@@ -19,7 +25,10 @@ export default async function BrokerAddPropertyPage() {
   return (
     <div>
       <h1>Create Broker Properties Page</h1>
-      <PropertyFormTabs propertyTypes={mockPropertyTypes} />
+      <PropertyFormTabs
+        propertyTypes={mockPropertyTypes}
+        currencyOptions={mockCurrencyTypes}
+      />
     </div>
   );
 }

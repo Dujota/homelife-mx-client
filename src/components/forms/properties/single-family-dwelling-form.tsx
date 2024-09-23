@@ -22,13 +22,16 @@ import toast from "react-hot-toast";
 // Mutations
 import { createSingleFamilyDwelling } from "@/lib/models/properties/mutations";
 import Checkboxes from "../fields/checkboxes";
+import { useMemo } from "react";
 
 type SingleFamilyDwellingFormProps = {
   propertyTypes: { name: string; id: number }[];
+  currencyOptions: { name: string; value: string }[];
 };
 
 const SingleFamilyDwellingForm = ({
   propertyTypes,
+  currencyOptions,
 }: SingleFamilyDwellingFormProps) => {
   const router = useRouter();
   const { data: session } = useSession({
@@ -42,12 +45,25 @@ const SingleFamilyDwellingForm = ({
     resolver: zodResolver(singleFamilyDwellingSchema),
   });
 
-  const propertyTypeOptions = propertyTypes?.map(
-    (type: { name: string; id: number }) => ({
-      label: type.name,
-      value: type.id,
-    }),
+  const propertyTypeOptions = useMemo(
+    () =>
+      propertyTypes?.map((type: { name: string; id: number }) => ({
+        label: type.name,
+        value: type.id,
+      })),
+    [propertyTypes],
   );
+
+  const currencySelectOptions = useMemo(
+    () =>
+      currencyOptions?.map((currency: { name: string; value: string }) => ({
+        label: currency.name,
+        value: currency.value,
+      })),
+    [currencyOptions],
+  );
+
+  console.log(currencyOptions);
 
   const onSubmit = async (data: SingleFamilyDwellingFormData) => {
     try {
@@ -79,6 +95,11 @@ const SingleFamilyDwellingForm = ({
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <NumberInput name="price" label="Price" />
+        <SelectInput
+          name="currency"
+          label="Currency"
+          options={currencySelectOptions}
+        />
         <TextArea name="description" label="Description" />
         <TextInput
           name="address_attributes.house_number"
@@ -130,7 +151,8 @@ const SingleFamilyDwellingForm = ({
             { label: "Garden", value: 3 },
           ]}
         /> */}
-        <TextInput name="currency" label="Currency" />
+        {/* <TextInput name="currency" label="Currency" /> */}
+
         <NumberInput name="number_of_living_rooms" label="Living Rooms" />
         <NumberInput name="garage_size" label="Garage Size" />
         <NumberInput

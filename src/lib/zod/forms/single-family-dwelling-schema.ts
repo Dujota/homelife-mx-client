@@ -44,7 +44,11 @@ export const singleFamilyDwellingSchema = z.object({
     (val = "") => (val === "" ? 0 : parseInt(val as string, 10)),
     z.number().min(1900, "Year built is required"),
   ),
-  currency: z.string().optional(),
+  // currency: z.string().optional(),
+  currency: z.preprocess(
+    (val = "") => (val === "" ? "" : (val as string)),
+    z.string().min(1, "Currency type is required").nullable(),
+  ),
   corner_lot: z.boolean().optional(),
   number_of_living_rooms: z.preprocess(
     (val = "") => (val === "" ? 0 : parseInt(val as string, 10)),
