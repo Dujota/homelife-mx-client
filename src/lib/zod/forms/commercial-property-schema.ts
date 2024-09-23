@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { validateCreateListing } from "./helpers";
+import { validateCreateListing } from "./schema-helpers";
 
 export const commercialPropertySchema = z.object({
   price: z.preprocess(

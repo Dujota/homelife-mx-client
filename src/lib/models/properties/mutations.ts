@@ -19,11 +19,6 @@ export const createSingleFamilyDwelling = async (
   }
 };
 
-// const payload = {
-//   property: { ...data },
-//   create_listing: data.create_listing === "true",
-// };
-
 export const createLand = async (
   data: LandPropertyFormData | any,
   token?: string,
