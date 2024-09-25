@@ -51,7 +51,6 @@ const PreConstructionForm = ({
 
   const onSubmit = async (data: PreConstructionFormData) => {
     try {
-
       let res;
       if (broker) {
         res = await createPreConstructionProjectBrokers(
