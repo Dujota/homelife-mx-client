@@ -18,18 +18,24 @@ import FormSubmitButton from "../../common/buttons/form-submit-button";
 import SelectInput from "../fields/simple-select-input";
 
 // Mutations
-import { createCommercialProperty } from "@/lib/models/properties/mutations";
+import {
+  createCommercialProperty,
+  createCommercialPropertyBrokers,
+} from "@/lib/models/properties/mutations";
 import { useMemo } from "react";
 import Checkboxes from "../fields/checkboxes";
+import ImageUpload from "../fields/image-uploader";
 
 type CommercialPropertyFormProps = {
   propertyTypes: { name: string; id: number }[];
   currencyOptions: { name: string; value: string }[];
+  broker?: boolean;
 };
 
 const CommercialPropertyForm = ({
   propertyTypes,
   currencyOptions,
+  broker,
 }: CommercialPropertyFormProps) => {
   const router = useRouter();
   const { data: session } = useSession({
@@ -61,10 +67,15 @@ const CommercialPropertyForm = ({
 
   const onSubmit = async (data: CommercialPropertyFormData) => {
     try {
-      const res = await createCommercialProperty(
-        data,
-        session?.user?.accessToken,
-      );
+      let res;
+      if (broker) {
+        res = await createCommercialPropertyBrokers(
+          data,
+          session?.user?.accessToken,
+        );
+      } else {
+        res = await createCommercialProperty(data, session?.user?.accessToken);
+      }
 
       const result = window.confirm("Do you want to add another property?");
 
@@ -72,7 +83,11 @@ const CommercialPropertyForm = ({
         // TODO: clear form with react hook form
         window.location.reload();
       } else {
-        router.push(`/admin/properties/${res.data.id}`);
+        if (broker) {
+          router.push(`/brokers/properties/${res.data.id}`);
+        } else {
+          router.push(`/admin/properties/${res.data.id}`);
+        }
       }
     } catch (error) {
       console.error("Error creating property:", error);
@@ -82,6 +97,12 @@ const CommercialPropertyForm = ({
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <ImageUpload name="images" label="Images" maxNumber={10} />
+        <ImageUpload
+          name="attachments"
+          label="Legal Documents (images)"
+          maxNumber={10}
+        />
         <NumberInput name="price" label="Price" />
         <SelectInput
           name="currency"

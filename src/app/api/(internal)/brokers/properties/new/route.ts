@@ -19,7 +19,7 @@ export async function GET(req: Request) {
       },
     };
 
-    const response = await apiV1.get("admin/properties/new", config);
+    const response = await apiV1.get("brokers/properties/new", config);
 
     return NextResponse.json(response.data);
   } catch (error: any) {

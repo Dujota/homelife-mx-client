@@ -20,18 +20,23 @@ import FormSubmitButton from "../../common/buttons/form-submit-button";
 import toast from "react-hot-toast";
 
 // Mutations
-import { createSingleFamilyDwelling } from "@/lib/models/properties/mutations";
+import {
+  createSingleFamilyDwelling,
+  createSingleFamilyDwellingBrokers,
+} from "@/lib/models/properties/mutations";
 import Checkboxes from "../fields/checkboxes";
 import ImageUpload from "../fields/image-uploader";
 
 type SingleFamilyDwellingFormProps = {
   propertyTypes: { name: string; id: number }[];
   currencyOptions: { name: string; value: string }[];
+  broker?: boolean;
 };
 
 const SingleFamilyDwellingForm = ({
   propertyTypes,
   currencyOptions,
+  broker,
 }: SingleFamilyDwellingFormProps) => {
   const router = useRouter();
   const { data: session } = useSession({
@@ -63,26 +68,32 @@ const SingleFamilyDwellingForm = ({
     [currencyOptions],
   );
 
-  console.log(currencyOptions);
-
   const onSubmit = async (data: SingleFamilyDwellingFormData) => {
     try {
-      const payload = {
-        property: { ...data },
-        create_listing: data.create_listing,
-      };
+      let res;
 
-      const res = await createSingleFamilyDwelling(
-        payload,
-        session?.user?.accessToken,
-      );
+      if (broker) {
+        res = await createSingleFamilyDwellingBrokers(
+          data,
+          session?.user?.accessToken,
+        );
+      } else {
+        res = await createSingleFamilyDwelling(
+          data,
+          session?.user?.accessToken,
+        );
+      }
 
       const result = window.confirm("Do you want to add another property?");
       if (result) {
         // TODO: clear form with react hook form
         window.location.reload();
       } else {
-        router.push(`/admin/properties/${res.data.id}`);
+        if (broker) {
+          router.push(`/brokers/properties/${res.data.id}`);
+        } else {
+          router.push(`/admin/properties/${res.data.id}`);
+        }
       }
 
       toast.success("Property created successfully!");
@@ -96,6 +107,11 @@ const SingleFamilyDwellingForm = ({
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         <ImageUpload name="images" label="Images" maxNumber={10} />
+        <ImageUpload
+          name="attachments"
+          label="Legal Documents (images)"
+          maxNumber={10}
+        />
         <NumberInput name="price" label="Price" />
         <SelectInput
           name="currency"

@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { validateCreateListing } from "./schema-helpers";
+import { imageValidator, validateCreateListing } from "./schema-helpers";
 
 export const landPropertySchema = z.object({
   price: z.preprocess(
@@ -42,6 +42,8 @@ export const landPropertySchema = z.object({
   access_to_utilities: z.boolean().optional(),
   existing_structures: z.string().optional(),
   create_listing: validateCreateListing,
+  images: imageValidator,
+  attachments: imageValidator,
 });
 
 export type LandPropertyFormData = z.infer<typeof landPropertySchema>;

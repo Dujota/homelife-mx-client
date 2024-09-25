@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { validateCreateListing } from "./schema-helpers";
+import { imageValidator, validateCreateListing } from "./schema-helpers";
 
 export const singleFamilyDwellingSchema = z.object({
   price: z.preprocess(
@@ -82,6 +82,8 @@ export const singleFamilyDwellingSchema = z.object({
   maintenance_fees_paid: z.boolean().optional(),
   amenity_ids: z.array(z.number()).optional(),
   create_listing: validateCreateListing,
+  images: imageValidator,
+  attachments: imageValidator,
 });
 
 export type SingleFamilyDwellingFormData = z.infer<
