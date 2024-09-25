@@ -1,5 +1,5 @@
 import { apiTokenExpired, getAccessToken } from "@/lib/helpers/api-helpers";
-import { apiV1 } from "@/lib/services";
+import { apiV1, apiV1FormData } from "@/lib/services";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -54,11 +54,32 @@ export async function POST(req: Request) {
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
+        // "Content-Type": "multipart/form-data",
       },
     };
 
-    const body = await req.json();
-    const response = await apiV1.post("/brokers/properties", body, config);
+    // const body = await req.json();
+    const formData = await req.formData();
+    // Prepare the payload to send to your Rails API
+    const payload: any = {};
+    // Convert FormData into a key-value object
+    formData.forEach((value, key) => {
+      if (key.endsWith("[]")) {
+        // Handle array fields (like images[] and attachments[])
+        if (!payload[key]) {
+          payload[key] = [];
+        }
+        payload[key].push(value);
+      } else {
+        payload[key] = value;
+      }
+    });
+
+    const response = await apiV1FormData.post(
+      "/brokers/properties",
+      payload,
+      config,
+    );
 
     return NextResponse.json(response.data);
   } catch (error: any) {

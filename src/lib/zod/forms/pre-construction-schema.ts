@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { validateCreateListing } from "./schema-helpers";
+import { imageValidator, validateCreateListing } from "./schema-helpers";
 
 export const preConstructionSchema = z.object({
   development_name: z.string().min(1, "Name of development is required"),
@@ -50,6 +50,8 @@ export const preConstructionSchema = z.object({
   incentives: z.string().optional(),
   amenity_ids: z.array(z.number()).optional(),
   create_listing: validateCreateListing,
+  images: imageValidator,
+  attachments: imageValidator,
 });
 
 export type PreConstructionFormData = z.infer<typeof preConstructionSchema>;

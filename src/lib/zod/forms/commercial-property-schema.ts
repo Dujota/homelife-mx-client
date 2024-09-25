@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { validateCreateListing } from "./schema-helpers";
+import { imageValidator, validateCreateListing } from "./schema-helpers";
 
 export const commercialPropertySchema = z.object({
   price: z.preprocess(
@@ -34,10 +34,10 @@ export const commercialPropertySchema = z.object({
     (val = "") => (val === "" ? 0 : parseFloat(val as string)),
     z.number().min(1, "Commercial space size is required"),
   ),
-  size_of_land: z.preprocess(
-    (val = "") => (val === "" ? 0 : parseFloat(val as string)),
-    z.number().min(1, "Lot size is required").optional(),
-  ),
+  // size_of_land: z.preprocess(
+  //   (val = "") => (val === "" ? 0 : parseFloat(val as string)),
+  //   z.number().min(1, "Lot size is required").optional(),
+  // ),
   zoning: z.string().min(1, "Zoning information is required"),
   rental_income: z
     .preprocess(
@@ -47,6 +47,8 @@ export const commercialPropertySchema = z.object({
     .optional(),
   commercial_lease_terms: z.string().optional(),
   create_listing: validateCreateListing,
+  images: imageValidator,
+  attachments: imageValidator,
 });
 
 export type CommercialPropertyFormData = z.infer<
