@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
-import { apiV1, handleError, handleSuccess } from "@/lib/services";
+import {
+  apiV1,
+  apiV1FormData,
+  handleError,
+  handleSuccess,
+} from "@/lib/services";
 import { apiTokenExpired, getAccessToken } from "@/lib/helpers/api-helpers";
 
 export async function POST(req: Request) {
@@ -19,9 +24,23 @@ export async function POST(req: Request) {
       },
     };
 
-    const body = await req.json();
+    const formData = await req.formData();
 
-    const response = await apiV1.post("admin/properties", body, config);
+    const data = new FormData();
+    formData.forEach((value, key) => {
+      // If value is a file (Blob), append the file; otherwise, append the field
+      if (value instanceof Blob) {
+        data.append(key, value, value.name);
+      } else {
+        data.append(key, value as string);
+      }
+    });
+
+    const response = await apiV1FormData.post(
+      "brokers/properties",
+      data,
+      config,
+    );
     return NextResponse.json(response.data);
   } catch (error: any) {
     if (apiTokenExpired(error)) {
@@ -49,7 +68,7 @@ export async function GET(req: Request) {
       },
     };
 
-    const response = await apiV1.get("admin/properties", config);
+    const response = await apiV1.get("brokers/properties", config);
 
     return NextResponse.json(response.data);
   } catch (error: any) {

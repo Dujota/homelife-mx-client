@@ -1,6 +1,17 @@
 import { NextResponse } from "next/server";
-import { apiV1, handleError, handleSuccess } from "@/lib/services";
+import {
+  apiV1,
+  apiV1FormData,
+  handleError,
+  handleSuccess,
+} from "@/lib/services";
 import { apiTokenExpired, getAccessToken } from "@/lib/helpers/api-helpers";
+
+export const config = {
+  api: {
+    bodyParser: false, // Disable Next.js body parsing to handle formData
+  },
+};
 
 export async function POST(req: Request) {
   try {
@@ -19,8 +30,23 @@ export async function POST(req: Request) {
       },
     };
 
-    const body = await req.json();
-    const response = await apiV1.post("/admin/properties", body, config);
+    const formData = await req.formData();
+
+    const data = new FormData();
+    formData.forEach((value, key) => {
+      // If value is a file (Blob), append the file; otherwise, append the field
+      if (value instanceof Blob) {
+        data.append(key, value, value.name);
+      } else {
+        data.append(key, value as string);
+      }
+    });
+
+    const response = await apiV1FormData.post(
+      "/admin/properties",
+      data,
+      config,
+    );
 
     return NextResponse.json(response.data);
   } catch (error: any) {
@@ -28,7 +54,7 @@ export async function POST(req: Request) {
       return new Response(JSON.stringify(error), { status: 401 });
     }
 
-    return new Response(JSON.stringify(error), { status: 400 });
+    return new Response(JSON.stringify(error), { status: 500 });
   }
 }
 

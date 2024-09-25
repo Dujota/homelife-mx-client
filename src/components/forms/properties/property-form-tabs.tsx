@@ -42,6 +42,7 @@ const PropertyFormTabs = ({
         <SelectedFormComponent
           propertyTypes={propertyTypes}
           currencyOptions={currencyOptions}
+          broker
         />
       </div>
     </div>

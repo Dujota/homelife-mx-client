@@ -30,7 +30,7 @@ export async function GET(
     };
 
     const response = await apiV1.get(
-      `admin/properties/${params.slug}/edit`,
+      `brokers/properties/${params.slug}/edit`,
       config,
     );
 
@@ -74,7 +74,7 @@ export async function PUT(
     const body = await req.json();
 
     const response = await apiV1.put(
-      `admin/properties/${params.slug}`,
+      `brokers/properties/${params.slug}`,
       body,
       config,
     );

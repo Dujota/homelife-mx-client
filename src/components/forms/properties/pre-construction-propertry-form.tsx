@@ -16,18 +16,25 @@ import TextArea from "../fields/text-area-input";
 import TextInput from "../fields/text-input";
 import SelectInput from "../fields/simple-select-input";
 import FormSubmitButton from "../../common/buttons/form-submit-button";
-import { createPreConstructionProject } from "@/lib/models/properties/mutations";
+import {
+  createPreConstructionProject,
+  createPreConstructionProjectBrokers,
+} from "@/lib/models/properties/mutations";
 import { useMemo } from "react";
 import Checkboxes from "../fields/checkboxes";
+import ImageUpload from "../fields/image-uploader";
+import DateInput from "../fields/date-input";
 
 type PreConstructionFormProps = {
   propertyTypes: { name: string; id: number }[];
   currencyOptions: { name: string; value: string }[];
+  broker?: boolean;
 };
 
 const PreConstructionForm = ({
   propertyTypes,
   currencyOptions,
+  broker,
 }: PreConstructionFormProps) => {
   const router = useRouter();
 
@@ -44,10 +51,19 @@ const PreConstructionForm = ({
 
   const onSubmit = async (data: PreConstructionFormData) => {
     try {
-      const res = await createPreConstructionProject(
-        data,
-        session?.user?.accessToken,
-      );
+
+      let res;
+      if (broker) {
+        res = await createPreConstructionProjectBrokers(
+          data,
+          session?.user?.accessToken,
+        );
+      } else {
+        res = await createPreConstructionProject(
+          data,
+          session?.user?.accessToken,
+        );
+      }
 
       const result = window.confirm("Do you want to add another property?");
 
@@ -55,7 +71,11 @@ const PreConstructionForm = ({
         // TODO: clear form with react hook form
         window.location.reload();
       } else {
-        router.push(`/admin/properties/${res.data.id}`);
+        if (broker) {
+          router.push(`/brokers/properties/${res.data.id}`);
+        } else {
+          router.push(`/admin/properties/${res.data.id}`);
+        }
       }
     } catch (error) {
       console.error("Error creating property:", error);
@@ -74,6 +94,12 @@ const PreConstructionForm = ({
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <ImageUpload name="images" label="Images" maxNumber={10} />
+        <ImageUpload
+          name="attachments"
+          label="Legal Documents (images)"
+          maxNumber={10}
+        />
         <TextInput name="development_name" label="Name of Development" />
         <TextArea name="description" label="Project Description" />
         <TextInput
@@ -117,7 +143,7 @@ const PreConstructionForm = ({
             { label: "No", value: false },
           ]}
         />
-        <TextInput
+        <DateInput
           name="estimated_completion_date"
           label="Estimated Completion Date"
         />
