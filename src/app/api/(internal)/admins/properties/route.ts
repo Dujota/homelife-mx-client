@@ -7,12 +7,6 @@ import {
 } from "@/lib/services";
 import { apiTokenExpired, getAccessToken } from "@/lib/helpers/api-helpers";
 
-export const config = {
-  api: {
-    bodyParser: false, // Disable Next.js body parsing to handle formData
-  },
-};
-
 export async function POST(req: Request) {
   try {
     const headers = new Headers(req.headers);
