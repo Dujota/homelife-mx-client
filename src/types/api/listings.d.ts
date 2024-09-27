@@ -49,6 +49,8 @@ export interface ListingAttributes {
   commission_percentage: string;
   created_at: string;
   updated_at: string;
+  currency: string;
+  property_type: string;
   property: Property;
   status: Status;
   listing_type: ListingType;

@@ -38,14 +38,16 @@ const Nav: NextPage<NavType> = ({
       style={NavStyle}
     >
       <div className="w-[8.75rem] flex flex-col items-start justify-center ml-[1rem]">
-        <Image
-          className="w-[6rem] h-[2.75rem] relative object-cover"
-          loading="eager"
-          alt="Casa Feliz Logo"
-          width={96}
-          height={44}
-          src="/images/logos/nav-black.svg"
-        />
+        <Link href="/">
+          <Image
+            className="w-[6rem] h-[2.75rem] relative object-cover"
+            loading="eager"
+            alt="Casa Feliz Logo"
+            width={96}
+            height={44}
+            src="/images/logos/nav-black.svg"
+          />
+        </Link>
       </div>
       <div className="flex flex-row items-center justify-start gap-spacing-container-md">
         <button className="cursor-pointer [border:none] py-[0.625rem] px-[2.312rem] bg-primary rounded-lg flex flex-row items-center justify-center whitespace-nowrap">

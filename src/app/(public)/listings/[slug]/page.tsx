@@ -3,36 +3,10 @@ import ContactAgent from "@/components/listings/public/contact-agent";
 import DescriptionCard from "@/components/listings/public/description-card";
 import PropertyDetailCard from "@/components/listings/public/property-detail-card";
 import PropertyDetailMetrics from "@/components/listings/public/property-detail-metrics";
+import { generatePropertyDetailMetrics } from "@/lib/helpers/listings-helpers";
+import { formatPrice } from "@/lib/helpers/price-helpers";
 import { getOneListingPublicAPIV1 } from "@/lib/models/listings/queries";
 import { type ListingResponse } from "@/types/api/listings";
-
-const propertyDetailMetricsMock = [
-  {
-    icon: "/images/icons/properties/location.svg",
-    alt: "location",
-    text: "Vaughan, Ontario, Canada, L5A4Y5",
-  },
-  {
-    icon: "/images/icons/properties/bed.svg",
-    alt: "bed",
-    text: "2 Beds",
-  },
-  {
-    icon: "/images/icons/properties/bath.svg",
-    alt: "bath",
-    text: "2 Baths",
-  },
-  {
-    icon: "/images/icons/properties/ruler-area.svg",
-    alt: "size",
-    text: "1000 sqm²",
-  },
-  {
-    icon: "/images/icons/properties/prop-type.svg",
-    alt: "property type",
-    text: "Apartment",
-  },
-];
 
 const mockTourRequestProps = {
   title: "Request a Tour",
@@ -40,17 +14,8 @@ const mockTourRequestProps = {
   buttonText: "Contact Agent",
 };
 
-const mockDescriptionProps = {
+const descriptionProps = {
   title: "Description",
-  content: `
-    Passambhati Villa is our exclusive villa at Cape Shark.
-    The spacious villa of about 3000 sqft built in contemporary Thai style,
-    is located at the very cape on a hillside about 35 metres above sea level.
-    The villa has a 270° panoramic view over the ocean and the two closest bays.
-    The villa has an outstanding infinity pool of 25 meters as well as outdoor salas
-    and terraces of 5000 sqft. Passambhati Villa is the perfect hide-away, if you want
-    an extraordinary and relaxing stay on Koh Tao. Use the laundry room by yourself!
-  `,
   showMoreText: "Show More",
   showLessText: "Show Less",
 };
@@ -146,6 +111,19 @@ export default async function PublicListingPage({
   const res: ListingResponse = await getOneListingPublicAPIV1(params.slug);
   const listing = res.data;
 
+  const {
+    property,
+    listing_date,
+    commission_percentage,
+    status,
+    listing_type,
+    currency,
+    property_type,
+    broker,
+  } = listing.attributes;
+
+  const propertyDetailMetrics = generatePropertyDetailMetrics(property);
+
   return (
     <div className=" relative bg-colors-background-bg-primary overflow-hidden flex flex-col items-start justify-start gap-[4.5rem] leading-[normal] tracking-[normal] text-center text-[1.25rem] text-primary font-text-md-regular mt-[6rem] ">
       <main className="self-stretch flex flex-col items-start justify-start gap-[2rem] max-w-full">
@@ -158,13 +136,11 @@ export default async function PublicListingPage({
               <div className="flex-1 flex flex-col items-start justify-start gap-[2.5rem] max-w-full self-stretch lg:flex-row">
                 <div className="self-stretch flex flex-col items-start justify-start gap-[1.5rem] text-[2rem] text-black">
                   <div className="self-stretch relative tracking-[-0.03em] leading-[2.5rem] font-medium whitespace-nowrap">
-                    $139,900
+                    {`${formatPrice(property.price)} ${currency}`}
                   </div>
 
                   <div className="self-stretch flex flex-col items-start justify-start gap-[2rem] max-w-full text-[1.25rem] text-content-base-main">
-                    <PropertyDetailMetrics
-                      details={propertyDetailMetricsMock}
-                    />
+                    <PropertyDetailMetrics details={propertyDetailMetrics} />
                   </div>
                 </div>
                 <div className="flex-1 flex flex-col items-start justify-start gap-[2.5rem] self-stretch lg:flex-row">
@@ -177,10 +153,11 @@ export default async function PublicListingPage({
               </div>
 
               <DescriptionCard
-                title={mockDescriptionProps.title}
-                content={mockDescriptionProps.content}
-                showMoreText={mockDescriptionProps.showMoreText}
-                showLessText={mockDescriptionProps.showLessText}
+                title={descriptionProps.title}
+                // content={property.description}
+                content={property.description}
+                showMoreText={descriptionProps.showMoreText}
+                showLessText={descriptionProps.showLessText}
               />
 
               <PropertyDetailCard

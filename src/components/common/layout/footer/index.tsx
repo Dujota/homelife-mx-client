@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo, type CSSProperties } from "react";
 
 export type FooterType = {
@@ -67,14 +68,16 @@ const Footer: NextPage<FooterType> = ({
     >
       <div className="self-stretch flex flex-col items-start justify-start gap-spacing-container-lg">
         <div className="self-stretch flex flex-col items-start justify-start gap-spacing-container-md">
-          <Image
-            className="w-[8.313rem] h-[4rem] relative object-cover"
-            loading="lazy"
-            width={100}
-            height={80}
-            alt="Footer Logo"
-            src="/images/logos/footer-black.svg"
-          />
+          <Link href="/">
+            <Image
+              className="w-[8.313rem] h-[4rem] relative object-cover"
+              loading="lazy"
+              width={100}
+              height={80}
+              alt="Footer Logo"
+              src="/images/logos/footer-black.svg"
+            />
+          </Link>
           <div className="self-stretch flex flex-col items-start justify-start gap-spacing-container-xs">
             <div className="self-stretch relative leading-[1.125rem] whitespace-nowrap">
               contact@homelife.com
