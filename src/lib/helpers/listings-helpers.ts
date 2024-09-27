@@ -54,26 +54,36 @@ export const generatePropertyDetailMetrics = (
         ? `${property.number_of_bathrooms} Baths`
         : "N/A",
     },
-    // {
-    //   icon: "/images/icons/properties/ruler-area.svg",
-    //   alt: "size",
-    //   text:
-    //     property.living_space_square_meters ||
-    //     property.lot_size ||
-    //     property.size_of_land ||
-    //     property.square_footage_of_building
-    //       ? `${
-    //           property.living_space_square_meters ||
-    //           property.lot_size ||
-    //           property.size_of_land ||
-    //           property.square_footage_of_building
-    //         } sqm²`
-    //       : "N/A",
-    // },
+    {
+      icon: "/images/icons/properties/ruler-area.svg",
+      alt: "size",
+      text:
+        property.living_space_square_meters ||
+        property.lot_size ||
+        property.size_of_land ||
+        property.square_footage_of_building
+          ? `${
+              property.living_space_square_meters ||
+              property.lot_size ||
+              property.size_of_land ||
+              property.square_footage_of_building
+            } sqm²`
+          : "N/A",
+    },
     {
       icon: "/images/icons/properties/prop-type.svg",
       alt: "property type",
       text: property.property_type.label || "N/A",
+    },
+    {
+      icon: "/images/icons/properties/prop-type.svg",
+      alt: "property type",
+      text: property.status.label || "N/A",
+    },
+    {
+      icon: "/images/icons/properties/prop-type.svg",
+      alt: "property type",
+      text: property.mls_number || "N/A",
     },
   ].filter((item) => item.text !== "N/A");
 };

@@ -82,3 +82,44 @@ export const mockAmenitiesProps = {
     },
   ],
 };
+
+export const mockDetailProps = {
+  title: "Details",
+  items: [
+    {
+      icon: "/images/icons/properties/bed.svg",
+      label: "Beds",
+      value: "2 Beds",
+    },
+    {
+      icon: "/images/icons/properties/bath.svg",
+      label: "Baths",
+      value: "2 Baths",
+    },
+    {
+      icon: "/images/icons/properties/ruler-area.svg",
+      label: "Size",
+      value: "100m² living Space",
+    },
+    {
+      icon: "/images/icons/properties/prop-type.svg",
+      label: "Type",
+      value: "Apartment",
+    },
+    {
+      icon: "/images/icons/properties/calendar.svg",
+      label: "Year",
+      value: "Built in 2014",
+    },
+    {
+      icon: "/images/icons/properties/apraisal.svg",
+      label: "Appraisal",
+      value: "Appraisal Available",
+    },
+    {
+      icon: "/images/icons/properties/ruler-area.svg",
+      label: "Lot Size",
+      value: "100m² lot size",
+    },
+  ],
+};

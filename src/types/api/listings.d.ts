@@ -20,6 +20,10 @@ export interface Property {
   description: string;
   created_at: string;
   updated_at: string;
+  property_type: {
+    name: string;
+    label: string;
+  };
   amenities: { name: string; label: string; label_spanish?: string }[];
 }
 

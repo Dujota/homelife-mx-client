@@ -24,47 +24,6 @@ const descriptionProps = {
   showLessText: "Show Less",
 };
 
-const mockDetailProps = {
-  title: "Details",
-  items: [
-    {
-      icon: "/images/icons/properties/bed.svg",
-      label: "Beds",
-      value: "2 Beds",
-    },
-    {
-      icon: "/images/icons/properties/bath.svg",
-      label: "Baths",
-      value: "2 Baths",
-    },
-    {
-      icon: "/images/icons/properties/ruler-area.svg",
-      label: "Size",
-      value: "100m² living Space",
-    },
-    {
-      icon: "/images/icons/properties/prop-type.svg",
-      label: "Type",
-      value: "Apartment",
-    },
-    {
-      icon: "/images/icons/properties/calendar.svg",
-      label: "Year",
-      value: "Built in 2014",
-    },
-    {
-      icon: "/images/icons/properties/apraisal.svg",
-      label: "Appraisal",
-      value: "Appraisal Available",
-    },
-    {
-      icon: "/images/icons/properties/ruler-area.svg",
-      label: "Lot Size",
-      value: "100m² lot size",
-    },
-  ],
-};
-
 export default async function PublicListingPage({
   params,
 }: {
@@ -84,7 +43,11 @@ export default async function PublicListingPage({
     broker,
   } = listing.attributes;
 
-  const propertyDetailMetrics = generatePropertyDetailMetrics(property);
+  const propertyDetailMetrics = generatePropertyDetailMetrics({
+    ...property,
+    status,
+    listing_date,
+  });
   const formattedItems = mapAmenitiesToItems(property.amenities);
   const formattedDetails = mapPropertyToDetails(property);
 
@@ -124,11 +87,17 @@ export default async function PublicListingPage({
                 showLessText={descriptionProps.showLessText}
               />
 
+              {/* General Section */}
               <PropertyDetailCard title="Details" items={formattedDetails} />
-              {property.property_type.name === "pre-construction" && (
-                <PropertyDetailCard title="Details" items={formattedDetails} />
+              {/* PreConstruction Sections*/}
+              {/* Commercial Section */}
+              {/* Single Family Dwelling Section*/}
+              {/* Land Section */}
+
+              {/* Amenities */}
+              {property.amenities.length && (
+                <PropertyDetailCard title="Amenities" items={formattedItems} />
               )}
-              <PropertyDetailCard title="Amenities" items={formattedItems} />
 
               <ContactAgent
                 title={mockTourRequestProps.title}
