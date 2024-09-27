@@ -100,9 +100,11 @@ const SingleFamilyDwellingForm = ({
         window.location.reload();
       } else {
         if (broker) {
-          router.push(`/brokers/properties/${res.data.id}`);
+          // router.push(`/brokers/properties/${res.data.id}`);
+          router.push(`/listings/${res.data.id}`);
         } else {
-          router.push(`/admin/properties/${res.data.id}`);
+          // router.push(`/admin/properties/${res.data.id}`);
+          router.push(`/listings/${res.data.id}`);
         }
       }
 
