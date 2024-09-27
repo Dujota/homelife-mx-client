@@ -28,15 +28,17 @@ import Checkboxes from "../fields/checkboxes";
 import ImageUpload from "../fields/image-uploader";
 
 type SingleFamilyDwellingFormProps = {
-  propertyTypes: { name: string; id: number }[];
+  propertyTypes: { name: string; id: number | string }[];
   currencyOptions: { name: string; value: string }[];
   broker?: boolean;
+  amenities: { label: string; value: number | string }[];
 };
 
 const SingleFamilyDwellingForm = ({
   propertyTypes,
   currencyOptions,
   broker,
+  amenities,
 }: SingleFamilyDwellingFormProps) => {
   const router = useRouter();
   const { data: session } = useSession({
@@ -52,10 +54,17 @@ const SingleFamilyDwellingForm = ({
 
   const propertyTypeOptions = useMemo(
     () =>
-      propertyTypes?.map((type: { name: string; id: number }) => ({
-        label: type.name,
-        value: type.id,
-      })),
+      propertyTypes
+        ?.map((type: { name: string; id: number | string }) => ({
+          label: type.name,
+          value: type.id,
+        }))
+        .filter(
+          (type) =>
+            !["commercial", "land", "pre-construction"].includes(
+              type.label.toLowerCase(),
+            ),
+        ),
     [propertyTypes],
   );
 
@@ -160,21 +169,7 @@ const SingleFamilyDwellingForm = ({
           name="general_carpentry_and_paint_condition"
           label="Carpentry/Paint Condition"
         />
-        <Checkboxes
-          name="amenity_ids"
-          label="Amenities"
-          options={[
-            { label: "Pool", value: 1 },
-            { label: "Gym", value: 2 },
-            { label: "Garden", value: 3 },
-            { label: "Pool", value: 4 },
-            { label: "Gym", value: 5 },
-            { label: "Garden", value: 6 },
-            { label: "Pool", value: 7 },
-            { label: "Gym", value: 8 },
-            { label: "Garden", value: 9 },
-          ]}
-        />
+        <Checkboxes name="amenity_ids" label="Amenities" options={amenities} />
 
         <Checkboxes
           name="create_listing"

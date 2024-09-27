@@ -32,10 +32,7 @@ export const createLand = async (
   token?: string,
 ): Promise<createPropertyResponse | any> => {
   try {
-    const formData = preparePropertyFormData({
-      ...data,
-      property_type_id: 3,
-    });
+    const formData = preparePropertyFormData(data);
 
     const response = await nextApiFormData.post("/admin/properties", formData, {
       headers: { Authorization: `Bearer ${token}` },
@@ -56,10 +53,7 @@ export const createCommercialProperty = async (
       create_listing: data.create_listing,
     };
 
-    const formData = preparePropertyFormData({
-      ...data,
-      property_type_id: 4,
-    });
+    const formData = preparePropertyFormData(data);
     const response = await nextApiFormData.post(
       "/admins/properties",
       formData,
@@ -78,10 +72,7 @@ export const createPreConstructionProject = async (
   token?: string,
 ): Promise<createPropertyResponse | any> => {
   try {
-    const formData = preparePropertyFormData({
-      ...data,
-      property_type_id: 5,
-    });
+    const formData = preparePropertyFormData(data);
     const response = await nextApiFormData.post(
       "/admins/properties",
       formData,
@@ -124,10 +115,7 @@ export const createLandBrokers = async (
   token?: string,
 ): Promise<createPropertyResponse | any> => {
   try {
-    const formData = preparePropertyFormData({
-      ...data,
-      property_type_id: 3,
-    });
+    const formData = preparePropertyFormData(data);
 
     const response = await nextApiFormData.post(
       "/brokers/properties",
@@ -147,10 +135,7 @@ export const createCommercialPropertyBrokers = async (
   token?: string,
 ): Promise<createPropertyResponse | any> => {
   try {
-    const formData = preparePropertyFormData({
-      ...data,
-      property_type_id: 4,
-    });
+    const formData = preparePropertyFormData(data);
     const response = await nextApiFormData.post(
       "/brokers/properties",
       formData,
@@ -169,10 +154,7 @@ export const createPreConstructionProjectBrokers = async (
   token?: string,
 ): Promise<createPropertyResponse | any> => {
   try {
-    const formData = preparePropertyFormData({
-      ...data,
-      property_type_id: 5,
-    });
+    const formData = preparePropertyFormData(data);
     const response = await nextApiFormData.post(
       "/brokers/properties",
       formData,

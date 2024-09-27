@@ -26,15 +26,17 @@ import ImageUpload from "../fields/image-uploader";
 import DateInput from "../fields/date-input";
 
 type PreConstructionFormProps = {
-  propertyTypes: { name: string; id: number }[];
+  propertyTypes: { name: string; id: number | string }[];
   currencyOptions: { name: string; value: string }[];
   broker?: boolean;
+  amenities: { label: string; value: number | string }[];
 };
 
 const PreConstructionForm = ({
   propertyTypes,
   currencyOptions,
   broker,
+  amenities,
 }: PreConstructionFormProps) => {
   const router = useRouter();
 
@@ -49,17 +51,25 @@ const PreConstructionForm = ({
     resolver: zodResolver(preConstructionSchema),
   });
 
+  const property_type_id = useMemo(() => {
+    const type = propertyTypes.find(
+      (type: { name: string; id: number | string }) =>
+        type.name.toLowerCase() === "pre-construction",
+    );
+    return type?.id;
+  }, [propertyTypes]);
+
   const onSubmit = async (data: PreConstructionFormData) => {
     try {
       let res;
       if (broker) {
         res = await createPreConstructionProjectBrokers(
-          data,
+          { ...data, property_type_id },
           session?.user?.accessToken,
         );
       } else {
         res = await createPreConstructionProject(
-          data,
+          { ...data, property_type_id },
           session?.user?.accessToken,
         );
       }
@@ -155,21 +165,7 @@ const PreConstructionForm = ({
         />
         <TextArea name="deposit_structure" label="Deposit Structure" />
         <TextArea name="incentives" label="Incentives" />
-        <Checkboxes
-          name="amenity_ids"
-          label="Amenities"
-          options={[
-            { label: "Pool", value: 1 },
-            { label: "Gym", value: 2 },
-            { label: "Garden", value: 3 },
-            { label: "Pool", value: 4 },
-            { label: "Gym", value: 5 },
-            { label: "Garden", value: 6 },
-            { label: "Pool", value: 7 },
-            { label: "Gym", value: 8 },
-            { label: "Garden", value: 9 },
-          ]}
-        />
+        <Checkboxes name="amenity_ids" label="Amenities" options={amenities} />
         <Checkboxes
           name="create_listing"
           label="Make Listing Public"

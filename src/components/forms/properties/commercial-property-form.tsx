@@ -27,15 +27,17 @@ import Checkboxes from "../fields/checkboxes";
 import ImageUpload from "../fields/image-uploader";
 
 type CommercialPropertyFormProps = {
-  propertyTypes: { name: string; id: number }[];
+  propertyTypes: { name: string; id: number | string }[];
   currencyOptions: { name: string; value: string }[];
   broker?: boolean;
+  amenities: { label: string; value: number | string }[];
 };
 
 const CommercialPropertyForm = ({
   propertyTypes,
   currencyOptions,
   broker,
+  amenities,
 }: CommercialPropertyFormProps) => {
   const router = useRouter();
   const { data: session } = useSession({
@@ -65,16 +67,27 @@ const CommercialPropertyForm = ({
     [currencyOptions],
   );
 
+  const property_type_id = useMemo(() => {
+    const type = propertyTypes.find(
+      (type: { name: string; id: number | string }) =>
+        type.name.toLowerCase() === "commercial",
+    );
+    return type?.id;
+  }, [propertyTypes]);
+
   const onSubmit = async (data: CommercialPropertyFormData) => {
     try {
       let res;
       if (broker) {
         res = await createCommercialPropertyBrokers(
-          data,
+          { ...data, property_type_id },
           session?.user?.accessToken,
         );
       } else {
-        res = await createCommercialProperty(data, session?.user?.accessToken);
+        res = await createCommercialProperty(
+          { ...data, property_type_id },
+          session?.user?.accessToken,
+        );
       }
 
       const result = window.confirm("Do you want to add another property?");

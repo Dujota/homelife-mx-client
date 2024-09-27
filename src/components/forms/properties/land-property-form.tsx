@@ -27,15 +27,17 @@ import Checkboxes from "../fields/checkboxes";
 import ImageUpload from "../fields/image-uploader";
 
 type LandPropertyFormProps = {
-  propertyTypes?: { name: string; id: number }[];
+  propertyTypes: { name: string; id: number | string }[];
   currencyOptions: { name: string; value: string }[];
   broker?: boolean;
+  amenities: { label: string; value: number | string }[];
 };
 
 const LandPropertyForm = ({
   propertyTypes,
   currencyOptions,
   broker,
+  amenities,
 }: LandPropertyFormProps) => {
   const router = useRouter();
   const { data: session } = useSession({
@@ -56,6 +58,14 @@ const LandPropertyForm = ({
   //   }),
   // );
 
+  const property_type_id = useMemo(() => {
+    const type = propertyTypes.find(
+      (type: { name: string; id: number | string }) =>
+        type.name.toLowerCase() === "land",
+    );
+    return type?.id;
+  }, [propertyTypes]);
+
   const currencySelectOptions = useMemo(
     () =>
       currencyOptions?.map((currency: { name: string; value: string }) => ({
@@ -69,9 +79,15 @@ const LandPropertyForm = ({
     try {
       let res;
       if (broker) {
-        res = await createLandBrokers(data, session?.user?.accessToken);
+        res = await createLandBrokers(
+          { ...data, property_type_id },
+          session?.user?.accessToken,
+        );
       } else {
-        res = await createLand(data, session?.user?.accessToken);
+        res = await createLand(
+          { ...data, property_type_id },
+          session?.user?.accessToken,
+        );
       }
 
       const result = window.confirm("Do you want to add another property?");
