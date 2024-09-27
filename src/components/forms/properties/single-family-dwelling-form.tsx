@@ -26,6 +26,7 @@ import {
 } from "@/lib/models/properties/mutations";
 import Checkboxes from "../fields/checkboxes";
 import ImageUpload from "../fields/image-uploader";
+import LoadingSpinner from "@/components/common/animations/loading-spinner";
 
 type SingleFamilyDwellingFormProps = {
   propertyTypes: { name: string; id: number | string }[];
@@ -113,75 +114,85 @@ const SingleFamilyDwellingForm = ({
   };
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <ImageUpload name="images" label="Images" maxNumber={10} />
-        <ImageUpload
-          name="attachments"
-          label="Legal Documents (images)"
-          maxNumber={10}
-        />
-        <NumberInput name="price" label="Price" />
-        <SelectInput
-          name="currency"
-          label="Currency"
-          options={currencySelectOptions}
-        />
-        <TextArea name="description" label="Description" />
-        <TextInput
-          name="address_attributes.house_number"
-          label="House Number"
-        />
-        <TextInput name="address_attributes.street" label="Street" />
-        <TextInput
-          name="address_attributes.neighborhood"
-          label="Neighborhood"
-        />
-        <TextInput
-          name="address_attributes.municipality"
-          label="Municipality"
-        />
-        <TextInput name="address_attributes.city" label="City" />
-        <TextInput name="address_attributes.state" label="State" />
-        <TextInput name="address_attributes.postal_code" label="Postal Code" />
-        <SelectInput
-          name="property_type_id"
-          label="Property Type"
-          options={propertyTypeOptions}
-        />
-        <NumberInput name="number_of_bedrooms" label="Number of Bedrooms" />
-        <NumberInput name="number_of_bathrooms" label="Number of Bathrooms" />
-        <NumberInput name="half_bathrooms" label="Half Bathrooms" />
-        <NumberInput
-          name="living_space_square_meters"
-          label="Living Space (sqm)"
-        />
-        <NumberInput name="lot_size" label="Lot Size (sqm)" />
-        <NumberInput name="year_built" label="Year Built" />
-        <NumberInput name="number_of_living_rooms" label="Living Rooms" />
-        <NumberInput name="garage_size" label="Garage Size" />
-        <NumberInput
-          name="number_of_airconditioners"
-          label="Number of Air Conditioners"
-        />
-        <NumberInput name="gas_tank_size" label="Gas Tank Size (liters)" />
-        <TextInput
-          name="general_carpentry_and_paint_condition"
-          label="Carpentry/Paint Condition"
-        />
-        <Checkboxes name="amenity_ids" label="Amenities" options={amenities} />
+    <>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <ImageUpload name="images" label="Images" maxNumber={10} />
+          <ImageUpload
+            name="attachments"
+            label="Legal Documents (images)"
+            maxNumber={10}
+          />
+          <NumberInput name="price" label="Price" />
+          <SelectInput
+            name="currency"
+            label="Currency"
+            options={currencySelectOptions}
+          />
+          <TextArea name="description" label="Description" />
+          <TextInput
+            name="address_attributes.house_number"
+            label="House Number"
+          />
+          <TextInput name="address_attributes.street" label="Street" />
+          <TextInput
+            name="address_attributes.neighborhood"
+            label="Neighborhood"
+          />
+          <TextInput
+            name="address_attributes.municipality"
+            label="Municipality"
+          />
+          <TextInput name="address_attributes.city" label="City" />
+          <TextInput name="address_attributes.state" label="State" />
+          <TextInput
+            name="address_attributes.postal_code"
+            label="Postal Code"
+          />
+          <SelectInput
+            name="property_type_id"
+            label="Property Type"
+            options={propertyTypeOptions}
+          />
+          <NumberInput name="number_of_bedrooms" label="Number of Bedrooms" />
+          <NumberInput name="number_of_bathrooms" label="Number of Bathrooms" />
+          <NumberInput name="half_bathrooms" label="Half Bathrooms" />
+          <NumberInput
+            name="living_space_square_meters"
+            label="Living Space (sqm)"
+          />
+          <NumberInput name="lot_size" label="Lot Size (sqm)" />
+          <NumberInput name="year_built" label="Year Built" />
+          <NumberInput name="number_of_living_rooms" label="Living Rooms" />
+          <NumberInput name="garage_size" label="Garage Size" />
+          <NumberInput
+            name="number_of_airconditioners"
+            label="Number of Air Conditioners"
+          />
+          <NumberInput name="gas_tank_size" label="Gas Tank Size (liters)" />
+          <TextInput
+            name="general_carpentry_and_paint_condition"
+            label="Carpentry/Paint Condition"
+          />
+          <Checkboxes
+            name="amenity_ids"
+            label="Amenities"
+            options={amenities}
+          />
 
-        <Checkboxes
-          name="create_listing"
-          label="Make Listing Public"
-          options={[
-            { label: "Yes", value: "true" },
-            { label: "No", value: "false" },
-          ]}
-        />
-        <FormSubmitButton text="Create Single Family Dwelling" />
-      </form>
-    </FormProvider>
+          <Checkboxes
+            name="create_listing"
+            label="Make Listing Public"
+            options={[
+              { label: "Yes", value: "true" },
+              { label: "No", value: "false" },
+            ]}
+          />
+          <FormSubmitButton text="Create Single Family Dwelling" />
+        </form>
+      </FormProvider>
+      <LoadingSpinner isLoading={methods.formState.isSubmitting} />
+    </>
   );
 };
 

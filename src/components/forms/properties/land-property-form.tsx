@@ -25,6 +25,7 @@ import {
 import { useMemo } from "react";
 import Checkboxes from "../fields/checkboxes";
 import ImageUpload from "../fields/image-uploader";
+import LoadingSpinner from "@/components/common/animations/loading-spinner";
 
 type LandPropertyFormProps = {
   propertyTypes: { name: string; id: number | string }[];
@@ -108,82 +109,88 @@ const LandPropertyForm = ({
   };
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <ImageUpload name="images" label="Images" maxNumber={10} />
-        <ImageUpload
-          name="attachments"
-          label="Legal Documents (images)"
-          maxNumber={10}
-        />
-        <NumberInput name="price" label="Price" />
-        <SelectInput
-          name="currency"
-          label="Currency"
-          options={currencySelectOptions}
-        />
-        <TextArea name="description" label="Description" />
-        <TextInput
-          name="address_attributes.house_number"
-          label="House Number"
-        />
-        <TextInput name="address_attributes.street" label="Street" />
-        <TextInput
-          name="address_attributes.neighborhood"
-          label="Neighborhood"
-        />
-        <TextInput
-          name="address_attributes.municipality"
-          label="Municipality"
-        />
-        <TextInput name="address_attributes.city" label="City" />
-        <TextInput name="address_attributes.state" label="State" />
-        <TextInput name="address_attributes.postal_code" label="Postal Code" />
-        {/* <SelectInput
+    <>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <ImageUpload name="images" label="Images" maxNumber={10} />
+          <ImageUpload
+            name="attachments"
+            label="Legal Documents (images)"
+            maxNumber={10}
+          />
+          <NumberInput name="price" label="Price" />
+          <SelectInput
+            name="currency"
+            label="Currency"
+            options={currencySelectOptions}
+          />
+          <TextArea name="description" label="Description" />
+          <TextInput
+            name="address_attributes.house_number"
+            label="House Number"
+          />
+          <TextInput name="address_attributes.street" label="Street" />
+          <TextInput
+            name="address_attributes.neighborhood"
+            label="Neighborhood"
+          />
+          <TextInput
+            name="address_attributes.municipality"
+            label="Municipality"
+          />
+          <TextInput name="address_attributes.city" label="City" />
+          <TextInput name="address_attributes.state" label="State" />
+          <TextInput
+            name="address_attributes.postal_code"
+            label="Postal Code"
+          />
+          {/* <SelectInput
           name="property_type_id"
           label="Property Type"
           options={propertyTypeOptions}
         /> */}
-        <NumberInput name="size_of_land" label="Size of the Land" />
-        <TextInput name="dimensions" label="Dimensions" />
-        <SelectInput
-          name="is_in_land_registry"
-          label="In Land Registry"
-          options={[
-            { label: "Yes", value: true },
-            { label: "No", value: false },
-          ]}
-        />
-        <SelectInput
-          name="appraisal_available"
-          label="Appraisal Available"
-          options={[
-            { label: "Yes", value: true },
-            { label: "No", value: false },
-          ]}
-        />
-        <TextInput name="zoning" label="Zoning" />
-        <TextInput name="topography" label="Topography" />
-        <SelectInput
-          name="access_to_utilities"
-          label="Access to Utilities"
-          options={[
-            { label: "Yes", value: true },
-            { label: "No", value: false },
-          ]}
-        />
-        <TextArea name="existing_structures" label="Existing Structures" />
-        <Checkboxes
-          name="create_listing"
-          label="Make Listing Public"
-          options={[
-            { label: "Yes", value: "true" },
-            { label: "No", value: "false" },
-          ]}
-        />
-        <FormSubmitButton text="Create Land Property" />
-      </form>
-    </FormProvider>
+          <NumberInput name="size_of_land" label="Size of the Land" />
+          <TextInput name="dimensions" label="Dimensions" />
+          <SelectInput
+            name="is_in_land_registry"
+            label="In Land Registry"
+            options={[
+              { label: "Yes", value: true },
+              { label: "No", value: false },
+            ]}
+          />
+          <SelectInput
+            name="appraisal_available"
+            label="Appraisal Available"
+            options={[
+              { label: "Yes", value: true },
+              { label: "No", value: false },
+            ]}
+          />
+          <TextInput name="zoning" label="Zoning" />
+          <TextInput name="topography" label="Topography" />
+          <SelectInput
+            name="access_to_utilities"
+            label="Access to Utilities"
+            options={[
+              { label: "Yes", value: true },
+              { label: "No", value: false },
+            ]}
+          />
+          <TextArea name="existing_structures" label="Existing Structures" />
+          <Checkboxes
+            name="create_listing"
+            label="Make Listing Public"
+            options={[
+              { label: "Yes", value: "true" },
+              { label: "No", value: "false" },
+            ]}
+          />
+          <FormSubmitButton text="Create Land Property" />
+        </form>
+      </FormProvider>
+      <LoadingSpinner isLoading={methods.formState.isSubmitting} />
+    </>
   );
 };
 
