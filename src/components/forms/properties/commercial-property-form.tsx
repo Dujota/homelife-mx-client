@@ -131,7 +131,7 @@ const CommercialPropertyForm = ({
           label="Property Type"
           options={propertyTypeOptions}
         /> */}
-        <TextInput name="type_of_property" label="Type of Business" />
+        <TextInput name="type_of_business" label="Type of Business" />
         <NumberInput
           name="square_footage_of_building"
           label="Commercial Space Size"
