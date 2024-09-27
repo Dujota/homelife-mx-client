@@ -3,7 +3,11 @@ import ContactAgent from "@/components/listings/public/contact-agent";
 import DescriptionCard from "@/components/listings/public/description-card";
 import PropertyDetailCard from "@/components/listings/public/property-detail-card";
 import PropertyDetailMetrics from "@/components/listings/public/property-detail-metrics";
-import { generatePropertyDetailMetrics } from "@/lib/helpers/listings-helpers";
+import {
+  generatePropertyDetailMetrics,
+  mapAmenitiesToItems,
+  mapPropertyToDetails,
+} from "@/lib/helpers/listings-helpers";
 import { formatPrice } from "@/lib/helpers/price-helpers";
 import { getOneListingPublicAPIV1 } from "@/lib/models/listings/queries";
 import { type ListingResponse } from "@/types/api/listings";
@@ -61,48 +65,6 @@ const mockDetailProps = {
   ],
 };
 
-const mockAmenitiesProps = {
-  title: "Amenities",
-  items: [
-    {
-      icon: "/images/icons/properties/image.svg",
-      label: "View",
-      value: "Bay view",
-    },
-    {
-      icon: "/images/icons/properties/sunset.svg",
-      label: "Waterfront",
-      value: "Waterfront",
-    },
-    { icon: "/images/icons/properties/wifi.svg", label: "Wifi", value: "Wifi" },
-    {
-      icon: "/images/icons/properties/car.svg",
-      label: "Parking",
-      value: "2 Car Garage",
-    },
-    {
-      icon: "/images/icons/properties/sunset.svg",
-      label: "View",
-      value: "Beach view",
-    },
-    {
-      icon: "/images/icons/properties/kitchen.svg",
-      label: "Kitchen",
-      value: "Kitchen",
-    },
-    {
-      icon: "/images/icons/properties/office.svg",
-      label: "Workspace",
-      value: "Office / Den",
-    },
-    {
-      icon: "/images/icons/properties/alarm.svg",
-      label: "Safety",
-      value: "24hr Security",
-    },
-  ],
-};
-
 export default async function PublicListingPage({
   params,
 }: {
@@ -123,6 +85,8 @@ export default async function PublicListingPage({
   } = listing.attributes;
 
   const propertyDetailMetrics = generatePropertyDetailMetrics(property);
+  const formattedItems = mapAmenitiesToItems(property.amenities);
+  const formattedDetails = mapPropertyToDetails(property);
 
   return (
     <div className=" relative bg-colors-background-bg-primary overflow-hidden flex flex-col items-start justify-start gap-[4.5rem] leading-[normal] tracking-[normal] text-center text-[1.25rem] text-primary font-text-md-regular mt-[6rem] ">
@@ -160,14 +124,11 @@ export default async function PublicListingPage({
                 showLessText={descriptionProps.showLessText}
               />
 
-              <PropertyDetailCard
-                title={mockDetailProps.title}
-                items={mockDetailProps.items}
-              />
-              <PropertyDetailCard
-                title={mockAmenitiesProps.title}
-                items={mockAmenitiesProps.items}
-              />
+              <PropertyDetailCard title="Details" items={formattedDetails} />
+              {property.property_type.name === "pre-construction" && (
+                <PropertyDetailCard title="Details" items={formattedDetails} />
+              )}
+              <PropertyDetailCard title="Amenities" items={formattedItems} />
 
               <ContactAgent
                 title={mockTourRequestProps.title}

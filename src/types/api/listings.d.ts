@@ -20,6 +20,7 @@ export interface Property {
   description: string;
   created_at: string;
   updated_at: string;
+  amenities: { name: string; label: string; label_spanish?: string }[];
 }
 
 export interface Status {
@@ -50,7 +51,10 @@ export interface ListingAttributes {
   created_at: string;
   updated_at: string;
   currency: string;
-  property_type: string;
+  property_type: {
+    name: string;
+    label: string;
+  };
   property: Property;
   status: Status;
   listing_type: ListingType;

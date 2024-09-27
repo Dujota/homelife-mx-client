@@ -29,7 +29,7 @@ export const commercialPropertySchema = z.object({
   //   (val = "") => (val === "" ? 0 : parseInt(val as string, 10)),
   //   z.number().min(1, "Property type is required").nullable(),
   // ),
-  type_of_business: z.string().min(1, "Type of property is required"),
+  type_of_business: z.string().min(3, "Type of property is required"),
   square_footage_of_building: z.preprocess(
     (val = "") => (val === "" ? 0 : parseFloat(val as string)),
     z.number().min(1, "Commercial space size is required"),

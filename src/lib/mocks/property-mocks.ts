@@ -40,3 +40,45 @@ export const mockDescriptionProps = {
   showMoreText: "Show More",
   showLessText: "Show Less",
 };
+
+export const mockAmenitiesProps = {
+  title: "Amenities",
+  items: [
+    {
+      icon: "/images/icons/properties/image.svg",
+      label: "View",
+      value: "Bay view",
+    },
+    {
+      icon: "/images/icons/properties/sunset.svg",
+      label: "Waterfront",
+      value: "Waterfront",
+    },
+    { icon: "/images/icons/properties/wifi.svg", label: "Wifi", value: "Wifi" },
+    {
+      icon: "/images/icons/properties/car.svg",
+      label: "Parking",
+      value: "2 Car Garage",
+    },
+    {
+      icon: "/images/icons/properties/sunset.svg",
+      label: "View",
+      value: "Beach view",
+    },
+    {
+      icon: "/images/icons/properties/kitchen.svg",
+      label: "Kitchen",
+      value: "Kitchen",
+    },
+    {
+      icon: "/images/icons/properties/office.svg",
+      label: "Workspace",
+      value: "Office / Den",
+    },
+    {
+      icon: "/images/icons/properties/alarm.svg",
+      label: "Safety",
+      value: "24hr Security",
+    },
+  ],
+};
