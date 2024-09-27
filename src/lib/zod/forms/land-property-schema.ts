@@ -23,7 +23,7 @@ export const landPropertySchema = z.object({
     city: z.string().min(1, "City is required"),
     state: z.string().min(1, "State is required"),
     // postal_code: z.string().min(1, "Postal code is required"),
-    postal_code: z.string(),
+    postal_code: z.string().optional(),
   }),
   // property_type_id: z.preprocess(
   //   (val = "") => (val === "" ? 0 : parseInt(val as string, 10)),

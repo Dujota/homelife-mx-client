@@ -95,7 +95,7 @@ export default async function PublicListingPage({
               {/* Land Section */}
 
               {/* Amenities */}
-              {property.amenities.length && (
+              {property.amenities.length > 0 && (
                 <PropertyDetailCard title="Amenities" items={formattedItems} />
               )}
 

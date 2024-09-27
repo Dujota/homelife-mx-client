@@ -1,14 +1,10 @@
 import PropertyFormTabs from "@/components/forms/properties/property-form-tabs";
+import { getAddPropertyFormFieldsAdminAPIV1 } from "@/lib/forms/form-services";
+import { transformApiResponseToFormOptions } from "@/lib/helpers/api-helpers";
 
 import { auth } from "@/server/auth";
+import { CreatePropertyFormFieldsResponse } from "@/types/property";
 import { redirect } from "next/navigation";
-
-const mockPropertyTypes = [
-  { name: "House", id: 1 },
-  { name: "Apartment", id: 2 },
-  { name: "Condo", id: 3 },
-  { name: "Townhouse", id: 4 },
-];
 
 const mockCurrencyTypes = [
   { name: "MXN", value: "MXN" },
@@ -23,12 +19,18 @@ export default async function AdminAddPropertyPage() {
     return redirect("/login?callbackUrl=/admin/properties/add-property");
   }
 
+  const res: CreatePropertyFormFieldsResponse =
+    await getAddPropertyFormFieldsAdminAPIV1(session.user.accessToken);
+
+  const { propertyTypes, amenities } = transformApiResponseToFormOptions(res);
+
   return (
     <main>
       <h1>CREATE PROPERTY FORM ADMIN</h1>
       <PropertyFormTabs
-        propertyTypes={mockPropertyTypes}
+        propertyTypes={propertyTypes}
         currencyOptions={mockCurrencyTypes}
+        amenities={amenities}
       />
     </main>
   );

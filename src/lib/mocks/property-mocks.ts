@@ -123,3 +123,10 @@ export const mockDetailProps = {
     },
   ],
 };
+
+export const mockPropertyTypes = [
+  { name: "House", id: 1 },
+  { name: "Apartment", id: 2 },
+  { name: "Condo", id: 3 },
+  { name: "Townhouse", id: 4 },
+];

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { NextPage } from "next";
+import { formatPrice } from "@/lib/helpers/price-helpers";
 
 export type ListingCardMetricsType = {
   price: string;
@@ -24,15 +25,15 @@ const ListingCardMetrics: NextPage<ListingCardMetricsType> = ({
     <div className="self-stretch flex flex-col items-start justify-start gap-[0.75rem]">
       {/* Price Section */}
       <div className="flex flex-row items-start justify-start py-[0rem] pl-[0rem] pr-[1.25rem] gap-[0.25rem]">
-        <h3 className="m-0 relative text-inherit tracking-[-0.02em] leading-[1.5rem] font-medium font-[inherit] inline-block min-w-[0.813rem]">
+        {/* <h3 className="m-0 relative text-inherit tracking-[-0.02em] leading-[1.5rem] font-medium font-[inherit] inline-block min-w-[0.813rem]">
           $
+        </h3> */}
+        <h3 className="relative tracking-[-0.02em] leading-[1.5rem] font-medium inline-block min-w-[5.75rem]">
+          {formatPrice(price)} {currency}
         </h3>
-        <div className="relative tracking-[-0.02em] leading-[1.5rem] font-medium inline-block min-w-[5.75rem]">
-          {price}
-        </div>
-        <h3 className="m-0 relative text-inherit tracking-[-0.02em] leading-[1.5rem] font-medium font-[inherit] inline-block min-w-[2.688rem]">
+        {/* <h3 className="m-0 relative text-inherit tracking-[-0.02em] leading-[1.5rem] font-medium font-[inherit] inline-block min-w-[2.688rem]">
           {currency}
-        </h3>
+        </h3> */}
       </div>
 
       {/* Address and Property Details */}

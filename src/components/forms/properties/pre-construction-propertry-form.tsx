@@ -24,17 +24,20 @@ import { useMemo } from "react";
 import Checkboxes from "../fields/checkboxes";
 import ImageUpload from "../fields/image-uploader";
 import DateInput from "../fields/date-input";
+import LoadingSpinner from "@/components/common/animations/loading-spinner";
 
 type PreConstructionFormProps = {
-  propertyTypes: { name: string; id: number }[];
+  propertyTypes: { name: string; id: number | string }[];
   currencyOptions: { name: string; value: string }[];
   broker?: boolean;
+  amenities: { label: string; value: number | string }[];
 };
 
 const PreConstructionForm = ({
   propertyTypes,
   currencyOptions,
   broker,
+  amenities,
 }: PreConstructionFormProps) => {
   const router = useRouter();
 
@@ -49,17 +52,25 @@ const PreConstructionForm = ({
     resolver: zodResolver(preConstructionSchema),
   });
 
+  const property_type_id = useMemo(() => {
+    const type = propertyTypes.find(
+      (type: { name: string; id: number | string }) =>
+        type.name.toLowerCase() === "pre-construction",
+    );
+    return type?.id;
+  }, [propertyTypes]);
+
   const onSubmit = async (data: PreConstructionFormData) => {
     try {
       let res;
       if (broker) {
         res = await createPreConstructionProjectBrokers(
-          data,
+          { ...data, property_type_id },
           session?.user?.accessToken,
         );
       } else {
         res = await createPreConstructionProject(
-          data,
+          { ...data, property_type_id },
           session?.user?.accessToken,
         );
       }
@@ -91,96 +102,92 @@ const PreConstructionForm = ({
   );
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <ImageUpload name="images" label="Images" maxNumber={10} />
-        <ImageUpload
-          name="attachments"
-          label="Legal Documents (images)"
-          maxNumber={10}
-        />
-        <TextInput name="development_name" label="Name of Development" />
-        <TextArea name="description" label="Project Description" />
-        <TextInput
-          name="developer_contact"
-          label="Developer Contact Information"
-        />
-        <TextInput name="cadastral_number" label="Cadastral/Folio Number" />
-        <SelectInput
-          name="proof_of_ownership"
-          label="Proof of Ownership"
-          options={[
-            { label: "Yes", value: true },
-            { label: "No", value: false },
-          ]}
-        />
-        <NumberInput name="property_taxes" label="Property Taxes" />
-        <TextInput name="zoning" label="Zoning" />
-        <TextInput name="location" label="Location" />
-        <TextInput
-          name="address_attributes.house_number"
-          label="House Number"
-        />
-        <TextInput name="address_attributes.street" label="Street" />
-        <TextInput
-          name="address_attributes.neighborhood"
-          label="Neighborhood"
-        />
-        <TextInput
-          name="address_attributes.municipality"
-          label="Municipality"
-        />
-        <TextInput name="address_attributes.city" label="City" />
-        <TextInput name="address_attributes.state" label="State" />
-        <TextInput name="address_attributes.postal_code" label="Postal Code" />
-        <TextArea name="plans" label="Plans" />
-        <SelectInput
-          name="rendering_available"
-          label="Rendering Available"
-          options={[
-            { label: "Yes", value: true },
-            { label: "No", value: false },
-          ]}
-        />
-        <DateInput
-          name="estimated_completion_date"
-          label="Estimated Completion Date"
-        />
-        <NumberInput name="min_price" label="Minimum Price" />
-        <NumberInput name="max_price" label="Maximum Price" />
-        <SelectInput
-          name="currency"
-          label="Currency"
-          options={currencySelectOptions}
-        />
-        <TextArea name="deposit_structure" label="Deposit Structure" />
-        <TextArea name="incentives" label="Incentives" />
-        <Checkboxes
-          name="amenity_ids"
-          label="Amenities"
-          options={[
-            { label: "Pool", value: 1 },
-            { label: "Gym", value: 2 },
-            { label: "Garden", value: 3 },
-            { label: "Pool", value: 4 },
-            { label: "Gym", value: 5 },
-            { label: "Garden", value: 6 },
-            { label: "Pool", value: 7 },
-            { label: "Gym", value: 8 },
-            { label: "Garden", value: 9 },
-          ]}
-        />
-        <Checkboxes
-          name="create_listing"
-          label="Make Listing Public"
-          options={[
-            { label: "Yes", value: "true" },
-            { label: "No", value: "false" },
-          ]}
-        />
-        <FormSubmitButton text="Create Pre-construction Property" />
-      </form>
-    </FormProvider>
+    <>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <ImageUpload name="images" label="Images" maxNumber={10} />
+          <ImageUpload
+            name="attachments"
+            label="Legal Documents (images)"
+            maxNumber={10}
+          />
+          <TextInput name="development_name" label="Name of Development" />
+          <TextArea name="description" label="Project Description" />
+          <TextInput
+            name="developer_contact"
+            label="Developer Contact Information"
+          />
+          <TextInput name="cadastral_number" label="Cadastral/Folio Number" />
+          <SelectInput
+            name="proof_of_ownership"
+            label="Proof of Ownership"
+            options={[
+              { label: "Yes", value: true },
+              { label: "No", value: false },
+            ]}
+          />
+          <NumberInput name="property_taxes" label="Property Taxes" />
+          <TextInput name="zoning" label="Zoning" />
+          <TextInput name="location" label="Location" />
+          <TextInput
+            name="address_attributes.house_number"
+            label="House Number"
+          />
+          <TextInput name="address_attributes.street" label="Street" />
+          <TextInput
+            name="address_attributes.neighborhood"
+            label="Neighborhood"
+          />
+          <TextInput
+            name="address_attributes.municipality"
+            label="Municipality"
+          />
+          <TextInput name="address_attributes.city" label="City" />
+          <TextInput name="address_attributes.state" label="State" />
+          <TextInput
+            name="address_attributes.postal_code"
+            label="Postal Code"
+          />
+          <TextArea name="plans" label="Plans" />
+          <SelectInput
+            name="rendering_available"
+            label="Rendering Available"
+            options={[
+              { label: "Yes", value: true },
+              { label: "No", value: false },
+            ]}
+          />
+          <DateInput
+            name="estimated_completion_date"
+            label="Estimated Completion Date"
+          />
+          <NumberInput name="min_price" label="Minimum Price" />
+          <NumberInput name="max_price" label="Maximum Price" />
+          <SelectInput
+            name="currency"
+            label="Currency"
+            options={currencySelectOptions}
+          />
+          <TextArea name="deposit_structure" label="Deposit Structure" />
+          <TextArea name="incentives" label="Incentives" />
+          <Checkboxes
+            name="amenity_ids"
+            label="Amenities"
+            options={amenities}
+          />
+          <Checkboxes
+            name="create_listing"
+            label="Make Listing Public"
+            options={[
+              { label: "Yes", value: "true" },
+              { label: "No", value: "false" },
+            ]}
+          />
+          <FormSubmitButton text="Create Pre-construction Property" />
+        </form>
+      </FormProvider>
+      <LoadingSpinner isLoading={methods.formState.isSubmitting} />
+    </>
   );
 };
 

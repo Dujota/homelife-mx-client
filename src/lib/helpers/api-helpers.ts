@@ -1,5 +1,6 @@
 import { type AxiosError } from "axios";
 import { SingleFamilyDwellingFormData } from "../zod/forms/single-family-dwelling-schema";
+import { CreatePropertyFormFieldsResponse } from "@/types/property";
 
 export function getAccessToken(req: Request) {
   const headers = new Headers(req.headers);
@@ -224,123 +225,43 @@ export const preparePropertyFormData = (data: any): FormData => {
   return formData;
 };
 
-// export const prepareSingleFamilyPropertyFormData = (data: any): FormData => {
-//   const formData = new FormData();
+interface FormPropertyType {
+  name: string;
+  id: number | string;
+}
 
-//   // Append property details to FormData
-//   formData.append("property[price]", data.price.toString());
-//   formData.append("property[description]", data.description);
-//   // formData.append(
-//   //   "property[address_id]",
-//   //   data.address_attributes.address_id?.toString(),
-//   // );
-//   formData.append(
-//     "property[property_type_id]",
-//     // @ts-ignore
-//     data.property_type_id.toString(),
-//   );
-//   formData.append(
-//     "property[number_of_bedrooms]",
-//     data.number_of_bedrooms.toString(),
-//   );
-//   formData.append(
-//     "property[number_of_bathrooms]",
-//     data.number_of_bathrooms.toString(),
-//   );
-//   formData.append(
-//     "property[living_space_square_meters]",
-//     data.living_space_square_meters.toString(),
-//   );
-//   formData.append("property[lot_size]", data.lot_size.toString());
-//   formData.append("property[year_built]", data.year_built.toString());
+// Transformed Amenity structure for form options
+interface FormAmenity {
+  label: string;
+  value: string | number;
+}
 
-//   // Additional fields that were requested
-//   formData.append(
-//     "property[number_of_living_rooms]",
-//     data.number_of_living_rooms?.toString() || "",
-//   );
-//   formData.append("property[garage_size]", data.garage_size?.toString() || "");
-//   formData.append(
-//     "property[general_carpentry_and_paint_condition]",
-//     data.general_carpentry_and_paint_condition || "",
-//   );
-//   formData.append(
-//     "property[number_of_electric_meters]",
-//     data.number_of_electric_meters?.toString() || "",
-//   );
-//   formData.append(
-//     "property[number_of_airconditioners]",
-//     data.number_of_airconditioners?.toString() || "",
-//   );
-//   formData.append(
-//     "property[half_bathrooms]",
-//     data.half_bathrooms?.toString() || "",
-//   );
-//   formData.append(
-//     "property[gas_tank_size]",
-//     data.gas_tank_size?.toString() || "",
-//   );
+// Transformed form options object
+interface FormOptions {
+  propertyTypes: FormPropertyType[];
+  amenities: FormAmenity[];
+}
+export function transformApiResponseToFormOptions(
+  apiResponse: CreatePropertyFormFieldsResponse,
+): FormOptions {
+  const { property_types: propertyTypesData, amenities: amenitiesData } =
+    apiResponse;
 
-//   // Append address details to FormData
-//   formData.append(
-//     "property[address_attributes][house_number]",
-//     data.address_attributes.house_number,
-//   );
-//   formData.append(
-//     "property[address_attributes][street]",
-//     data.address_attributes.street,
-//   );
-//   formData.append(
-//     "property[address_attributes][neighborhood]",
-//     data.address_attributes.neighborhood,
-//   );
-//   formData.append(
-//     "property[address_attributes][municipality]",
-//     data.address_attributes.municipality,
-//   );
-//   formData.append(
-//     "property[address_attributes][city]",
-//     data.address_attributes.city,
-//   );
-//   formData.append(
-//     "property[address_attributes][state]",
-//     data.address_attributes.state,
-//   );
-//   formData.append(
-//     "property[address_attributes][postal_code]",
-//     data.address_attributes.postal_code,
-//   );
+  // Transform property types
+  const propertyTypes = propertyTypesData.data.map(
+    (item): FormPropertyType => ({
+      name: item.attributes.label, // Use label_spanish if necessary
+      id: item.id,
+    }),
+  );
 
-//   // Append currency
-//   //@ts-ignore
-//   formData.append("property[currency]", data.currency);
+  // Transform amenities
+  const amenities = amenitiesData.data.map(
+    (item): FormAmenity => ({
+      label: item.attributes.label, // Use label_spanish if necessary
+      value: parseInt(item.id),
+    }),
+  );
 
-//   // Handle the checkbox for creating a listing
-//   formData.append("create_listing", data.create_listing ? "true" : "false");
-
-//   // Append amenity_ids if they exist
-//   if (data.amenity_ids && data.amenity_ids.length > 0) {
-//     data.amenity_ids.forEach((amenity_id: any) => {
-//       formData.append("property[amenity_ids][]", amenity_id.toString());
-//     });
-//   }
-
-//   // Append images if they exist
-//   if (data.images && data.images.length > 0) {
-//     // @ts-ignore
-//     data.images.forEach((image, index) => {
-//       debugger;
-//       formData.append(`images[]`, image.file); // Append each image file to the form data
-//     });
-//   }
-
-//   // // Append attachments if they exist
-//   if (data.attachments && data.attachments.length > 0) {
-//     // @ts-ignore
-//     data.attachments.forEach((attachment, index) => {
-//       formData.append(`attachments[]`, attachment.file); // Append each attachment file to the form data
-//     });
-//   }
-
-//   return formData;
-// };
+  return { propertyTypes, amenities };
+}
