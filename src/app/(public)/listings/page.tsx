@@ -4,6 +4,9 @@ import FavsWatchList from "@/components/listings/favs-list";
 import { getAllListingsPublicAPIV1 } from "@/lib/models/listings/queries";
 import { type ListingsResponse } from "@/types/api/listings";
 
+// Cache control
+export const revalidate = 60;
+
 export default async function PublicListingsPage() {
   const res: ListingsResponse = await getAllListingsPublicAPIV1();
   const listings = res.data;

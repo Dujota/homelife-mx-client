@@ -9,8 +9,11 @@ import {
   mapPropertyToDetails,
 } from "@/lib/helpers/listings-helpers";
 import { formatPrice } from "@/lib/helpers/price-helpers";
-import { getOneListingPublicAPIV1 } from "@/lib/models/listings/queries";
-import { type ListingResponse } from "@/types/api/listings";
+import {
+  getAllListingsPublicAPIV1,
+  getOneListingPublicAPIV1,
+} from "@/lib/models/listings/queries";
+import { ListingsResponse, type ListingResponse } from "@/types/api/listings";
 
 const mockTourRequestProps = {
   title: "Request a Tour",
@@ -23,6 +26,24 @@ const descriptionProps = {
   showMoreText: "Show More",
   showLessText: "Show Less",
 };
+
+// Next.js will invalidate the cache when a
+// request comes in, at most once every 60 seconds.
+export const revalidate = 60;
+
+// We'll prerender only the params from `generateStaticParams` at build time.
+// If a request comes in for a path that hasn't been generated,
+// Next.js will server-render the page on-demand.
+export const dynamicParams = true; // or false, to 404 on unknown paths
+
+export async function generateStaticParams() {
+  const res: ListingsResponse = await getAllListingsPublicAPIV1();
+  const listings = res.data;
+
+  return listings.map((listing: { id: string }) => ({
+    slug: String(listing.id),
+  }));
+}
 
 export default async function PublicListingPage({
   params,

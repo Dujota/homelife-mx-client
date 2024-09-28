@@ -26,6 +26,9 @@ const mockNewsletterData = {
     "Whether you're a first-time homebuyer, a seasoned investor, or looking to sell your property, our team of experienced and passionate agents is here to provide exceptional service and expertise.",
 };
 
+// Cache control
+export const revalidate = 60;
+
 export default function Home() {
   return (
     <PageWrapper>
