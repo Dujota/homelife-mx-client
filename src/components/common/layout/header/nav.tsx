@@ -65,7 +65,11 @@ const Nav: NextPage<NavType> = ({ className = "", userType = "public" }) => {
                 alt="Homefile Logo"
                 width={96}
                 height={44}
-                src="/images/logos/nav-black.svg"
+                src={
+                  isScrolled
+                    ? "/images/logos/nav-black.svg"
+                    : "/images/logos/nav-white.svg"
+                }
               />
             </Link>
           </div>
@@ -95,7 +99,7 @@ const Nav: NextPage<NavType> = ({ className = "", userType = "public" }) => {
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500"
+              className={`bg-transparent inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500 ${isScrolled ? "text-black" : "text-white"}`}
             >
               <span className="sr-only">Open main menu</span>
               {isMenuOpen ? (
@@ -128,7 +132,7 @@ const Nav: NextPage<NavType> = ({ className = "", userType = "public" }) => {
                 <div>
                   <button
                     onClick={() => setIsMenuOpen(false)}
-                    className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500"
+                    className="bg-transparent inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500"
                   >
                     <span className="sr-only">Close menu</span>
                     <X className="h-6 w-6" aria-hidden="true" />
