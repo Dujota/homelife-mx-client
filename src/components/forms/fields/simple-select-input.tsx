@@ -11,20 +11,35 @@ type SelectInputProps = {
   label: string;
   options: Option[];
   isMulti?: boolean;
+  inputStyle?: string;
+  labelStyle?: string;
+  id?: string;
 };
 
-const SelectInput = ({ name, label, options, isMulti }: SelectInputProps) => {
+const SelectInput = ({
+  name,
+  label,
+  options,
+  isMulti,
+  labelStyle,
+  inputStyle,
+  id,
+}: SelectInputProps) => {
   const { control } = useFormContext();
 
   return (
     <div>
-      <label>{label}</label>
+      <label htmlFor={id} className={labelStyle}>
+        {label}
+      </label>
       <Controller
         name={name}
         control={control}
         render={({ field, fieldState: { error } }) => (
           <>
             <select
+              id={id}
+              className={inputStyle}
               {...field}
               multiple={isMulti}
               onChange={(e) => {

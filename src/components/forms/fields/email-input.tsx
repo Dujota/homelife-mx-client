@@ -4,10 +4,13 @@ import FieldErrorMessage from "./field-error-message";
 type EmailInputProps = {
   name: string;
   label: string;
-  placeholder: string;
+  placeholder?: string;
   wrapperClassName?: string;
   className?: string;
   disableErrorMessage?: boolean;
+  labelStyle?: string;
+  inputStyle?: string;
+  id?: string;
 };
 
 const EmailInput = ({
@@ -17,18 +20,25 @@ const EmailInput = ({
   placeholder,
   wrapperClassName,
   disableErrorMessage,
+  labelStyle,
+  id,
 }: EmailInputProps) => {
   const { control } = useFormContext();
 
   return (
     <div className={wrapperClassName}>
-      {/* <label>{label}</label> */}
+      {label && (
+        <label htmlFor={id} className={labelStyle}>
+          {label}
+        </label>
+      )}
       <Controller
         name={name}
         control={control}
         render={({ field, fieldState: { error } }) => (
           <>
             <input
+              id={id}
               {...field}
               type="email"
               className={className}

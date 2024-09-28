@@ -4,20 +4,39 @@ import FieldErrorMessage from "./field-error-message";
 type TextInputProps = {
   name: string;
   label: string;
+  inputStyle?: string;
+  labelStyle?: string;
+  placeholder?: string;
+  id?: string;
 };
 
-const TextInput = ({ name, label }: TextInputProps) => {
+const TextInput = ({
+  name,
+  label,
+  labelStyle,
+  inputStyle,
+  placeholder,
+  id,
+}: TextInputProps) => {
   const { control } = useFormContext();
 
   return (
     <div>
-      <label>{label}</label>
+      <label htmlFor={id} className={labelStyle}>
+        {label}
+      </label>
       <Controller
         name={name}
         control={control}
         render={({ field, fieldState: { error } }) => (
           <>
-            <input {...field} type="text" />
+            <input
+              id={id}
+              placeholder={placeholder}
+              className={inputStyle}
+              {...field}
+              type="text"
+            />
             {error && <FieldErrorMessage errorMessage={error.message} />}
           </>
         )}
