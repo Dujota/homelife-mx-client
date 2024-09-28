@@ -3,7 +3,7 @@ import FieldErrorMessage from "./field-error-message";
 
 type EmailInputProps = {
   name: string;
-  label: string;
+  label?: string;
   placeholder?: string;
   wrapperClassName?: string;
   className?: string;
