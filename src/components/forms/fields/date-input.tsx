@@ -5,20 +5,40 @@ import { today } from "@/lib/helpers/date-helpers";
 type DateInputProps = {
   name: string;
   label: string;
+  inputStyle?: string;
+  labelStyle?: string;
+  placeholder?: string;
+  id?: string;
 };
 
-const DateInput = ({ name, label }: DateInputProps) => {
+const DateInput = ({
+  name,
+  label,
+  inputStyle,
+  labelStyle,
+  placeholder,
+  id,
+}: DateInputProps) => {
   const { control } = useFormContext();
 
   return (
     <div>
-      <label>{label}</label>
+      <label htmlFor={id} className={labelStyle}>
+        {label}
+      </label>
       <Controller
         name={name}
         control={control}
         render={({ field, fieldState: { error } }) => (
           <>
-            <input {...field} type="date" min={today} />
+            <input
+              id={id}
+              className={inputStyle}
+              placeholder={placeholder}
+              {...field}
+              type="date"
+              min={today}
+            />
             {error && <FieldErrorMessage errorMessage={error.message} />}
           </>
         )}

@@ -10,15 +10,23 @@ type CheckboxOption = {
 type CheckboxesProps = {
   name: string;
   label: string;
+  inputStyle?: string;
+  labelStyle?: string;
   options: CheckboxOption[];
 };
 
-const Checkboxes = ({ name, label, options }: CheckboxesProps) => {
+const Checkboxes = ({
+  name,
+  label,
+  options,
+  inputStyle,
+  labelStyle,
+}: CheckboxesProps) => {
   const { control } = useFormContext();
 
   return (
     <>
-      {label && <label className="my-4">{label}</label>}
+      {label && <label className={`my-4 ${labelStyle}`}>{label}</label>}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         <Controller
           name={name}
@@ -32,6 +40,7 @@ const Checkboxes = ({ name, label, options }: CheckboxesProps) => {
                 >
                   <input
                     type="checkbox"
+                    className={inputStyle}
                     value={option.value}
                     id={option.label}
                     checked={field.value?.includes(option.value)}

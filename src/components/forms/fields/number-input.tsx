@@ -4,20 +4,39 @@ import FieldErrorMessage from "./field-error-message";
 type NumberInputProps = {
   name: string;
   label: string;
+  labelStyle?: string;
+  inputStyle?: string;
+  placeholder?: string;
+  id?: string;
 };
 
-const NumberInput = ({ name, label }: NumberInputProps) => {
+const NumberInput = ({
+  name,
+  label,
+  labelStyle,
+  inputStyle,
+  placeholder,
+  id,
+}: NumberInputProps) => {
   const { control } = useFormContext();
 
   return (
     <div>
-      <label>{label}</label>
+      <label htmlFor={id} className={labelStyle}>
+        {label}
+      </label>
       <Controller
         name={name}
         control={control}
         render={({ field, fieldState: { error } }) => (
           <>
-            <input {...field} type="number" />
+            <input
+              id={id}
+              placeholder={placeholder}
+              className={inputStyle}
+              {...field}
+              type="number"
+            />
             {error && <FieldErrorMessage errorMessage={error.message} />}
           </>
         )}

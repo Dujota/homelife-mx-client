@@ -4,20 +4,41 @@ import FieldErrorMessage from "./field-error-message";
 type TextAreaProps = {
   name: string;
   label: string;
+  inputStyle?: string;
+  labelStyle?: string;
+  placeholder?: string;
+  id?: string;
+  rows?: number;
 };
 
-const TextArea = ({ name, label }: TextAreaProps) => {
+const TextArea = ({
+  name,
+  label,
+  inputStyle,
+  labelStyle,
+  placeholder,
+  id,
+  rows = 6,
+}: TextAreaProps) => {
   const { control } = useFormContext();
 
   return (
     <div>
-      <label>{label}</label>
+      <label htmlFor={id} className={labelStyle}>
+        {label}
+      </label>
       <Controller
         name={name}
         control={control}
         render={({ field, fieldState: { error } }) => (
           <>
-            <textarea {...field} />
+            <textarea
+              id={id}
+              placeholder={placeholder}
+              className={inputStyle}
+              rows={rows}
+              {...field}
+            />
             {error && <FieldErrorMessage errorMessage={error.message} />}
           </>
         )}
