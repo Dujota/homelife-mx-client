@@ -8,10 +8,10 @@ export default function ImagePlaceholder({
   className = "",
 }: ImagePlaceholderProps) {
   return (
-    <div className={`bg-gray-200 animate-pulse ${className}`}>
+    <div className={`bg-whitesmoke-300 animate-pulse ${className}`}>
       <div className="flex items-center justify-center w-full h-full">
         <svg
-          className="w-12 h-12 text-whitesmoke-300"
+          className="w-12 h-12 text-darkgray-100"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
           fill="currentColor"
