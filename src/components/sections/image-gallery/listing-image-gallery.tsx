@@ -17,7 +17,7 @@ export default function ListingImageGallery({
 
   const images = useMemo(
     () =>
-      listing.attributes.property.images?.map((image, idx) => ({
+      listing.attributes.property.images?.map((image: any, idx: any) => ({
         fullscreen: image.original,
         original: image.original,
         thumbnail: image.thumbnail,
