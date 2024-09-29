@@ -8,6 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      animation: {
+        "fade-in": "fadeIn 0.5s ease-out",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+      },
       colors: {
         "colors-background-bg-primary": "#fff",
         "colors-border-border-secondary": "#eaecf0",
@@ -63,7 +72,7 @@ const config: Config = {
         "text-md-regular": "Inter",
       },
       borderRadius: {
-        "21xl": "40px",
+        "radius-3xl": "40px",
         "rounded-lg": "8px",
         "radius-xs": "4px",
         rounded: "4px",
@@ -76,11 +85,12 @@ const config: Config = {
       xl: "1.25rem",
       "2xl": "1.5rem",
       xs: "0.75rem",
-      "13xl": "2rem",
-      "21xl": "2.5rem",
+      "3xl": "2rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem",
+      "6xl": "3.75rem",
       lg: "1.125rem",
       smi: "0.813rem",
-      "5xl": "1.5rem",
       inherit: "inherit",
     },
     screens: {

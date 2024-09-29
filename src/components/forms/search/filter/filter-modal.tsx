@@ -76,7 +76,7 @@ export default function FilterModal({ isOpen, onClose, totalResults }: any) {
   ];
 
   return (
-    <div className="fixed inset-0 bg-white z-50 overflow-hidden flex flex-col">
+    <div className="fixed inset-0 bg-white z-50 overflow-hidden flex flex-col text-left">
       {/* Header */}
       <div className="flex justify-between items-center p-4 border-b">
         <div className="max-w-3xl w-full mx-auto">
