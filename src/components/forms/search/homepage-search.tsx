@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { SendHorizontal } from "lucide-react";
+import { SendHorizontal, SlidersHorizontal } from "lucide-react";
 import Image from "next/image";
 import FilterModal from "./filter/filter-modal";
 
@@ -33,15 +33,23 @@ export default function HomepageSearch() {
             onChange={(e) => setTerm(e.target.value)}
           />
         </div>
-        <Image
-          className="h-[1.25rem] w-[1.25rem] relative overflow-hidden shrink-0 cursor-pointer"
-          width={20}
-          height={20}
-          alt="Activate Filter Button"
+        <div
+          className="cursor-pointer hover:text-primary"
           onClick={handleFilterClick}
-          src="/images/icons/forms/filter.svg"
-        />
-        <SendHorizontal />
+        >
+          {/* <Image
+            className="h-[1.25rem] w-[1.25rem] relative overflow-hidden shrink-0 "
+            width={20}
+            height={20}
+            alt="Activate Filter Button"
+            onClick={handleFilterClick}
+            src="/images/icons/forms/filter.svg"
+          /> */}
+          <SlidersHorizontal className="h-[1.25rem] w-[1.25rem] relative overflow-hidden shrink-0 " />
+        </div>
+        <div className="cursor-pointer hover:text-primary">
+          <SendHorizontal className="h-[1.25rem] w-[1.25rem] " />
+        </div>
       </div>
       <FilterModal
         isOpen={isFilterOpen}
