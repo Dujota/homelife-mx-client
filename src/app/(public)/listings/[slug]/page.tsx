@@ -3,6 +3,7 @@ import ContactAgent from "@/components/listings/public/contact-agent";
 import DescriptionCard from "@/components/listings/public/description-card";
 import PropertyDetailCard from "@/components/listings/public/property-detail-card";
 import PropertyDetailMetrics from "@/components/listings/public/property-detail-metrics";
+import ListingImageGallery from "@/components/sections/image-gallery/listing-image-gallery";
 import {
   generatePropertyDetailMetrics,
   mapAmenitiesToItems,
@@ -77,10 +78,10 @@ export default async function PublicListingPage({
       <main className="self-stretch flex flex-col items-start justify-start gap-[2rem] max-w-full">
         <section className="self-stretch flex flex-row items-start justify-start py-[0rem] px-[1rem] box-border max-w-full text-left text-[1rem] text-content-base-base font-text-md-regular md:max-w-[1100px] mx-auto">
           <div className="flex-1 flex flex-row items-start justify-start max-w-full">
-            {/* Metrics */}
             <div className="flex-1 flex flex-col items-start justify-start gap-[2.5rem] max-w-full">
               <BackToLink slug="/listings" label="Listings" />
-
+              {/* Image Gallery */}
+              <ListingImageGallery listing={listing} />
               <div className="flex-1 flex flex-col items-start justify-start gap-[2.5rem] max-w-full self-stretch lg:flex-row">
                 <div className="self-stretch flex flex-col items-start justify-start gap-[1.5rem] text-[2rem] text-black">
                   <div className="self-stretch relative tracking-[-0.03em] leading-[2.5rem] font-medium whitespace-nowrap">
