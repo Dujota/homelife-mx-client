@@ -2,7 +2,7 @@
 
 import "react-image-gallery/styles/css/image-gallery.css";
 
-import { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import ImageGallery from "react-image-gallery";
 
 type ListingImageGalleryProps = {
@@ -42,18 +42,37 @@ export default function ListingImageGallery({
   };
 
   return (
-    <section
-      id="listing-slider"
-      className="flex flex-row items-start justify-center gap-[1rem] self-stretch"
-    >
-      <ImageGallery
-        items={images || []}
-        showIndex
-        onClick={handleImageClick}
-        ref={imageGalleryRef}
-        thumbnailPosition={isFullScreen ? "bottom" : "right"}
-        onScreenChange={handleScreenChange}
-      />
-    </section>
+    <>
+      <section
+        id="listing-slider"
+        className="flex flex-row items-start justify-center gap-[1rem] self-stretch"
+      >
+        <ImageGallery
+          items={images || []}
+          showIndex
+          onClick={handleImageClick}
+          ref={imageGalleryRef}
+          thumbnailPosition={isFullScreen ? "bottom" : "right"}
+          onScreenChange={handleScreenChange}
+        />
+      </section>
+      <style jsx global>{`
+        /* .image-gallery-slides {
+          height: ${isFullScreen ? "89vh" : "auto"};
+        } */
+        .image-gallery-thumbnails {
+          overflow-y: ${!isFullScreen ? "scroll" : "auto"};
+        }
+        .image-gallery-content .image-gallery-slide .image-gallery-image {
+          max-height: ${!isFullScreen
+            ? "719px !important"
+            : "calc(100vh - 150px) !important"};
+        }
+        .image-gallery-thumbnail-image {
+          max-height: 69px;
+          object-fit: cover;
+        }
+      `}</style>
+    </>
   );
 }
