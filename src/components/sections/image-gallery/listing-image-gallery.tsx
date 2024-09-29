@@ -42,18 +42,35 @@ export default function ListingImageGallery({
   };
 
   return (
-    <section
-      id="listing-slider"
-      className="flex flex-row items-start justify-center gap-[1rem] self-stretch"
-    >
-      <ImageGallery
-        items={images || []}
-        showIndex
-        onClick={handleImageClick}
-        ref={imageGalleryRef}
-        thumbnailPosition={isFullScreen ? "bottom" : "right"}
-        onScreenChange={handleScreenChange}
-      />
-    </section>
+    <>
+      <section
+        id="listing-slider"
+        className="flex flex-row items-start justify-center gap-[1rem] self-stretch"
+      >
+        <ImageGallery
+          items={images || []}
+          showIndex
+          onClick={handleImageClick}
+          ref={imageGalleryRef}
+          thumbnailPosition={isFullScreen ? "bottom" : "right"}
+          onScreenChange={handleScreenChange}
+        />
+      </section>
+      <style jsx global>{`
+        /* .image-gallery-slides {
+          height: ${isFullScreen ? "89vh" : "auto"};
+        } */
+        .image-gallery-thumbnails {
+          overflow-y: ${!isFullScreen ? "scroll" : "auto"};
+        }
+        .image-gallery-content .image-gallery-slide .image-gallery-image {
+          max-height: calc(100vh - 150px);
+        }
+        .image-gallery-thumbnail-image {
+          max-height: 69px;
+          object-fit: cover;
+        }
+      `}</style>
+    </>
   );
 }
