@@ -11,7 +11,7 @@ export default function ImagePlaceholder({
     <div className={`bg-gray-200 animate-pulse ${className}`}>
       <div className="flex items-center justify-center w-full h-full">
         <svg
-          className="w-12 h-12 text-gray-400"
+          className="w-12 h-12 text-whitesmoke-300"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
           fill="currentColor"
