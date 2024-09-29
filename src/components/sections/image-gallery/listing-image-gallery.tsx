@@ -2,7 +2,7 @@
 
 import "react-image-gallery/styles/css/image-gallery.css";
 
-import { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import ImageGallery from "react-image-gallery";
 
 type ListingImageGalleryProps = {
