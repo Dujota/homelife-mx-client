@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useMemo, type CSSProperties } from "react";
+import { useMemo } from "react";
+import { usePathname } from "next/navigation";
 
 import type { NextPage } from "next";
 import Image from "next/image";
@@ -38,6 +39,8 @@ const adminBrokerLinks: NavLink[] = [
 const Nav: NextPage<NavType> = ({ className = "", userType = "public" }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+
   const links = useMemo(() => {
     return userType === "public" ? publicLinks : adminBrokerLinks;
   }, [userType]);
@@ -49,6 +52,10 @@ const Nav: NextPage<NavType> = ({ className = "", userType = "public" }) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const showBlackGrey = useMemo(() => {
+    return isScrolled || pathname !== "/";
+  }, [isScrolled, pathname]);
 
   return (
     // <nav className="bg-white bg-opacity-90 shadow-md">
@@ -66,7 +73,7 @@ const Nav: NextPage<NavType> = ({ className = "", userType = "public" }) => {
                 width={96}
                 height={44}
                 src={
-                  isScrolled
+                  showBlackGrey
                     ? "/images/logos/nav-black.svg"
                     : "/images/logos/nav-white.svg"
                 }
@@ -79,7 +86,7 @@ const Nav: NextPage<NavType> = ({ className = "", userType = "public" }) => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={` hover:bg-gray-100 px-3 py-2 rounded-md text-base font-medium  ${isScrolled ? "text-gray-800" : "text-white"}`}
+                  className={` hover:bg-gray-100 px-3 py-2 rounded-md text-base font-medium  ${showBlackGrey ? "text-gray-800" : "text-white"}`}
                 >
                   {link.label}
                 </Link>
@@ -99,7 +106,7 @@ const Nav: NextPage<NavType> = ({ className = "", userType = "public" }) => {
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`bg-transparent inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500 ${isScrolled ? "text-black" : "text-white"}`}
+              className={`bg-transparent inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500 ${showBlackGrey ? "text-black" : "text-white"}`}
             >
               <span className="sr-only">Open main menu</span>
               {isMenuOpen ? (
