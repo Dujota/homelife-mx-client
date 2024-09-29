@@ -64,7 +64,9 @@ export default function ListingImageGallery({
           overflow-y: ${!isFullScreen ? "scroll" : "auto"};
         }
         .image-gallery-content .image-gallery-slide .image-gallery-image {
-          max-height: calc(100vh - 150px);
+          max-height: ${!isFullScreen
+            ? "719px !important"
+            : "calc(100vh - 150px) !important"};
         }
         .image-gallery-thumbnail-image {
           max-height: 69px;
