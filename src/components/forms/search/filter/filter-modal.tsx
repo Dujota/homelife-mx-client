@@ -5,9 +5,9 @@ import Select from "react-select";
 import { X, ChevronDown, ChevronUp } from "lucide-react";
 
 export default function FilterModal({ isOpen, onClose, totalResults }: any) {
-  const [priceType, setPriceType] = useState("list");
+  // const [priceType, setPriceType] = useState("list");
   const [showMoreAmenities, setShowMoreAmenities] = useState(false);
-  const [showMoreViews, setShowMoreViews] = useState(false);
+  // const [showMoreViews, setShowMoreViews] = useState(false);
   const [homeTypes, setHomeTypes] = useState({
     Houses: true,
     Townhomes: true,
@@ -30,10 +30,16 @@ export default function FilterModal({ isOpen, onClose, totalResults }: any) {
     );
   };
 
+  const handlSelectAll = () => {
+    setHomeTypes(
+      Object.fromEntries(Object.keys(homeTypes).map((key: any) => [key, true])),
+    );
+  };
+
   const handleResetAll = () => {
-    setPriceType("list");
+    // setPriceType("list");
     setShowMoreAmenities(false);
-    setShowMoreViews(false);
+    // setShowMoreViews(false);
     setHomeTypes({
       Houses: true,
       Townhomes: true,
@@ -44,6 +50,10 @@ export default function FilterModal({ isOpen, onClose, totalResults }: any) {
       Manufactured: true,
     });
     // Reset other state variables here
+  };
+
+  const handleSubmit = () => {
+    console.log("Apply");
   };
 
   if (!isOpen) return null;
@@ -78,7 +88,7 @@ export default function FilterModal({ isOpen, onClose, totalResults }: any) {
   return (
     <div className="fixed inset-0 bg-white z-50 overflow-hidden flex flex-col text-left">
       {/* Header */}
-      <div className="flex justify-between items-center p-4 border-b">
+      <div className="flex justify-between items-center p-4 border-b border-solid border">
         <div className="max-w-3xl w-full mx-auto">
           <h2 className="text-xl font-semibold">
             {totalResults.toLocaleString()} Results
@@ -90,12 +100,12 @@ export default function FilterModal({ isOpen, onClose, totalResults }: any) {
       </div>
 
       {/* Scrollable content */}
-      <div className="flex-1 overflow-y-auto p-4">
+      <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-4">
         <div className="space-y-6 max-w-3xl mx-auto">
           {/* Price Range */}
           <div>
             <h3 className="text-lg font-semibold mb-2">Price Range</h3>
-            <div className="flex mb-2">
+            {/* <div className="flex mb-2">
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
@@ -118,7 +128,7 @@ export default function FilterModal({ isOpen, onClose, totalResults }: any) {
                 />
                 <span className="ml-2">Monthly Payment</span>
               </label>
-            </div>
+            </div> */}
             <div className="grid grid-cols-2 gap-4 mt-2">
               <Select options={priceOptions} placeholder="No Min" />
               <Select options={priceOptions} placeholder="No Max" />
@@ -159,9 +169,13 @@ export default function FilterModal({ isOpen, onClose, totalResults }: any) {
             <h3 className="text-lg font-semibold mb-2">Home Type</h3>
             <button
               className="px-4 py-2 border rounded mb-2"
-              onClick={handleDeselectAll}
+              onClick={
+                Object.values(homeTypes).some(Boolean)
+                  ? handleDeselectAll
+                  : handlSelectAll
+              }
             >
-              {Object.values(homeTypes).every(Boolean)
+              {Object.values(homeTypes).some(Boolean)
                 ? "Deselect All"
                 : "Select All"}
             </button>
@@ -215,7 +229,9 @@ export default function FilterModal({ isOpen, onClose, totalResults }: any) {
 
           {/* Lot Size */}
           <div>
-            <h3 className="text-lg font-semibold mb-2">Lot Size</h3>
+            <h3 className="text-lg font-semibold mb-2">
+              Lot Size (m<sup>2</sup>)
+            </h3>
             <div className="grid grid-cols-2 gap-4">
               <Select options={priceOptions} placeholder="No Min" />
               <Select options={priceOptions} placeholder="No Max" />
@@ -224,7 +240,9 @@ export default function FilterModal({ isOpen, onClose, totalResults }: any) {
 
           {/* Living Space */}
           <div>
-            <h3 className="text-lg font-semibold mb-2">Living Space (sq ft)</h3>
+            <h3 className="text-lg font-semibold mb-2">
+              Living Space (m<sup>2</sup>)
+            </h3>
             <div className="grid grid-cols-2 gap-4">
               <Select options={priceOptions} placeholder="No Min" />
               <Select options={priceOptions} placeholder="No Max" />
@@ -307,7 +325,7 @@ export default function FilterModal({ isOpen, onClose, totalResults }: any) {
           </div>
 
           {/* View */}
-          <div>
+          {/* <div>
             <h3 className="text-lg font-semibold mb-2">View</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
               {["City", "Mountain", "Park", "Water"]
@@ -334,7 +352,7 @@ export default function FilterModal({ isOpen, onClose, totalResults }: any) {
                 </>
               )}
             </button>
-          </div>
+          </div> */}
 
           {/* Days on Market */}
           <div>
@@ -347,24 +365,33 @@ export default function FilterModal({ isOpen, onClose, totalResults }: any) {
           </div>
 
           {/* Keywords */}
-          <div>
+          <div style={{ marginBottom: "1rem" }}>
             <h3 className="text-lg font-semibold mb-2">Keywords</h3>
             <input
               type="text"
               placeholder="MLS #, yard, etc."
-              className="w-full px-4 py-2 border rounded"
+              className="min-w-[400px] max-w-[500px] md:max-w-full  px-4 py-2 border rounded"
             />
           </div>
         </div>
-      </div>
+      </form>
 
       {/* Footer */}
-      <div className="border-t p-4">
+      <div className="border-t border-solid p-4">
         <div className="max-w-3xl mx-auto flex justify-between">
-          <button className="px-4 py-2 border rounded" onClick={handleResetAll}>
+          <button
+            className="px-4 py-2 border rounded cursor-pointer"
+            onClick={handleResetAll}
+          >
             Reset all filters
           </button>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded">
+          <button
+            type="submit"
+            onClick={() => {
+              console.log("Apply");
+            }}
+            className="px-4 py-2 bg-blue-600 text-white rounded cursor-pointer"
+          >
             Apply
           </button>
         </div>

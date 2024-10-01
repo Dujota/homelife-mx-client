@@ -37,7 +37,7 @@ export default async function PublicListingsPage() {
               src="/settings04.svg"
             />
           </div> */}
-          <HomepageSearch />
+          <HomepageSearch showFilter />
         </header>
       </div>
       <ListFilterDropdowns title="Listings" />
