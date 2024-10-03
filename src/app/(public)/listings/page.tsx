@@ -1,6 +1,7 @@
 import ListFilterDropdowns from "@/components/forms/fields/all-recently-selects";
 import HomepageSearch from "@/components/forms/search/homepage-search";
 import FavsWatchList from "@/components/listings/favs-list";
+import { transformApiResponseToFormOptions } from "@/lib/helpers/api-helpers";
 import { getAllListingsPublicAPIV1 } from "@/lib/models/listings/queries";
 import { type ListingsResponse } from "@/types/api/listings";
 
@@ -9,7 +10,13 @@ export const revalidate = 60;
 
 export default async function PublicListingsPage() {
   const res: ListingsResponse = await getAllListingsPublicAPIV1();
-  const listings = res.data;
+
+  const { propertyTypes, amenities } = transformApiResponseToFormOptions({
+    // @ts-ignore
+    property_types: res.property_types,
+    // @ts-ignore
+    amenities: res.amenities,
+  });
 
   return (
     <div className=" relative bg-colors-background-bg-primary overflow-hidden flex flex-col items-start justify-start pt-[0.75rem] px-[0rem] pb-[0rem] box-border gap-[2rem] leading-[normal] tracking-[normal] mt-[6rem] 3xl:mx-auto 3xl:w-[1650px]">
@@ -37,13 +44,17 @@ export default async function PublicListingsPage() {
               src="/settings04.svg"
             />
           </div> */}
-          <HomepageSearch showFilter />
+          <HomepageSearch
+            showFilter
+            propertyTypes={propertyTypes}
+            amenities={amenities}
+          />
         </header>
       </div>
       <ListFilterDropdowns title="Listings" />
 
       <main className="self-stretch flex flex-row items-start justify-start py-[0rem] px-[1rem] box-border max-w-full">
-        <FavsWatchList listings={listings} />
+        <FavsWatchList listings={res.listings.data} />
       </main>
     </div>
   );
