@@ -101,7 +101,7 @@ export function handleError(error: unknown) {
         //   errors: apiErrors,
         // };
       }
-      debugger;
+
       if (status === 400 && statusText === "Bad Request") {
         throw new Error(statusText);
       }

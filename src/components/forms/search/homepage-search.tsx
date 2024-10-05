@@ -5,6 +5,7 @@ import { SendHorizontal, SlidersHorizontal } from "lucide-react";
 import Image from "next/image";
 import FilterModal from "./filter/filter-modal";
 import { Listing } from "@/types/api/listings";
+import useFilterSearchParams from "@/lib/hooks/filter/use-filter-search-params";
 
 const mockResults = 1000;
 
@@ -25,6 +26,8 @@ export default function HomepageSearch({
   const handleFilterClick = () => {
     setIsFilterOpen(true);
   };
+
+  const filterParams = useFilterSearchParams();
 
   return (
     <>
@@ -65,6 +68,7 @@ export default function HomepageSearch({
           propertyTypes={propertyTypes}
           amenities={amenities}
           setListingsList={setListingsList}
+          initialFilterData={filterParams}
         />
       )}
     </>

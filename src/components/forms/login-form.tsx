@@ -42,7 +42,6 @@ export const LoginForm = () => {
       setSubmitting(false);
 
       if (!res?.error) {
-        debugger;
         toast.success("successfully logged in");
         router.push(callbackUrl);
       } else {
