@@ -24,7 +24,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Nav className="absolute w-full" />
         {/* <Breadcrumbs
           homeElement="Home"
           separator={<span className="text-coral">&gt;</span>}
@@ -34,13 +33,16 @@ export default function RootLayout({
           capitalizeLinks={true}
           linkClass="text-xs hover:underline no-underline text-coral"
         /> */}
-        <SessionProvider>{children}</SessionProvider>
-        <Toaster />
-        <Footer
-          contact={footerData.contact}
-          sections={footerData.sections}
-          footerLinks={footerData.footerLinks}
-        />
+        <SessionProvider>
+          <Nav className="absolute w-full" />
+          {children}
+          <Toaster />
+          <Footer
+            contact={footerData.contact}
+            sections={footerData.sections}
+            footerLinks={footerData.footerLinks}
+          />
+        </SessionProvider>
       </body>
     </html>
   );
