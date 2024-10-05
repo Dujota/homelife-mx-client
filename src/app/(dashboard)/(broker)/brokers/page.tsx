@@ -1,7 +1,18 @@
-"use client";
+import { auth } from "@/server/auth";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default function BrokersDashboard() {
+export default async function BrokersDashboard() {
+  const session = await auth();
+
+  if (!session?.user) {
+    return redirect("/login?callbackUrl=/brokers");
+  } else if (session.user.roles?.find((role: any) => role.name === "admin")) {
+    return redirect("/admin");
+  } else if (!session.user.roles?.find((role: any) => role.name === "broker")) {
+    return redirect("/login?callbackUrl=/brokers");
+  }
+
   return (
     <div>
       <h1>Brokers Dashboard</h1>
@@ -9,9 +20,9 @@ export default function BrokersDashboard() {
         <Link href="/brokers/properties/add-property">
           <button className="mx-2">Add Property</button>
         </Link>
-        <Link href="/brokers/listings/add-listing">
+        {/* <Link href="/brokers/listings/add-listing">
           <button className="mx-2">Add Listings</button>
-        </Link>
+        </Link> */}
         {/* <Link href="/brokers/properties">
           <button className="mx-2">See Propertiess</button>
         </Link> */}

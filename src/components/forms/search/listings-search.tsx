@@ -9,7 +9,7 @@ import useFilterSearchParams from "@/lib/hooks/filter/use-filter-search-params";
 
 const mockResults = 1000;
 
-export default function HomepageSearch({
+export default function ListingsSearch({
   showFilter = false,
   propertyTypes,
   amenities,

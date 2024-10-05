@@ -1,8 +1,19 @@
-"use client";
-
+import { auth } from "@/server/auth";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default function AdminDashboard() {
+export default async function AdminDashboard() {
+  const session = await auth();
+
+  if (!session?.user) {
+    return redirect("/login?callbackUrl=/admin");
+    // @ts-ignore
+  } else if (!session.user.roles?.find((role) => role.name === "admin")) {
+    return redirect("/login?callbackUrl=/admin");
+  }
+
+  console.log(session.user);
+
   return (
     <div>
       <h1>ADMIN Dashboard</h1>
