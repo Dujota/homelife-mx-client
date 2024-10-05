@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { SendHorizontal, SlidersHorizontal } from "lucide-react";
 import Image from "next/image";
 import FilterModal from "./filter/filter-modal";
+import { Listing } from "@/types/api/listings";
 
 const mockResults = 1000;
 
@@ -11,10 +12,12 @@ export default function HomepageSearch({
   showFilter = false,
   propertyTypes,
   amenities,
+  setListingsList,
 }: {
   showFilter?: boolean;
   propertyTypes?: { name: string; id: number | string }[];
   amenities?: { label: string; value: number | string }[];
+  setListingsList?: (listings: Listing[]) => void;
 }) {
   const [term, setTerm] = useState("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -61,6 +64,7 @@ export default function HomepageSearch({
           totalResults={mockResults}
           propertyTypes={propertyTypes}
           amenities={amenities}
+          setListingsList={setListingsList}
         />
       )}
     </>

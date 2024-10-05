@@ -225,13 +225,13 @@ export const preparePropertyFormData = (data: any): FormData => {
   return formData;
 };
 
-interface FormPropertyType {
+export interface FormPropertyType {
   name: string;
   id: number | string;
 }
 
 // Transformed Amenity structure for form options
-interface FormAmenity {
+export interface FormAmenity {
   label: string;
   value: string | number;
 }

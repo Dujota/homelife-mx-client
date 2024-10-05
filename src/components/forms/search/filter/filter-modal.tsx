@@ -4,6 +4,8 @@ import React, { useMemo, useState } from "react";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { X, ChevronDown, ChevronUp } from "lucide-react";
+import { transformFormSubmission } from "@/lib/helpers/form-elpers";
+import { FilterFormSubmission } from "@/types/api/forms/public-forms";
 
 const parkingOptions = [
   { value: "any", label: "Any" },
@@ -50,6 +52,7 @@ export default function FilterModal({
   totalResults,
   propertyTypes,
   amenities,
+  setListingsList,
 }: any) {
   // const [priceType, setPriceType] = useState("list");
   // const [showMoreViews, setShowMoreViews] = useState(false);
@@ -138,7 +141,7 @@ export default function FilterModal({
   const [selectedAmenities, setSelectedAmenities] = useState([]);
   const [showMoreAmenities, setShowMoreAmenities] = useState(false);
   const [minYearBuilt, setMinYearBuilt] = useState();
-  const [MaxYearBuilt, setMaxYearBuilt] = useState();
+  const [maxYearBuilt, setMaxYearBuilt] = useState();
   const [keyword, setKeyword] = useState("");
   const [mustHaveGarage, setMustHaveGarage] = useState(false);
   const [parkingSpots, setParkingSpots] = useState<{
@@ -338,7 +341,7 @@ export default function FilterModal({
     e.preventDefault();
 
     // Gather all form state into an object
-    const formData = {
+    const formData: FilterFormSubmission = {
       beds,
       baths,
       exactMatch,
@@ -346,7 +349,7 @@ export default function FilterModal({
       selectedAmenities,
       showMoreAmenities,
       minYearBuilt,
-      MaxYearBuilt,
+      maxYearBuilt,
       keyword,
       mustHaveGarage,
       parkingSpots,
@@ -359,8 +362,12 @@ export default function FilterModal({
       maxLivingSpace,
     };
 
+    const payload = transformFormSubmission(formData);
+
+    console.log(payload);
+
     // Display the form data as a JSON string
-    alert(JSON.stringify(formData, null, 2));
+    alert(JSON.stringify(payload, null, 2));
   };
 
   if (!isOpen) return null;
@@ -374,13 +381,17 @@ export default function FilterModal({
             {totalResults.toLocaleString()} Results
           </h2>
         </div>
-        <button onClick={onClose} className="absolute right-4 top-4">
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute right-4 top-4"
+        >
           <X className="h-6 w-6" />
         </button>
       </div>
 
       {/* Scrollable content */}
-      <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-4">
+      <form className="flex-1 overflow-y-auto p-4">
         <div className="space-y-6 max-w-3xl mx-auto">
           {/* Price Range */}
           <div>
@@ -458,6 +469,7 @@ export default function FilterModal({
               <div className="flex flex-wrap gap-2">
                 {bedOptions.map((bed) => (
                   <button
+                    type="button"
                     key={bed.label}
                     className={`px-4 py-2 border rounded cursor-pointer ${beds === bed.value ? "bg-dimgray text-white" : ""}`}
                     onClick={() => handleBedsChange(bed.value)}
@@ -482,6 +494,7 @@ export default function FilterModal({
               <div className="flex flex-wrap gap-2">
                 {bathOptions.map((bath) => (
                   <button
+                    type="button"
                     key={bath.label}
                     className={`px-4 py-2 border rounded cursor-pointer ${baths === bath.value ? "bg-dimgray text-white" : ""}`}
                     onClick={() => handleBathsChange(bath.value)}
@@ -497,6 +510,7 @@ export default function FilterModal({
           <div>
             <h3 className="text-lg font-semibold mb-2">Property Type</h3>
             <button
+              type="button"
               className="px-4 py-2 border rounded mb-2"
               onClick={
                 selectedHomeTypes?.length > 0
@@ -631,7 +645,7 @@ export default function FilterModal({
                 className="px-4 py-2 border rounded"
                 min="2000"
                 onChange={handleMaxYearBuiltChange}
-                value={MaxYearBuilt}
+                value={maxYearBuilt}
                 max={new Date().getFullYear()}
               />
             </div>
@@ -681,6 +695,7 @@ export default function FilterModal({
               )}
             </div>
             <button
+              type="button"
               className="mt-2 text-blue-600"
               onClick={() => setShowMoreAmenities(!showMoreAmenities)}
             >
@@ -757,14 +772,16 @@ export default function FilterModal({
       <div className="border-t border-solid p-4">
         <div className="max-w-3xl mx-auto flex justify-between">
           <button
-            className="px-4 py-2 border rounded cursor-pointer"
+            type="button"
+            className="px-8 py-4 border rounded cursor-pointer bg-secondary text-base"
             onClick={handleResetAll}
           >
             Reset all filters
           </button>
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-600 text-white rounded cursor-pointer"
+            onClick={handleSubmit}
+            className="px-8 py-4 bg-primary text-white rounded cursor-pointer text-base"
           >
             Apply
           </button>
