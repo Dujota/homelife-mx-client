@@ -3,10 +3,12 @@
 import { useState } from "react";
 import Select from "react-select";
 import type { NextPage } from "next";
+import { Listing } from "@/types/api/listings";
 
 export type ListFilterDropdownsType = {
   className?: string;
   title: string;
+  setListingsList: (listings: Listing[]) => void;
 };
 
 const optionsListings = [
@@ -24,6 +26,7 @@ const optionsRecentlyAdded = [
 const ListFilterDropdowns: NextPage<ListFilterDropdownsType> = ({
   className = "",
   title = "Favourites",
+  setListingsList,
 }) => {
   const [selectedListing, setSelectedListing] = useState(optionsListings[0]);
   const [selectedRecentlyAdded, setSelectedRecentlyAdded] = useState(

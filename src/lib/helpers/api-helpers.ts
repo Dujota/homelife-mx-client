@@ -1,5 +1,4 @@
 import { type AxiosError } from "axios";
-import { SingleFamilyDwellingFormData } from "../zod/forms/single-family-dwelling-schema";
 import { CreatePropertyFormFieldsResponse } from "@/types/property";
 
 export function getAccessToken(req: Request) {
@@ -225,13 +224,13 @@ export const preparePropertyFormData = (data: any): FormData => {
   return formData;
 };
 
-interface FormPropertyType {
+export interface FormPropertyType {
   name: string;
   id: number | string;
 }
 
 // Transformed Amenity structure for form options
-interface FormAmenity {
+export interface FormAmenity {
   label: string;
   value: string | number;
 }
@@ -241,6 +240,7 @@ interface FormOptions {
   propertyTypes: FormPropertyType[];
   amenities: FormAmenity[];
 }
+
 export function transformApiResponseToFormOptions(
   apiResponse: CreatePropertyFormFieldsResponse,
 ): FormOptions {

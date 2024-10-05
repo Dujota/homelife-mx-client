@@ -1,3 +1,4 @@
+import { buildQueryString } from "@/lib/helpers/url-helpers";
 import { nextApi, handleError, handleSuccess, apiV1 } from "@/lib/services";
 import { ListingResponse, ListingsResponse } from "@/types/api/listings";
 
@@ -24,11 +25,13 @@ export const getOneListingPublic = async (
   }
 };
 
-export const getAllListingsPublicAPIV1 = async (): Promise<
-  ListingsResponse | any
-> => {
+export const getAllListingsPublicAPIV1 = async (searchParams: {
+  [key: string]: string | string[] | undefined;
+}): Promise<ListingsResponse | any> => {
   try {
-    const response = await apiV1.get("/listings");
+    const queryString = buildQueryString(searchParams);
+
+    const response = await apiV1.get(`/listings?${queryString}`);
     return handleSuccess(response);
   } catch (error) {
     return handleError(error);

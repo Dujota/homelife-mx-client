@@ -1,3 +1,6 @@
+import { Amenities } from "./amenity-type";
+import { PropertyTypes } from "./property-type";
+
 export interface Address {
   id: number;
   house_number: string;
@@ -72,7 +75,9 @@ export interface Listing {
 }
 
 export interface ListingsResponse {
-  data: Listing[];
+  listings: { data: Listing[] };
+  amenities: { data: Amenities[] };
+  property_types: { data: PropertyTypes[] };
 }
 
 export interface ListingResponse {

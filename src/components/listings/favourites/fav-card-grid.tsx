@@ -1,11 +1,10 @@
-import GridListingCard from "./cards/grid-listing-card";
+import GridListingCard from "../cards/grid-listing-card";
 
-const FavsWatchList = ({ listings }: { listings: any[] }) => {
+const FavouriteCardGrid = ({ listings }: { listings: any[] }) => {
   return (
     <section className="flex-1 overflow-hidden flex flex-col items-center justify-start gap-spacing-container-lg max-w-full text-left text-[1.25rem] text-content-base-main font-text-md-regular sm:flex-wrap sm:flex-row sm:justify-evenly 3xl:justify-start">
       {listings.length &&
         listings.map((listing, i) => {
-          if (listing.id === 27) console.log(listing);
           return (
             <GridListingCard
               slug={listing.id}
@@ -31,4 +30,4 @@ const FavsWatchList = ({ listings }: { listings: any[] }) => {
   );
 };
 
-export default FavsWatchList;
+export default FavouriteCardGrid;

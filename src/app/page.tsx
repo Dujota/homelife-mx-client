@@ -6,6 +6,10 @@ import FeaturedPropertiesBanner from "@/components/sections/featured-properties-
 import HomepageHeroBanner from "@/components/sections/hero/homepage-hero";
 import NewsletterBanner from "@/components/sections/newsletter-banner";
 import UpcomingProjectsBanner from "@/components/sections/upcoming/upcoming-projects-banner";
+import { deriveCateogoriesFromPropertyTypes } from "@/lib/helpers/pages-helpers";
+
+import { getPublicHomepageAPIV1 } from "@/lib/services/pages/queries";
+import { PropertyTypeData } from "@/types/api/property-type";
 
 // MOCKS
 const aboutUsData = {
@@ -52,13 +56,23 @@ const mockContactUsData = {
 // Cache control
 export const revalidate = 60;
 
-export default function Home() {
+export default async function Home() {
+  const res = await getPublicHomepageAPIV1();
+
+  // Transform property types
+  const propertyTypes = deriveCateogoriesFromPropertyTypes(
+    res.property_types.data,
+  );
+
   return (
     <PageWrapper>
       <HomepageHeroBanner />
       <FeaturedPropertiesBanner />
       <UpcomingProjectsBanner />
-      <CategoriesList containerClassName="3xl:mx-auto 3xl:max-w-[1600px]" />
+      <CategoriesList
+        containerClassName="3xl:mx-auto 3xl:max-w-[1600px]"
+        categories={propertyTypes}
+      />
       <AboutUs {...aboutUsData} className="3xl:mx-auto 3xl:max-w-[1600px]" />
       <ContactUs
         title={mockContactUsData.title}

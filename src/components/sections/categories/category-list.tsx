@@ -4,26 +4,29 @@ import CategoryCard from "./category-card";
 
 const mock_cats = [
   "House",
-  "Pre-Construction",
-  "Land",
   "Apartment",
+  "Land",
+  "Pre-Construction",
   "Commercial",
-].map((m, i) => {
-  if (i % 2) {
-    return { img: "/images/categories/TEST_2.png", label: m };
-  }
-
-  return { img: "/images/categories/TEST_1.png", label: m };
-});
+].map((m, i) => ({
+  img: `/images/categories/${m.toLocaleLowerCase()}.png`,
+  label: m,
+}));
 
 export type CategoriesListType = {
   className?: string;
   containerClassName?: string;
+  categories: {
+    label: string;
+    img: string;
+    url: string;
+  }[];
 };
 
 export default function CategoriesList({
   className = "",
   containerClassName,
+  categories,
 }: CategoriesListType) {
   return (
     <section
@@ -40,16 +43,21 @@ export default function CategoriesList({
             </h1>
           </div>
           <div className="h-[25rem] md:flex-wrap md:h-full md:w-full md:justify-evenly 2xl:justify-between overflow-x-auto shrink-0 flex flex-row items-start justify-start gap-spacing-container-md max-w-full text-[1.25rem] text-colors-background-bg-primary">
-            {mock_cats.map(
+            {categories.map(
               (
-                m: { img: string; label: string | undefined },
-                i: Key | null | undefined,
+                cat: {
+                  label: string;
+                  img: string;
+                  url: string;
+                },
+                i,
               ) => (
                 <CategoryCard
                   key={i}
                   className="md:w-[360px] md:h-[400px]"
-                  imgUrl={m.img}
-                  label={m.label}
+                  imgUrl={cat.img}
+                  label={cat.label}
+                  link={cat.url}
                 />
               ),
             )}

@@ -39,7 +39,7 @@ export const dynamicParams = true; // or false, to 404 on unknown paths
 
 export async function generateStaticParams() {
   const res: ListingsResponse = await getAllListingsPublicAPIV1();
-  const listings = res.data;
+  const listings = res.listings.data;
 
   return listings.map((listing: { id: string }) => ({
     slug: String(listing.id),
