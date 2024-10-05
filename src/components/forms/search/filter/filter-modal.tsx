@@ -4,7 +4,7 @@ import React, { useMemo, useState } from "react";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { X, ChevronDown, ChevronUp } from "lucide-react";
-import { transformFormSubmission } from "@/lib/helpers/form-elpers";
+import { transformFormSubmission } from "@/lib/helpers/form-helpers";
 import { FilterFormSubmission } from "@/types/api/forms/public-forms";
 
 const parkingOptions = [

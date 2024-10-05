@@ -1,5 +1,4 @@
 import { type AxiosError } from "axios";
-import { SingleFamilyDwellingFormData } from "../zod/forms/single-family-dwelling-schema";
 import { CreatePropertyFormFieldsResponse } from "@/types/property";
 
 export function getAccessToken(req: Request) {
@@ -241,6 +240,7 @@ interface FormOptions {
   propertyTypes: FormPropertyType[];
   amenities: FormAmenity[];
 }
+
 export function transformApiResponseToFormOptions(
   apiResponse: CreatePropertyFormFieldsResponse,
 ): FormOptions {

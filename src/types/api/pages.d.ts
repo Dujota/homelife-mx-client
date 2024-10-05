@@ -5,3 +5,7 @@ export interface FilterFieldsResponse {
   amenities: { data: Amenities[] };
   property_types: { data: PropertyTypes[] };
 }
+
+export interface HomePageResponse {
+  property_types: { data: PropertyTypes[] };
+}
