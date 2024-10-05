@@ -875,7 +875,7 @@ export default function FilterModal({
   } = useFilterState(initialFilterData);
 
   const allIds = useMemo(() => {
-    return propertyTypes.map((type) => type.id);
+    return propertyTypes.map((type: any) => type.id);
   }, [propertyTypes]);
 
   const initialAmenities = useMemo(() => {
@@ -1126,7 +1126,7 @@ export default function FilterModal({
               {selectedHomeTypes.length > 0 ? "Deselect All" : "Select All"}
             </button>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-              {propertyTypes.map(({ id, name }) => (
+              {propertyTypes.map(({ id, name }: any) => (
                 <label key={id} className="inline-flex items-center">
                   <input
                     type="checkbox"
@@ -1237,7 +1237,7 @@ export default function FilterModal({
             <h3 className="text-lg font-semibold mb-2">Amenities</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
               {(showMoreAmenities ? amenities : initialAmenities).map(
-                (amenity) => (
+                (amenity: any) => (
                   <label
                     key={amenity.value}
                     className="inline-flex items-center cursor-pointer"

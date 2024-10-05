@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import HomepageSearch from "@/components/forms/search/homepage-search";
+import InputLoader from "@/components/common/animations/input-loading";
 
 export type HomepageHeroBannerType = {
   className?: string;
@@ -16,7 +18,9 @@ const HomepageHeroBanner = async ({
           <span className="block">at the right price</span>
         </h1>
         <div className="w-full max-w-2xl">
-          <HomepageSearch />
+          <Suspense fallback={<InputLoader className="w-full h-12" />}>
+            <HomepageSearch />
+          </Suspense>
         </div>
       </div>
     </section>
