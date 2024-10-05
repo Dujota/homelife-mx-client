@@ -74,6 +74,10 @@ export interface Listing {
   attributes: ListingAttributes;
 }
 
+export interface DashboardListingResponse {
+  data: Listing[];
+}
+
 export interface ListingsResponse {
   listings: { data: Listing[] };
   amenities: { data: Amenities[] };
