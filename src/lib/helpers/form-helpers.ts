@@ -2,6 +2,7 @@ import {
   FilterFormSubmission,
   TransformedFilterFormParams,
 } from "@/types/api/forms/public-forms";
+import { type Option } from "../hooks/filter/filter-options";
 
 export function transformFormSubmission(
   formData: FilterFormSubmission,
@@ -51,3 +52,11 @@ export function transformFormSubmission(
         : null,
   };
 }
+
+export const findOptionByValue = (
+  options: Option[],
+  value: string | number | undefined,
+): Option | null => {
+  if (value === undefined) return null;
+  return options.find((option) => option.value === value.toString()) || null;
+};
