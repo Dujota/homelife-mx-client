@@ -29,8 +29,6 @@ export default function HomepageSearch({
 
   const filterParams = useFilterSearchParams();
 
-  console.log(filterParams);
-
   return (
     <>
       <div className="self-stretch rounded-lg bg-colors-background-bg-primary border-r-[1px] border-solid border-b-[1px] border-t-[1px] border-gainsboro-200 border-l-[1px] flex flex-row items-center justify-start pt-spacing-container-sm px-[0.687rem] pb-[0.625rem] gap-spacing-container-xs sm:w-[640px] sm:self-center">
