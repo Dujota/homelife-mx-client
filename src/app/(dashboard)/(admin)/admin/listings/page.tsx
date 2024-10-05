@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import ListingsList from "@/components/listings/listings-list";
 import ListingListItem from "@/components/listings/listings-list-item";
 import { getAllListingsAdminAPIV1 } from "@/lib/models/listings/queries";
-import { type ListingsResponse } from "@/types/api/listings";
+import { type DashboardListingResponse } from "@/types/api/listings";
 
 export default async function AdminListingsPage() {
   const session = await auth();
@@ -12,7 +12,7 @@ export default async function AdminListingsPage() {
     return redirect("/login?callbackUrl=/admin/listings");
   }
 
-  const res: ListingsResponse = await getAllListingsAdminAPIV1(
+  const res: DashboardListingResponse = await getAllListingsAdminAPIV1(
     session.user.accessToken,
   );
   const listings = res.data;
