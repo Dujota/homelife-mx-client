@@ -12,9 +12,7 @@ export default async function PublicListingsPage({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const res: ListingsResponse = await getAllListingsPublicAPIV1(
-    searchParams || {},
-  );
+  const res: ListingsResponse = await getAllListingsPublicAPIV1(searchParams);
 
   const { propertyTypes, amenities } = transformApiResponseToFormOptions({
     // @ts-ignore
