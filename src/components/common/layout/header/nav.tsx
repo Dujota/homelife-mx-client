@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useMemo } from "react";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 import type { NextPage } from "next";
 import Image from "next/image";
@@ -40,6 +41,8 @@ const Nav: NextPage<NavType> = ({ className = "", userType = "public" }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+
+  const { data: session } = useSession();
 
   const links = useMemo(() => {
     return userType === "public" ? publicLinks : adminBrokerLinks;
@@ -93,16 +96,20 @@ const Nav: NextPage<NavType> = ({ className = "", userType = "public" }) => {
               ))}
             </div>
           </div>
+
           <div className="hidden md:block">
-            <button className="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-              <Link
-                href="/login"
-                className="[text-decoration:none] relative text-[1.25rem] font-text-md-regular text-colors-background-bg-primary text-left inline-block min-w-[4.063rem] whitespace-nowrap"
-              >
-                Sign In
-              </Link>
-            </button>
+            {!session?.user && (
+              <button className="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                <Link
+                  href="/login"
+                  className="[text-decoration:none] relative text-[1.25rem] font-text-md-regular text-colors-background-bg-primary text-left inline-block min-w-[4.063rem] whitespace-nowrap"
+                >
+                  Sign In
+                </Link>
+              </button>
+            )}
           </div>
+
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -160,15 +167,18 @@ const Nav: NextPage<NavType> = ({ className = "", userType = "public" }) => {
                   ))}
                 </nav>
               </div>
+
               <div className="mt-6">
-                <button className="w-full bg-primary text-white px-4 py-2 rounded-md text-base font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                  <Link
-                    href="/login"
-                    className="[text-decoration:none] relative text-[1.25rem] font-text-md-regular text-colors-background-bg-primary text-left inline-block min-w-[4.063rem] whitespace-nowrap"
-                  >
-                    Sign In
-                  </Link>
-                </button>
+                {!session?.user && (
+                  <button className="w-full bg-primary text-white px-4 py-2 rounded-md text-base font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                    <Link
+                      href="/login"
+                      className="[text-decoration:none] relative text-[1.25rem] font-text-md-regular text-colors-background-bg-primary text-left inline-block min-w-[4.063rem] whitespace-nowrap"
+                    >
+                      Sign In
+                    </Link>
+                  </button>
+                )}
               </div>
             </div>
           </div>
