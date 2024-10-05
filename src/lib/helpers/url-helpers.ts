@@ -1,6 +1,8 @@
-export const buildQueryString = (params: {
+export const buildQueryString = (params?: {
   [key: string]: string | string[] | undefined;
 }) => {
+  if (!params) return "";
+
   const query = new URLSearchParams();
 
   Object.keys(params).forEach((key) => {
