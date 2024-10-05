@@ -5,6 +5,7 @@ import { type ListingsResponse } from "@/types/api/listings";
 
 // Cache control
 export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function PublicListingsPage({
   searchParams,
