@@ -25,7 +25,7 @@ export const getOneListingPublic = async (
   }
 };
 
-export const getAllListingsPublicAPIV1 = async (searchParams: {
+export const getAllListingsPublicAPIV1 = async (searchParams?: {
   [key: string]: string | string[] | undefined;
 }): Promise<ListingsResponse | any> => {
   try {
