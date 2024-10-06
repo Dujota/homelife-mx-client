@@ -3,11 +3,11 @@ import { nextApi, handleError, handleSuccess, apiV1 } from "@/lib/services";
 import { ListingResponse, ListingsResponse } from "@/types/api/listings";
 
 // Public
-export const getAllListingsPublic = async (): Promise<
-  ListingsResponse | any
-> => {
+export const getAllListingsPublic = async (
+  query: string,
+): Promise<ListingsResponse | any> => {
   try {
-    const response = await nextApi.get("/listings");
+    const response = await nextApi.get(`/listings?${query}`);
     return handleSuccess(response);
   } catch (error) {
     return handleError(error);

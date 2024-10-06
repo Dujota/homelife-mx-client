@@ -16,3 +16,13 @@ export const buildQueryString = (params?: {
 
   return query.toString();
 };
+
+export const updateSearchParams = (
+  searchParams: URLSearchParams,
+  key: string,
+  value: string,
+) => {
+  const params = new URLSearchParams(searchParams);
+  params.set(key, value);
+  return params;
+};
