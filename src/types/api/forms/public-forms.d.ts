@@ -48,8 +48,8 @@ interface TransformedFilterFormParams {
   beds: number | string;
   baths: number | string;
   exact_match: boolean;
-  property_types: number[]; // IDs as numbers
-  amenities: number[];
+  property_types: number[] | string; // IDs as numbers
+  amenities: number[] | string;
   min_year_built: number | null;
   max_year_built: number | null;
   keyword: string;
