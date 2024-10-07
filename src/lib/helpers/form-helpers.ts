@@ -11,8 +11,8 @@ export function transformFormSubmission(
     beds: formData.beds,
     baths: formData.baths,
     exact_match: formData.exactMatch,
-    property_types: formData.selectedHomeTypes.map(Number), // Convert ids to numbers
-    amenities: formData.selectedAmenities,
+    property_types: formData.selectedHomeTypes.join(","), // Convert ids to numbers
+    amenities: formData.selectedAmenities.join(","),
     min_year_built: formData.minYearBuilt
       ? parseInt(formData.minYearBuilt, 10)
       : null,

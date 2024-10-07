@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 // Components
 import { SendHorizontal, SlidersHorizontal, Loader2 } from "lucide-react";
 import FilterModal from "./filter/filter-modal";
 import LoadingSpinner from "@/components/common/animations/loading-spinner";
+import PlacePredictions from "./place-predictions";
 
 // Hooks
 import usePlacesAutocompleteService from "react-google-autocomplete/lib/usePlacesAutocompleteService";
@@ -14,9 +16,9 @@ import useFilterSearchParams from "@/lib/hooks/filter/use-filter-search-params";
 
 // Types
 import { Listing } from "@/types/api/listings";
-import PlacePredictions from "./place-predictions";
+
+// libs
 import { updateSearchParams } from "@/lib/helpers/url-helpers";
-import { useRouter, useSearchParams } from "next/navigation";
 import { getAllListingsPublic } from "@/lib/models/listings/queries";
 
 const mockResults = 1000;
@@ -172,6 +174,7 @@ export default function ListingsSearch({
           amenities={amenities}
           setListingsList={setListingsList}
           initialFilterData={filterParams}
+          setIsSearching={setIsSearching}
         />
       )}
 

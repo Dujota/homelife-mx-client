@@ -1,12 +1,15 @@
 "use client";
 
 import React, { useMemo } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { X, ChevronDown, ChevronUp } from "lucide-react";
 import { transformFormSubmission } from "@/lib/helpers/form-helpers";
 import { FilterFormSubmission } from "@/types/api/forms/public-forms";
 import { useFilterState } from "@/lib/hooks/filter/use-filter-state";
+import { updateSearchParams } from "@/lib/helpers/url-helpers";
+
 import {
   parkingOptions,
   daysOnMarketOptions,
@@ -17,6 +20,7 @@ import {
   livingSpaceSizes,
   Option,
 } from "@/lib/hooks/filter/filter-options";
+import { getAllListingsPublic } from "@/lib/models/listings/queries";
 
 interface FilterModalProps {
   isOpen: boolean;
@@ -36,7 +40,11 @@ export default function FilterModal({
   amenities,
   setListingsList,
   initialFilterData,
+  setIsSearching,
 }: any) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const {
     beds,
     setBeds,
@@ -197,7 +205,59 @@ export default function FilterModal({
     setMaxLivingSpace(livingSpaceSizes[0]);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+
+  //   const formData: FilterFormSubmission = {
+  //     beds,
+  //     baths,
+  //     exactMatch,
+  //     selectedHomeTypes,
+  //     selectedAmenities,
+  //     showMoreAmenities,
+  //     minYearBuilt,
+  //     maxYearBuilt,
+  //     keyword,
+  //     mustHaveGarage,
+  //     parkingSpots,
+  //     daysOnMarket,
+  //     minPrice,
+  //     maxPrice,
+  //     minLotSize,
+  //     maxLotSize,
+  //     minLivingSpace,
+  //     maxLivingSpace,
+  //   };
+
+  //   const payload = transformFormSubmission(formData);
+
+  //   console.log(payload);
+
+  //   try {
+  //     setIsSearching(true);
+  //     let updatedParams = new URLSearchParams(searchParams);
+
+  //     // updatedParams = updateSearchParams(updatedParams, "location", cityName);
+
+  //     // Update the URL without reloading the page
+  //     const newUrl = `${window.location.pathname}?${updatedParams.toString()}`;
+  //     router.push(newUrl, { scroll: false });
+
+  //     const res = await getAllListingsPublic(updatedParams.toString());
+  //     if (setListingsList) {
+  //       setListingsList(res.listings.data);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching search results:", error);
+  //     // Handle error (e.g., show error message to user)
+  //   }
+
+  //   setIsSearching(false);
+  //   onClose();
+  //   alert(JSON.stringify(payload, null, 2));
+  // };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const formData: FilterFormSubmission = {
@@ -223,9 +283,61 @@ export default function FilterModal({
 
     const payload = transformFormSubmission(formData);
 
-    console.log(payload);
+    try {
+      setIsSearching(true);
+      let updatedParams = new URLSearchParams(searchParams);
 
-    alert(JSON.stringify(payload, null, 2));
+      // Retain the location parameter
+      const locationParam = updatedParams.get("location");
+
+      // Loop over the payload and update the params
+      Object.entries(payload).forEach(([key, value]) => {
+        if (
+          value !== null &&
+          value !== undefined &&
+          value !== "" &&
+          value !== "any" &&
+          value !== false
+        ) {
+          updatedParams = updateSearchParams(
+            updatedParams,
+            key,
+            value.toString(),
+          );
+        }
+      });
+
+      // Remove params that are not in the payload and not the location
+      Array.from(updatedParams.keys()).forEach((key) => {
+        if (key !== "location" && !(key in payload)) {
+          updatedParams.delete(key);
+        }
+      });
+
+      // Ensure location parameter is retained
+      if (locationParam) {
+        updatedParams = updateSearchParams(
+          updatedParams,
+          "location",
+          locationParam,
+        );
+      }
+
+      // Update the URL without reloading the page
+      const newUrl = `${window.location.pathname}?${updatedParams.toString()}`;
+      router.push(newUrl, { scroll: false });
+
+      const res = await getAllListingsPublic(updatedParams.toString());
+      if (setListingsList) {
+        setListingsList(res.listings.data);
+      }
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+      // Handle error (e.g., show error message to user)
+    }
+
+    setIsSearching(false);
+    onClose();
   };
 
   if (!isOpen) return null;
