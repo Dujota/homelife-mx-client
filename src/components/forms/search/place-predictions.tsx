@@ -9,18 +9,22 @@ interface Prediction {
 interface PlacePredictionsProps {
   predictions: Prediction[];
   onSelect: (prediction: Prediction) => void;
+  className?: string;
 }
 
 export default function PlacePredictions({
   predictions,
   onSelect,
+  className = "",
 }: PlacePredictionsProps) {
   if (predictions.length === 0) {
     return null;
   }
 
   return (
-    <div className="absolute left-0 right-0 z-50 mt-[3.5rem] max-w-[400px] bg-white shadow-lg rounded-md overflow-hidden border border-gray-200 max-h-60 overflow-y-auto">
+    <div
+      className={`absolute left-0 right-0 z-50 bg-white shadow-lg rounded-md overflow-hidden border border-gray-200 max-h-60 overflow-y-auto ${className}`}
+    >
       {predictions.map((prediction) => (
         <div
           key={prediction.place_id}
