@@ -32,6 +32,7 @@ export default function FavListWrapper({
               propertyTypes={propertyTypes}
               amenities={amenities}
               setListingsList={setListingsList}
+              predictionsClassName="mt-[3.5rem] max-w-[400px]"
             />
           </Suspense>
         </header>

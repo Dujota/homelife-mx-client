@@ -54,7 +54,7 @@ export default function CategoriesList({
               ) => (
                 <CategoryCard
                   key={i}
-                  className="md:w-[360px] md:h-[400px]"
+                  className="md:w-[360px] h-[400px]"
                   imgUrl={cat.img}
                   label={cat.label}
                   link={cat.url}
