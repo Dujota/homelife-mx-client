@@ -22,7 +22,11 @@ const FavouriteCardGrid = ({ listings }: { listings: any[] }) => {
               propertyType={listing.attributes.property_type}
               isFavorite={listing.attributes.is_favorite}
               currency={listing.attributes.currency}
-              imageUrl="/temp/TEST_IMAGE_DELETE.png"
+              imageUrl={
+                (listing.attributes.property.images?.length &&
+                  listing.attributes.property.images[0].thumbnail) ||
+                "/temp/TEST_IMAGE_DELETE.png"
+              }
             />
           );
         })}
