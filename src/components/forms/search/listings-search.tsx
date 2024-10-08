@@ -39,9 +39,7 @@ export default function ListingsSearch({
   const [term, setTerm] = useState("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
-  const [selectedPlace, setSelectedPlace] =
-    // @ts-ignore
-    useState<google.maps.places.PlaceResult | null>(null);
+  const [selectedPlace, setSelectedPlace] = useState<any | null>(null);
 
   const router = useRouter();
   const searchParams = useSearchParams();
