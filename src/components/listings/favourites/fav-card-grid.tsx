@@ -25,6 +25,8 @@ const FavouriteCardGrid = ({ listings }: { listings: any[] }) => {
               imageUrl={
                 (listing.attributes.property.images?.length &&
                   listing.attributes.property.images[0].thumbnail) ||
+                (listing.attributes.property.images?.length &&
+                  listing.attributes.property.images[0].original) ||
                 "/temp/TEST_IMAGE_DELETE.png"
               }
             />
