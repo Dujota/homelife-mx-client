@@ -40,6 +40,7 @@ export default function ListingsSearch({
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState<any | null>(null);
+  const [scriptLoaded, setScriptLoaded] = useState(false);
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -107,9 +108,17 @@ export default function ListingsSearch({
   );
 
   useEffect(() => {
-    console.log("Place predictions:", placePredictions);
-    console.log("Is loading predictions:", isPlacePredictionsLoading);
-  }, [placePredictions, isPlacePredictionsLoading]);
+    //@ts-ignore
+    if (global?.window?.google) {
+      debugger;
+      setScriptLoaded(true);
+    }
+    //@ts-ignore
+  }, [global?.window?.google]);
+
+  if (!scriptLoaded) {
+    return <>Loading...</>;
+  }
 
   return (
     <>
