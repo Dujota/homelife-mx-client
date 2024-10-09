@@ -45,6 +45,14 @@ export default function FilterModal({
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const allIds = useMemo(() => {
+    return propertyTypes.map((type: any) => type.id);
+  }, [propertyTypes]);
+
+  const initialAmenities = useMemo(() => {
+    return amenities.slice(0, 6);
+  }, [amenities]);
+
   const {
     beds,
     setBeds,
@@ -85,15 +93,7 @@ export default function FilterModal({
     maxPriceOptions,
     maxLotSizeOptions,
     maxLivingSpacesOptions,
-  } = useFilterState(initialFilterData);
-
-  const allIds = useMemo(() => {
-    return propertyTypes.map((type: any) => type.id);
-  }, [propertyTypes]);
-
-  const initialAmenities = useMemo(() => {
-    return amenities.slice(0, 6);
-  }, [amenities]);
+  } = useFilterState(initialFilterData, allIds);
 
   const handleMinYearBuiltChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMinYearBuilt(e.target.value);
@@ -204,58 +204,6 @@ export default function FilterModal({
     setMinLivingSpace(livingSpaceSizes[0]);
     setMaxLivingSpace(livingSpaceSizes[0]);
   };
-
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-
-  //   const formData: FilterFormSubmission = {
-  //     beds,
-  //     baths,
-  //     exactMatch,
-  //     selectedHomeTypes,
-  //     selectedAmenities,
-  //     showMoreAmenities,
-  //     minYearBuilt,
-  //     maxYearBuilt,
-  //     keyword,
-  //     mustHaveGarage,
-  //     parkingSpots,
-  //     daysOnMarket,
-  //     minPrice,
-  //     maxPrice,
-  //     minLotSize,
-  //     maxLotSize,
-  //     minLivingSpace,
-  //     maxLivingSpace,
-  //   };
-
-  //   const payload = transformFormSubmission(formData);
-
-  //   console.log(payload);
-
-  //   try {
-  //     setIsSearching(true);
-  //     let updatedParams = new URLSearchParams(searchParams);
-
-  //     // updatedParams = updateSearchParams(updatedParams, "location", cityName);
-
-  //     // Update the URL without reloading the page
-  //     const newUrl = `${window.location.pathname}?${updatedParams.toString()}`;
-  //     router.push(newUrl, { scroll: false });
-
-  //     const res = await getAllListingsPublic(updatedParams.toString());
-  //     if (setListingsList) {
-  //       setListingsList(res.listings.data);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching search results:", error);
-  //     // Handle error (e.g., show error message to user)
-  //   }
-
-  //   setIsSearching(false);
-  //   onClose();
-  //   alert(JSON.stringify(payload, null, 2));
-  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

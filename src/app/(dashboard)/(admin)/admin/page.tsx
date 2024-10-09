@@ -12,8 +12,6 @@ export default async function AdminDashboard() {
     return redirect("/login?callbackUrl=/admin");
   }
 
-  console.log(session.user);
-
   return (
     <div>
       <h1>ADMIN Dashboard</h1>

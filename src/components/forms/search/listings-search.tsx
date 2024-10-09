@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import React, { useCallback, useState } from "react";
 import Image from "next/image";
 
 // Components
@@ -20,6 +19,7 @@ import { Listing } from "@/types/api/listings";
 // libs
 import { updateSearchParams } from "@/lib/helpers/url-helpers";
 import { getAllListingsPublic } from "@/lib/models/listings/queries";
+import useNavigationEvents from "@/lib/hooks/use-navigation-events";
 
 const mockResults = 1000;
 
@@ -36,14 +36,14 @@ export default function ListingsSearch({
   setListingsList?: (listings: Listing[]) => void;
   predictionsClassName?: string;
 }) {
-  const [term, setTerm] = useState("");
+  const { pathname, router, searchParams } = useNavigationEvents();
+
+  const filterParams = useFilterSearchParams();
+
+  const [term, setTerm] = useState(searchParams.get("location") || "");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState<any | null>(null);
-
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const filterParams = useFilterSearchParams();
 
   const {
     placesService,
@@ -70,8 +70,14 @@ export default function ListingsSearch({
       }
 
       // Update the URL without reloading the page
-      const newUrl = `${window.location.pathname}?${updatedParams.toString()}`;
-      router.push(newUrl, { scroll: false });
+      if (pathname === "/") {
+        const newUrl = `listings/?${updatedParams.toString()}`;
+        router.push(newUrl, { scroll: false });
+        return;
+      } else {
+        const newUrl = `${window.location.pathname}?${updatedParams.toString()}`;
+        router.push(newUrl, { scroll: false });
+      }
 
       const res = await getAllListingsPublic(updatedParams.toString());
       if (setListingsList) {
@@ -98,7 +104,6 @@ export default function ListingsSearch({
           placeId: prediction.place_id,
         },
         (placeDetails: any) => {
-          console.log("Selected place details:", placeDetails);
           setSelectedPlace(placeDetails);
         },
       );
