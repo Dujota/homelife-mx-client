@@ -51,7 +51,6 @@ const CreateListingForm = () => {
       }
 
       const result = await res.json();
-      console.log("Listing created:", result);
     } catch (error) {
       console.error("Error creating listing:", error);
     }

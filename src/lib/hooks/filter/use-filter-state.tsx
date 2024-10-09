@@ -10,7 +10,10 @@ import {
 } from "./filter-options";
 import { findOptionByValue } from "@/lib/helpers/form-helpers";
 
-export function useFilterState(initialFilterData: any) {
+export function useFilterState(
+  initialFilterData: any,
+  allPropertyTypeIds: any,
+) {
   const [beds, setBeds] = useState<number | string>(
     initialFilterData.beds || "any",
   );
@@ -21,7 +24,7 @@ export function useFilterState(initialFilterData: any) {
     initialFilterData.exactMatch || false,
   );
   const [selectedHomeTypes, setSelectedHomeTypes] = useState<string[]>(
-    initialFilterData.propertyTypes || [],
+    initialFilterData.propertyTypes || allPropertyTypeIds,
   );
   const [selectedAmenities, setSelectedAmenities] = useState<number[]>(
     initialFilterData.amenities?.map(Number) || [],
