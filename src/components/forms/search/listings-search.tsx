@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import React, { useCallback, useState } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import Image from "next/image";
 
 // Components
@@ -42,6 +42,7 @@ export default function ListingsSearch({
   const [selectedPlace, setSelectedPlace] = useState<any | null>(null);
 
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const filterParams = useFilterSearchParams();
 
@@ -70,8 +71,14 @@ export default function ListingsSearch({
       }
 
       // Update the URL without reloading the page
-      const newUrl = `${window.location.pathname}?${updatedParams.toString()}`;
-      router.push(newUrl, { scroll: false });
+      if (pathname === "/") {
+        const newUrl = `listings/?${updatedParams.toString()}`;
+        router.push(newUrl, { scroll: false });
+        return;
+      } else {
+        const newUrl = `${window.location.pathname}?${updatedParams.toString()}`;
+        router.push(newUrl, { scroll: false });
+      }
 
       const res = await getAllListingsPublic(updatedParams.toString());
       if (setListingsList) {
