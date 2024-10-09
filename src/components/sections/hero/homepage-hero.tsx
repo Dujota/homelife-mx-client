@@ -19,7 +19,7 @@ const HomepageHeroBanner = async ({
         </h1>
         <div className="w-full max-w-2xl">
           <Suspense fallback={<InputLoader className="w-full h-12" />}>
-            <ListingsSearch predictionsClassName="max-w-[665px] mr-[25px] ml-[25px]" />
+            <ListingsSearch predictionsClassName="max-w-[665px] mr-[25px] ml-[25px] lg:ml-[30px]" />
           </Suspense>
         </div>
       </div>
