@@ -20,30 +20,35 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic&display=optional"
-      />
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
-      />
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
-      />
-      <Breadcrumbs
-        homeElement="Home"
-        separator={<span className="text-coral">&gt;</span>}
-        containerClasses="flex m-0 p-0 mt-[6rem]"
-        listClasses="hover:underline mx-2 font-bold list-none"
-        activeClasses="text-steelblue"
-        capitalizeLinks={true}
-        linkClass="text-xs hover:underline no-underline text-coral"
-      />
-      <main>{children}</main>
-
+    <html lang="en">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic&display=optional"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+        />
+      </head>
+      <body>
+        <Breadcrumbs
+          homeElement="Home"
+          separator={<span className="text-coral">&gt;</span>}
+          containerClasses="flex m-0 p-0 mt-[6rem]"
+          listClasses="hover:underline mx-2 font-bold list-none"
+          activeClasses="text-steelblue"
+          capitalizeLinks={true}
+          linkClass="text-xs hover:underline no-underline text-coral"
+        />
+        <SessionProvider>
+          <main>{children}</main>
+        </SessionProvider>
+      </body>
       {/*
        <html lang="en">
       <body className={inter.className}>
@@ -56,6 +61,6 @@ export default function RootLayout({
 
       </html>
       */}
-    </>
+    </html>
   );
 }
