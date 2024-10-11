@@ -73,13 +73,14 @@ a{
   --dash-radius: 0.5rem;
 }
 
+/* Dashboard dark theme variables */
+/*
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
 
-    /* Dashboard dark theme variables */
     --dash-background: 222.2 84% 4.9%;
     --dash-foreground: 210 40% 98%;
     --dash-card: 222.2 84% 4.9%;
@@ -101,9 +102,10 @@ a{
     --dash-ring: 224.3 76.3% 48%;
   }
 }
-
+*/
 body {
   @apply leading-[normal] m-0;
+  @apply tracking-wide
 }
 
 *,
