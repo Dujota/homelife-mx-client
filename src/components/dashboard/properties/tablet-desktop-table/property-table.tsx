@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React from "react";
 
 interface Property {
@@ -126,9 +127,11 @@ export default function PropertyTable({ properties }: PropertyTableProps) {
                     <button className="bg-white text-primary inset-0 border border-solid border-primary px-[16px] py-[8px] rounded text-base cursor-pointer mr-2 hover:text-black">
                       Contact Agent
                     </button>
-                    <button className="bg-primary text-white px-[16px] py-[8px] rounded text-base cursor-pointer hover:text-black">
-                      See Property
-                    </button>
+                    <Link href={`/dashboard/properties/${property.id}`}>
+                      <button className="bg-primary text-white px-[16px] py-[8px] rounded text-base cursor-pointer hover:text-black">
+                        See Property
+                      </button>
+                    </Link>
                   </td>
                 </tr>
               ))}

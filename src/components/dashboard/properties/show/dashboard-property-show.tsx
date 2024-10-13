@@ -6,63 +6,63 @@ import TableSection from "./sections/table-section";
 import ListSection from "./sections/list-section";
 import HeadingSubheadingSection from "./sections/heading-subheading-section";
 
+const roomData = [
+  {
+    "Room Name": "Living Room",
+    Length: "14.00",
+    Width: "29.00",
+    Level: "Main",
+  },
+  { "Room Name": "Kitchen", Length: "14.00", Width: "29.00", Level: "Main" },
+  {
+    "Room Name": "Master Bedroom",
+    Length: "14.00",
+    Width: "29.00",
+    Level: "Main",
+  },
+];
+
+const amenities = [
+  { text: "Infinity Pool (25 meters)", icon: BedDouble },
+  { text: "Outdoor Spa", icon: BedDouble },
+  { text: "Panoramic Ocean View", icon: BedDouble },
+  { text: "Terrace (5000 sqft)", icon: BedDouble },
+  { text: "Modern Kitchen Appliances", icon: BedDouble },
+  { text: "High-Speed Internet", icon: BedDouble },
+  { text: "Smart Home System", icon: BedDouble },
+  { text: "Home Theater", icon: BedDouble },
+  { text: "Fitness Room", icon: BedDouble },
+  { text: "Wine Cellar", icon: BedDouble },
+];
+
+const images = [
+  {
+    original: "/property-main.jpg",
+    thumbnail: "/property-thumb-1.jpg",
+  },
+  {
+    original: "/property-image-2.jpg",
+    thumbnail: "/property-thumb-2.jpg",
+  },
+  {
+    original: "/property-image-3.jpg",
+    thumbnail: "/property-thumb-3.jpg",
+  },
+  {
+    original: "/property-image-4.jpg",
+    thumbnail: "/property-thumb-4.jpg",
+  },
+  {
+    original: "/property-image-5.jpg",
+    thumbnail: "/property-thumb-5.jpg",
+  },
+  {
+    original: "/property-image-6.jpg",
+    thumbnail: "/property-thumb-6.jpg",
+  },
+];
+
 export default function DashboardPropertyShow() {
-  const roomData = [
-    {
-      "Room Name": "Living Room",
-      Length: "14.00",
-      Width: "29.00",
-      Level: "Main",
-    },
-    { "Room Name": "Kitchen", Length: "14.00", Width: "29.00", Level: "Main" },
-    {
-      "Room Name": "Master Bedroom",
-      Length: "14.00",
-      Width: "29.00",
-      Level: "Main",
-    },
-  ];
-
-  const amenities = [
-    { text: "Infinity Pool (25 meters)", icon: BedDouble },
-    { text: "Outdoor Spa", icon: BedDouble },
-    { text: "Panoramic Ocean View", icon: BedDouble },
-    { text: "Terrace (5000 sqft)", icon: BedDouble },
-    { text: "Modern Kitchen Appliances", icon: BedDouble },
-    { text: "High-Speed Internet", icon: BedDouble },
-    { text: "Smart Home System", icon: BedDouble },
-    { text: "Home Theater", icon: BedDouble },
-    { text: "Fitness Room", icon: BedDouble },
-    { text: "Wine Cellar", icon: BedDouble },
-  ];
-
-  const images = [
-    {
-      original: "/property-main.jpg",
-      thumbnail: "/property-thumb-1.jpg",
-    },
-    {
-      original: "/property-image-2.jpg",
-      thumbnail: "/property-thumb-2.jpg",
-    },
-    {
-      original: "/property-image-3.jpg",
-      thumbnail: "/property-thumb-3.jpg",
-    },
-    {
-      original: "/property-image-4.jpg",
-      thumbnail: "/property-thumb-4.jpg",
-    },
-    {
-      original: "/property-image-5.jpg",
-      thumbnail: "/property-thumb-5.jpg",
-    },
-    {
-      original: "/property-image-6.jpg",
-      thumbnail: "/property-thumb-6.jpg",
-    },
-  ];
-
   return (
     <div className="bg-white text-gray-900 min-h-screen p-4 md:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
