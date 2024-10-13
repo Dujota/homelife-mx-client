@@ -1,21 +1,3 @@
-// const StatCard = ({
-//   icon: Icon,
-//   title,
-//   value,
-// }: {
-//   icon: React.ElementType;
-//   title: string;
-//   value: string;
-// }) => (
-//   <div className="bg-white rounded-lg shadow p-4">
-//     <div className="flex justify-between items-center mb-2">
-//       <h3 className="text-sm font-medium text-gray-500">{title}</h3>
-//       <Icon className="h-4 w-4 text-gray-400" />
-//     </div>
-//     <p className="text-2xl font-bold">{value}</p>
-//   </div>
-// );
-
 const StatCard = ({
   icon: Icon,
   title,
