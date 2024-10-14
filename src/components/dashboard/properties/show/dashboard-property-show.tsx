@@ -5,6 +5,7 @@ import TextSection from "./sections/text-section";
 import TableSection from "./sections/table-section";
 import ListSection from "./sections/list-section";
 import HeadingSubheadingSection from "./sections/heading-subheading-section";
+import PropertyShowToolbar from "./property-show-toolbar";
 
 const roomData = [
   {
@@ -98,16 +99,7 @@ export default function DashboardPropertyShow() {
           <div className="lg:w-2/3 mb-4 lg:mb-0">
             <PropertyImageGallery images={images} />
           </div>
-          <div className="lg:w-1/3 mt-6 lg:mt-0 lg:hidden">
-            <div className="sticky top-6 space-y-4">
-              <button className="w-full py-2 px-4 bg-green-600 text-white rounded-md text-center font-semibold">
-                Contact Agent
-              </button>
-              <button className="w-full py-2 px-4 border border-gray-300 rounded-md text-center">
-                Generate MLS Link
-              </button>
-            </div>
-          </div>
+          <PropertyShowToolbar className="lg:hidden" />
         </div>
 
         <div className="lg:flex lg:space-x-8">
@@ -165,16 +157,7 @@ export default function DashboardPropertyShow() {
             </div>
           </div>
 
-          <div className="lg:w-1/3 mt-6 lg:mt-0">
-            <div className="sticky top-6 space-y-4">
-              <button className="w-full py-2 px-4 bg-green-600 text-white rounded-md text-center font-semibold">
-                Contact Agent
-              </button>
-              <button className="w-full py-2 px-4 border border-gray-300 rounded-md text-center">
-                Generate MLS Link
-              </button>
-            </div>
-          </div>
+          <PropertyShowToolbar />
         </div>
       </div>
     </div>
