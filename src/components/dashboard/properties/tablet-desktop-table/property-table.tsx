@@ -1,8 +1,8 @@
 "use client";
 
 import TablePreviewBtn from "@/components/common/buttons/preview/table-preview-btn";
-import Link from "next/link";
 import React from "react";
+import TableActions from "./table-actions";
 
 interface Property {
   id: number;
@@ -123,14 +123,9 @@ export default function PropertyTable({ properties }: PropertyTableProps) {
                     {property.listingAgent}
                   </td>
                   <td className="py-3 px-6 text-left whitespace-nowrap">
-                    <button className="bg-white text-primary inset-0 border border-solid border-primary px-[16px] py-[8px] rounded text-base cursor-pointer mr-2 hover:text-black">
-                      Contact Agent
-                    </button>
-                    <Link href={`/dashboard/properties/${property.id}`}>
-                      <button className="bg-primary text-white px-[16px] py-[8px] rounded text-base cursor-pointer hover:text-black">
-                        See Property
-                      </button>
-                    </Link>
+                    <TableActions
+                      url={`/dashboard/properties/${property.id}`}
+                    />
                   </td>
                 </tr>
               ))}
