@@ -37,9 +37,12 @@ export default function PropertyListingTable({
     <div className="p-4 flex flex-col h-full">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Property Listing</h1>
-        <button className="bg-primary hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center cursor-pointer">
+        {/* <button
+          className="bg-primary hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center cursor-pointer"
+          type="button"
+        >
           <Plus className="mr-2" /> Add Property
-        </button>
+        </button> */}
       </div>
       <p className="text-orange-500 mb-4">
         {`Orange colored 'property name' indicates public listing`}
