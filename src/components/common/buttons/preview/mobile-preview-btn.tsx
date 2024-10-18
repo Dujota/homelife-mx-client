@@ -1,7 +1,7 @@
 import { useModal } from "@/lib/hooks/use-modal";
 import PropertyPreviewModal from "../../modals/property-preview-modal";
 
-export default function MobilePreviewBtn({ property }) {
+export default function MobilePreviewBtn({ property }: { property: any }) {
   const { modalState, openModal, closeModal } = useModal([
     "previewProperty",
     "contactAgent",
