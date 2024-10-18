@@ -11,11 +11,12 @@ import {
 } from "@/lib/zod/forms/commercial-property-schema";
 
 // Components
-import NumberInput from "../fields/number-input";
-import TextArea from "../fields/text-area-input";
-import TextInput from "../fields/text-input";
 import FormSubmitButton from "../../common/buttons/form-submit-button";
-import SelectInput from "../fields/simple-select-input";
+import UploadFieldGroup from "./field-groups/upload-group";
+import PricingFieldGroup from "./field-groups/pricing-group";
+import AddressFieldGroup from "./field-groups/address-group";
+import PublishListingFieldGroup from "./field-groups/publish-group";
+import CommercialInformationGroup from "./field-groups/commercial-information-group";
 
 // Mutations
 import {
@@ -23,8 +24,6 @@ import {
   createCommercialPropertyBrokers,
 } from "@/lib/models/properties/mutations";
 import { useMemo } from "react";
-import Checkboxes from "../fields/checkboxes";
-import ImageUpload from "../fields/image-uploader";
 import LoadingSpinner from "@/components/common/animations/loading-spinner";
 
 type CommercialPropertyFormProps = {
@@ -114,64 +113,11 @@ const CommercialPropertyForm = ({
     <>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <ImageUpload name="images" label="Images" maxNumber={10} />
-          <ImageUpload
-            name="attachments"
-            label="Legal Documents (images)"
-            maxNumber={10}
-          />
-          <NumberInput name="price" label="Price" />
-          <SelectInput
-            name="currency"
-            label="Currency"
-            options={currencySelectOptions}
-          />
-          <TextArea name="description" label="Description" />
-          <TextInput
-            name="address_attributes.house_number"
-            label="House Number"
-          />
-          <TextInput name="address_attributes.street" label="Street" />
-          <TextInput
-            name="address_attributes.neighborhood"
-            label="Neighborhood"
-          />
-          <TextInput
-            name="address_attributes.municipality"
-            label="Municipality"
-          />
-          <TextInput name="address_attributes.city" label="City" />
-          <TextInput name="address_attributes.state" label="State" />
-          <TextInput
-            name="address_attributes.postal_code"
-            label="Postal Code"
-          />
-          {/* <SelectInput
-          name="property_type_id"
-          label="Property Type"
-          options={propertyTypeOptions}
-        /> */}
-          <TextInput name="type_of_business" label="Type of Business" />
-          <NumberInput
-            name="square_footage_of_building"
-            label="Commercial Space Size"
-          />
-          {/* <NumberInput name="size_of_land" label="Lot Size" /> */}
-          <TextInput name="zoning" label="Zoning" />
-          <NumberInput name="rental_income" label="Rental Income" />
-          {/* <NumberInput name="year_built" label="Year Built" /> */}
-          <TextArea
-            name="commercial_lease_terms"
-            label="Commercial Lease Terms"
-          />
-          <Checkboxes
-            name="create_listing"
-            label="Make Listing Public"
-            options={[
-              { label: "Yes", value: "true" },
-              { label: "No", value: "false" },
-            ]}
-          />
+          <UploadFieldGroup />
+          <AddressFieldGroup />
+          <PricingFieldGroup currencySelectOptions={currencySelectOptions} />
+          <CommercialInformationGroup />
+          <PublishListingFieldGroup />
           <FormSubmitButton text="Create Commercial Property" />
         </form>
       </FormProvider>
