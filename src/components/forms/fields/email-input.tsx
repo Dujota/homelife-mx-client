@@ -28,7 +28,10 @@ const EmailInput = ({
   return (
     <div className={wrapperClassName}>
       {label && (
-        <label htmlFor={id} className={labelStyle}>
+        <label
+          htmlFor={id}
+          className={`block text-md font-medium text-dash-muted-foreground mb-1 ${labelStyle}`}
+        >
           {label}
         </label>
       )}

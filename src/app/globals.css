@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -36,4 +36,107 @@ a{
   .text-balance {
     text-wrap: balance;
   }
+} */
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+
+  /* Dashboard theme variables */
+  --dash-background: 0 0% 100%;
+  --dash-foreground: 222.2 84% 4.9%;
+  --dash-card: 0 0% 100%;
+  --dash-card-foreground: 222.2 84% 4.9%;
+  --dash-popover: 0 0% 100%;
+  --dash-popover-foreground: 222.2 84% 4.9%;
+  --dash-primary: 221.2 83.2% 53.3%;
+  --dash-primary-foreground: 210 40% 98%;
+  --dash-secondary: 210 40% 96.1%;
+  --dash-secondary-foreground: 222.2 47.4% 11.2%;
+  --dash-muted: 210 40% 96.1%;
+  --dash-muted-foreground: 215.4 16.3% 46.9%;
+  --dash-accent: 210 40% 96.1%;
+  --dash-accent-foreground: 222.2 47.4% 11.2%;
+  --dash-destructive: 0 84.2% 60.2%;
+  --dash-destructive-foreground: 210 40% 98%;
+  --dash-border: 214.3 31.8% 91.4%;
+  --dash-input: 214.3 31.8% 91.4%;
+  --dash-ring: 221.2 83.2% 53.3%;
+  --dash-radius: 0.5rem;
+}
+
+/* Dashboard dark theme variables */
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+
+    --dash-background: 222.2 84% 4.9%;
+    --dash-foreground: 210 40% 98%;
+    --dash-card: 222.2 84% 4.9%;
+    --dash-card-foreground: 210 40% 98%;
+    --dash-popover: 222.2 84% 4.9%;
+    --dash-popover-foreground: 210 40% 98%;
+    --dash-primary: 217.2 91.2% 59.8%;
+    --dash-primary-foreground: 222.2 47.4% 11.2%;
+    --dash-secondary: 217.2 32.6% 17.5%;
+    --dash-secondary-foreground: 210 40% 98%;
+    --dash-muted: 217.2 32.6% 17.5%;
+    --dash-muted-foreground: 215 20.2% 65.1%;
+    --dash-accent: 217.2 32.6% 17.5%;
+    --dash-accent-foreground: 210 40% 98%;
+    --dash-destructive: 0 62.8% 30.6%;
+    --dash-destructive-foreground: 210 40% 98%;
+    --dash-border: 217.2 32.6% 17.5%;
+    --dash-input: 217.2 32.6% 17.5%;
+    --dash-ring: 224.3 76.3% 48%;
+  }
+}
+*/
+body {
+  @apply leading-[normal] m-0;
+  @apply tracking-wide
+}
+
+*,
+::before,
+::after {
+  border-width: 0;
+  font-family: 'Inter', sans-serif !important;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: #4b5563;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Dashboard specific styles */
+.dash-layout {
+  font-family: var(--dash-font-sans);
+}
+
+.dash-layout * {
+  border-color: hsl(var(--dash-border));
+}
+
+.dash-layout {
+  background-color: hsl(var(--dash-background));
+  color: hsl(var(--dash-foreground));
 }
