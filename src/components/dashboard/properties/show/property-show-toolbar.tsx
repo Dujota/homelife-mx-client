@@ -32,7 +32,7 @@ export default function PropertyShowToolbar({
       >
         <ContactAgentForm
           agentName="Stacy Martin"
-          agentImage="/temp/agent-image.jpg"
+          agentImage="/temp/agent-image.png"
           onClose={() => closeModal("contactAgent")}
         />
       </Modal>
