@@ -3,6 +3,7 @@ import React from "react";
 import ListTypeTabSelector from "./list-type-tab-selector";
 import AllPropertySearch from "@/components/forms/search/dashboard/property-search/all-property-search";
 import PropertyListSort from "@/components/forms/search/dashboard/property-list-sort";
+import MobilePreviewBtn from "@/components/common/buttons/preview/mobile-preview-btn";
 
 interface Property {
   id: number;
@@ -319,9 +320,7 @@ export default function AllPropertiesMobile() {
               </div>
             </div>
             <div className="mt-4 flex space-x-4">
-              <button className="flex-1 px-4 py-2 border border-primary bg-white text-primary rounded-lg hover:bg-green-50 cursor-pointer">
-                Preview
-              </button>
+              <MobilePreviewBtn property={property} />
               <button className="flex-1 px-4 py-2 bg-primary text-white rounded-lg hover:bg-green-700 cursor-pointer">
                 See Property
               </button>

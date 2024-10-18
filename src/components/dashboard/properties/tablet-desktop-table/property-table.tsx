@@ -1,5 +1,6 @@
 "use client";
 
+import TablePreviewBtn from "@/components/common/buttons/preview/table-preview-btn";
 import Link from "next/link";
 import React from "react";
 
@@ -82,9 +83,7 @@ export default function PropertyTable({ properties }: PropertyTableProps) {
                   className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
                 >
                   <td className="py-3 px-6 text-left whitespace-nowrap">
-                    <button className="bg-primary text-white px-[12px] py-[8px] rounded text-base cursor-pointer">
-                      Preview
-                    </button>
+                    <TablePreviewBtn property={property} />
                   </td>
                   <td
                     className={`py-3 px-6 text-left font-medium whitespace-nowrap ${property.isPublic ? "text-orange-500" : ""}`}
