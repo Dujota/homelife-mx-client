@@ -10,10 +10,8 @@ import {
   X,
 } from "lucide-react";
 
-import ActionButton from "../action-button";
 import { useModal } from "@/lib/hooks/use-modal";
-import { Modal } from "@/components/common/modals/modal";
-import PropertyFormTabs from "@/components/forms/properties/property-form-tabs";
+import ActionButton from "../action-button";
 import AddPropertyModal from "@/components/common/modals/add-property-modal";
 
 type QuickActionToolbarTypes = {
