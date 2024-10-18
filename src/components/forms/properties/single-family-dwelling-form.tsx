@@ -12,20 +12,22 @@ import {
 } from "@/lib/zod/forms/single-family-dwelling-schema";
 
 // Components
-import NumberInput from "../fields/number-input";
-import TextArea from "../fields/text-area-input";
-import TextInput from "../fields/text-input";
-import SelectInput from "../fields/simple-select-input";
+
 import FormSubmitButton from "../../common/buttons/form-submit-button";
 import toast from "react-hot-toast";
+import UploadFieldGroup from "./field-groups/upload-group";
+import PricingFieldGroup from "./field-groups/pricing-group";
+import InformationFieldGroup from "./field-groups/information-group";
+import AddressFieldGroup from "./field-groups/address-group";
+import ConstructionSizeFieldGroup from "./field-groups/construction-size-group";
+import PublishListingFieldGroup from "./field-groups/publish-group";
+import AmenityFieldGroup from "./field-groups/amenity-group";
 
 // Mutations
 import {
   createSingleFamilyDwelling,
   createSingleFamilyDwellingBrokers,
 } from "@/lib/models/properties/mutations";
-import Checkboxes from "../fields/checkboxes";
-import ImageUpload from "../fields/image-uploader";
 import LoadingSpinner from "@/components/common/animations/loading-spinner";
 
 type SingleFamilyDwellingFormProps = {
@@ -119,77 +121,13 @@ const SingleFamilyDwellingForm = ({
     <>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <ImageUpload name="images" label="Images" maxNumber={10} />
-          <ImageUpload
-            name="attachments"
-            label="Legal Documents (images)"
-            maxNumber={10}
-          />
-          <NumberInput name="price" label="Price" />
-          <SelectInput
-            name="currency"
-            label="Currency"
-            options={currencySelectOptions}
-          />
-          <TextArea name="description" label="Description" />
-          <TextInput
-            name="address_attributes.house_number"
-            label="House Number"
-          />
-          <TextInput name="address_attributes.street" label="Street" />
-          <TextInput
-            name="address_attributes.neighborhood"
-            label="Neighborhood"
-          />
-          <TextInput
-            name="address_attributes.municipality"
-            label="Municipality"
-          />
-          <TextInput name="address_attributes.city" label="City" />
-          <TextInput name="address_attributes.state" label="State" />
-          <TextInput
-            name="address_attributes.postal_code"
-            label="Postal Code"
-          />
-          <SelectInput
-            name="property_type_id"
-            label="Property Type"
-            options={propertyTypeOptions}
-          />
-          <NumberInput name="number_of_bedrooms" label="Number of Bedrooms" />
-          <NumberInput name="number_of_bathrooms" label="Number of Bathrooms" />
-          <NumberInput name="half_bathrooms" label="Half Bathrooms" />
-          <NumberInput
-            name="living_space_square_meters"
-            label="Living Space (sqm)"
-          />
-          <NumberInput name="lot_size" label="Lot Size (sqm)" />
-          <NumberInput name="year_built" label="Year Built" />
-          <NumberInput name="number_of_living_rooms" label="Living Rooms" />
-          <NumberInput name="garage_size" label="Garage Size" />
-          <NumberInput
-            name="number_of_airconditioners"
-            label="Number of Air Conditioners"
-          />
-          <NumberInput name="gas_tank_size" label="Gas Tank Size (liters)" />
-          <TextInput
-            name="general_carpentry_and_paint_condition"
-            label="Carpentry/Paint Condition"
-          />
-          <Checkboxes
-            name="amenity_ids"
-            label="Amenities"
-            options={amenities}
-          />
-
-          <Checkboxes
-            name="create_listing"
-            label="Make Listing Public"
-            options={[
-              { label: "Yes", value: "true" },
-              { label: "No", value: "false" },
-            ]}
-          />
+          <UploadFieldGroup />
+          <PricingFieldGroup currencySelectOptions={currencySelectOptions} />
+          <InformationFieldGroup propertyTypeOptions={propertyTypeOptions} />
+          <AddressFieldGroup />
+          <ConstructionSizeFieldGroup />
+          <AmenityFieldGroup amenities={amenities} />
+          <PublishListingFieldGroup />
           <FormSubmitButton text="Create Single Family Dwelling" />
         </form>
       </FormProvider>

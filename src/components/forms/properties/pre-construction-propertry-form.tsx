@@ -1,4 +1,5 @@
 "use client";
+import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
@@ -11,20 +12,22 @@ import {
 } from "@/lib/zod/forms/pre-construction-schema";
 
 // Components
-import NumberInput from "../fields/number-input";
-import TextArea from "../fields/text-area-input";
-import TextInput from "../fields/text-input";
-import SelectInput from "../fields/simple-select-input";
 import FormSubmitButton from "../../common/buttons/form-submit-button";
+import LoadingSpinner from "@/components/common/animations/loading-spinner";
+import UploadFieldGroup from "./field-groups/upload-group";
+import AddressFieldGroup from "./field-groups/address-group";
+import PricingFieldGroup from "./field-groups/pricing-group";
+import AmenityFieldGroup from "./field-groups/amenity-group";
+import PublishListingFieldGroup from "./field-groups/publish-group";
+import PaymentOptionGroup from "../fields/payment-option-group";
+import DeveloperInformationFieldGroup from "../fields/developer-information";
+import PreConstructionInformationFieldGroup from "../fields/pre-construction-information";
+
+// Services
 import {
   createPreConstructionProject,
   createPreConstructionProjectBrokers,
 } from "@/lib/models/properties/mutations";
-import { useMemo } from "react";
-import Checkboxes from "../fields/checkboxes";
-import ImageUpload from "../fields/image-uploader";
-import DateInput from "../fields/date-input";
-import LoadingSpinner from "@/components/common/animations/loading-spinner";
 
 type PreConstructionFormProps = {
   propertyTypes: { name: string; id: number | string }[];
@@ -107,84 +110,17 @@ const PreConstructionForm = ({
     <>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <ImageUpload name="images" label="Images" maxNumber={10} />
-          <ImageUpload
-            name="attachments"
-            label="Legal Documents (images)"
-            maxNumber={10}
+          <UploadFieldGroup />
+          <DeveloperInformationFieldGroup />
+          <PreConstructionInformationFieldGroup />
+          <AddressFieldGroup />
+          <AmenityFieldGroup amenities={amenities} />
+          <PricingFieldGroup
+            currencySelectOptions={currencySelectOptions}
+            range
           />
-          <TextInput name="development_name" label="Name of Development" />
-          <TextArea name="description" label="Project Description" />
-          <TextInput
-            name="developer_contact"
-            label="Developer Contact Information"
-          />
-          <TextInput name="cadastral_number" label="Cadastral/Folio Number" />
-          <SelectInput
-            name="proof_of_ownership"
-            label="Proof of Ownership"
-            options={[
-              { label: "Yes", value: true },
-              { label: "No", value: false },
-            ]}
-          />
-          <NumberInput name="property_taxes" label="Property Taxes" />
-          <TextInput name="zoning" label="Zoning" />
-          <TextInput name="location" label="Location" />
-          <TextInput
-            name="address_attributes.house_number"
-            label="House Number"
-          />
-          <TextInput name="address_attributes.street" label="Street" />
-          <TextInput
-            name="address_attributes.neighborhood"
-            label="Neighborhood"
-          />
-          <TextInput
-            name="address_attributes.municipality"
-            label="Municipality"
-          />
-          <TextInput name="address_attributes.city" label="City" />
-          <TextInput name="address_attributes.state" label="State" />
-          <TextInput
-            name="address_attributes.postal_code"
-            label="Postal Code"
-          />
-          <TextArea name="plans" label="Plans" />
-          <SelectInput
-            name="rendering_available"
-            label="Rendering Available"
-            options={[
-              { label: "Yes", value: true },
-              { label: "No", value: false },
-            ]}
-          />
-          <DateInput
-            name="estimated_completion_date"
-            label="Estimated Completion Date"
-          />
-          <NumberInput name="min_price" label="Minimum Price" />
-          <NumberInput name="max_price" label="Maximum Price" />
-          <SelectInput
-            name="currency"
-            label="Currency"
-            options={currencySelectOptions}
-          />
-          <TextArea name="deposit_structure" label="Deposit Structure" />
-          <TextArea name="incentives" label="Incentives" />
-          <Checkboxes
-            name="amenity_ids"
-            label="Amenities"
-            options={amenities}
-          />
-          <Checkboxes
-            name="create_listing"
-            label="Make Listing Public"
-            options={[
-              { label: "Yes", value: "true" },
-              { label: "No", value: "false" },
-            ]}
-          />
+          <PaymentOptionGroup />
+          <PublishListingFieldGroup />
           <FormSubmitButton text="Create Pre-construction Property" />
         </form>
       </FormProvider>
