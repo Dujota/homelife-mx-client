@@ -18,7 +18,7 @@ export default async function AdminAddPropertyPage() {
   if (!session?.user) {
     return redirect("/login?callbackUrl=/admin/properties/add-property");
   }
-
+  console.log(session.user);
   const res: CreatePropertyFormFieldsResponse =
     await getAddPropertyFormFieldsAdminAPIV1(session.user.accessToken);
 

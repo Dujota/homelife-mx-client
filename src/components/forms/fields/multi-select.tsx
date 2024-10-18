@@ -10,9 +10,15 @@ type MultiSelectInputProps = {
   name: string;
   label: string;
   options: Option[];
+  labelStyle?: string;
 };
 
-const MultiSelectInput = ({ name, label, options }: MultiSelectInputProps) => {
+const MultiSelectInput = ({
+  name,
+  label,
+  options,
+  labelStyle,
+}: MultiSelectInputProps) => {
   const { control } = useFormContext();
   const {
     field: { value, onChange, onBlur },
@@ -25,7 +31,11 @@ const MultiSelectInput = ({ name, label, options }: MultiSelectInputProps) => {
 
   return (
     <div className="form-group">
-      <label>{label}</label>
+      <label
+        className={`block text-md font-medium text-dash-muted-foreground mb-1 ${labelStyle}`}
+      >
+        {label}
+      </label>
       <Select
         isMulti
         options={options}

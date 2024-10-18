@@ -26,21 +26,24 @@ const Checkboxes = ({
 
   return (
     <>
-      {label && <label className={`my-4 ${labelStyle}`}>{label}</label>}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      {label && (
+        <label
+          className={`my-4 block text-md font-medium text-dash-muted-foreground mb-1 ${labelStyle}`}
+        >
+          {label}
+        </label>
+      )}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         <Controller
           name={name}
           control={control}
           render={({ field, fieldState: { error } }) => (
             <>
               {options.map((option) => (
-                <div
-                  key={option.value}
-                  className="flex items-baseline space-x-2"
-                >
+                <div key={option.value} className="flex items-center space-x-2">
                   <input
                     type="checkbox"
-                    className={inputStyle}
+                    className={`mr-2 h-4 w-4 rounded border-gray-300 cursor-pointer focus:ring-blue-500 ${inputStyle}`}
                     value={option.value}
                     id={option.label}
                     checked={field.value?.includes(option.value)}
@@ -56,7 +59,7 @@ const Checkboxes = ({
                   />
                   <label
                     htmlFor={option.label}
-                    className="font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    className="font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                   >
                     {option.label}
                   </label>

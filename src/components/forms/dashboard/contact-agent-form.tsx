@@ -88,7 +88,7 @@ const ContactAgentForm: React.FC<ContactAgentFormProps> = ({
       {/* <FileUploadField control={control} /> */}
       <button
         type="submit"
-        className="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors"
+        className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors"
       >
         Submit
       </button>

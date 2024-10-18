@@ -24,8 +24,12 @@ const ImageUpload = ({
 
   return (
     <>
-      {label && <label className="my-4">{label}</label>}
-      <div className="w-full max-w-md mx-auto space-y-4">
+      {label && (
+        <label className="my-4 block text-md font-medium text-dash-muted-foreground mb-1">
+          {label}
+        </label>
+      )}
+      <div className="w-full max-w-md mx-auto space-y-4 text-dash-muted-foreground">
         <Controller
           name={name}
           control={control}
@@ -75,7 +79,7 @@ const ImageUpload = ({
                             <button
                               type="button"
                               onClick={() => onImageRemove(index)}
-                              className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity h-4 w-4"
+                              className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity h-4 w-4 flex items-center justify-center cursor-pointer"
                             >
                               <X className="h-4 w-4" />
                             </button>

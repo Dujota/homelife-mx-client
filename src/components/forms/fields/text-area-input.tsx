@@ -24,7 +24,10 @@ const TextArea = ({
 
   return (
     <div>
-      <label htmlFor={id} className={labelStyle}>
+      <label
+        htmlFor={id}
+        className={`block text-md font-medium text-dash-muted-foreground mb-1 ${labelStyle}`}
+      >
         {label}
       </label>
       <Controller
@@ -35,7 +38,7 @@ const TextArea = ({
             <textarea
               id={id}
               placeholder={placeholder}
-              className={inputStyle}
+              className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 ${inputStyle}`}
               rows={rows}
               {...field}
             />

@@ -33,7 +33,8 @@ const PropertyFormTabs = ({
         {PROPERTY_TABS.map((tab, index) => (
           <button
             key={tab.name}
-            className={`mx-2 tab ${index === selectedTab ? "active" : ""}`}
+            type="button"
+            className={`mx-2 tab cursor-pointer p-2 ${index === selectedTab ? "active" : ""}`}
             onClick={() => setSelectedTab(index)}
           >
             {tab.name}

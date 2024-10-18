@@ -8,8 +8,8 @@ import { SessionProvider } from "next-auth/react";
 
 import DashboardSideBar from "@/components/dashboard/navs/dashboard-sidebar";
 import DashboardHeader from "@/components/dashboard/dashboard-header";
-import QuickActionToolbar from "@/components/dashboard/navs/quick-action-toolbar";
 import DashboardNav from "@/components/dashboard/navs/dashboard-nav";
+import QuickActions from "@/components/dashboard/navs/quick-actions";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,7 +39,7 @@ export default function DashboardLayout({
 
               <main className="flex-1 overflow-y-auto p-4">
                 <div className="space-y-4">
-                  <QuickActionToolbar />
+                  <QuickActions />
 
                   {children}
                 </div>
